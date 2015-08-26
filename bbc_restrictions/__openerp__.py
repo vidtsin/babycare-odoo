@@ -29,6 +29,7 @@
             'base',
             'sale',
             'point_of_sale',
+            'web_m2x_options'
             
             ],
         "qweb": [

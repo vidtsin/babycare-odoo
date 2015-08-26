@@ -11,6 +11,9 @@
             <xpath expr="//field[@name='country_id']" position="attributes">
                 <attribute name="options">{'create': false, 'create_edit' : false }</attribute>
             </xpath>
+            <xpath expr="//field[@name='state_id']" position="attributes">
+                <attribute name="options">{'create': false, 'create_edit' : false }</attribute>
+            </xpath>
 
 
 
