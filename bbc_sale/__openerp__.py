@@ -26,8 +26,12 @@
     "depends": [
         'sale_stock',
         'point_of_sale',
+        'purchase',
     ],
     'data': [
         'views/templates.xml',
+        'views/sale_order.xml',
+        'views/purchase_order.xml',
+        'views/stock_picking.xml',
     ],
 }
