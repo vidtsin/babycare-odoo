@@ -4,7 +4,7 @@ from openerp import models, fields, api
 class Picking(models.Model):
     _inherit = 'stock.picking'
 
-    remarks = fields.Char(compute='get_remarks')
+    remarks = fields.Char(string='Remarks', compute='get_remarks')
 
     @api.depends('move_lines')
     @api.one
