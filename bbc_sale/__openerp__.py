@@ -24,6 +24,10 @@
     "author": "Opener B.V.",
     "website": 'https://opener.am',
     "depends": [
-            'sale_stock',
+        'sale_stock',
+        'point_of_sale',
+    ],
+    'data': [
+        'views/templates.xml',
     ],
 }

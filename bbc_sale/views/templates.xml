@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <template id="assets_backend" name="pos_modifications"
+                  inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/bbc_sale/static/src/js/bbc_sale.js"></script>
+            </xpath>
+        </template>
+    </data>
+</openerp>
