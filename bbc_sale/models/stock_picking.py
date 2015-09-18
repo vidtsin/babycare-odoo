@@ -15,5 +15,5 @@ class Picking(models.Model):
              ('remarks', '!=', False),
              ('remarks', '!=', '')])
         self.remarks = '; '.join(
-            [purchase.remarks for purchase in purchases] +
+            [purchase.remarks for purchase in purchases if purchase.remarks] +
             [sale.remarks for sale in sales])
