@@ -13,5 +13,16 @@
             </field>
         </record>
 
+        <record id="view_order_tree" model="ir.ui.view">
+            <field name="name">Add remarks field to sales order</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree" />
+            <field name="arch" type="xml">
+                <field name="state" position="after">
+                    <field name="remarks" />
+                </field>
+            </field>
+        </record>
+
     </data>
 </openerp>
