@@ -17,12 +17,8 @@ class Invoice(models.Model):
         action.
         """
         res = super(Invoice, self).confirm_paid()
-        sale_orders = self.env['sale.order'].search(
+        self.env['sale.order'].search(
             [('invoice_ids', 'in', self.ids),
-             ('state', '=', 'shipping_except')])
-        sale_orders.signal_workflow('ship_recreate')
-        sale_orders.refresh()
-        for sale_order in sale_orders:
-            if sale_order.invoiced:
-                sale_order.picking_ids.write({'x_is_paid': True})
+             ('state', '=', 'shipping_except')]
+        ).signal_workflow('ship_recreate')
         return res
