@@ -6,7 +6,7 @@
             <field name="name">Add remarks field to sales order</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form" />
-           <field name="priority" eval="110" />
+            <field name="priority" eval="110" />
             <field name="arch" type="xml">
                 <field name="invoiced" position="after">
                     <field name="remarks" />
