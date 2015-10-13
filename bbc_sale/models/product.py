@@ -37,22 +37,23 @@ class ProductTemplate(models.Model):
             logger.debug(
                 'Template %s (%s) was modified at %s',
                 template.id, template.state, template.write_date)
+            modified = False
             for product in self.env['product.product'].search(
                     [('product_tmpl_id', '=', template.id),
                      ('qty_available', '=', 0)]):
-                moves = self.env['stock.move'].search(
-                    [('product_id', '=', product.id),
-                     ('write_date', '>', cutoff_datetime)])
-                if moves:
+                logger.info(
+                    'Found product %s with zero physical stock', product.id)
+                if self.env['stock.move'].search(
+                        [('product_id', '=', product.id),
+                         ('write_date', '>', cutoff_datetime)]):
                     logger.debug(
-                        'Recent stock moves: %s',
-                        ','.join(['%s:%s' % (move.id, move.write_date)
-                                  for move in moves]))
+                        'Product %s has recent stock moves', product.id)
                     continue
                 logger.info(
                     'Setting product %s to inactive', product.id)
                 product.write({'active': False})
-            if not self.env['product.product'].search(
+                modified = True
+            if modified and not self.env['product.product'].search(
                     [('product_tmpl_id', '=', template.id)]):
                 logger.debug(
                     'No active products for this template. Setting inactive')
