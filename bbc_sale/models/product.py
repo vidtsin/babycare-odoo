@@ -22,8 +22,8 @@ class ProductTemplate(models.Model):
     @api.model
     def deactivate_obsolete_products(self):
         """ Products that have been set to EOL at least three months ago,
-        and that have no recent stock moves will be set to inactive. To be
-        called from cron.
+        have no physical stock and and that have no recent stock moves
+        will be set to inactive. To be called from cron.
         """
         logger = logging.getLogger('odoo.addons.bbc_sale')
         cutoff_datetime = fields.Date.to_string(
@@ -37,24 +37,23 @@ class ProductTemplate(models.Model):
             logger.debug(
                 'Template %s (%s) was modified at %s',
                 template.id, template.state, template.write_date)
-            products = self.env['product.product'].search(
-                [('product_tmpl_id', '=', template.id)])
-            if not products:
+            for product in self.env['product.product'].search(
+                    [('product_tmpl_id', '=', template.id),
+                     ('qty_available', '=', 0)]):
+                moves = self.env['stock.move'].search(
+                    [('product_id', '=', product.id),
+                     ('write_date', '>', cutoff_datetime)])
+                if moves:
+                    logger.debug(
+                        'Recent stock moves: %s',
+                        ','.join(['%s:%s' % (move.id, move.write_date)
+                                  for move in moves]))
+                    continue
+                logger.info(
+                    'Setting product %s to inactive', product.id)
+                product.write({'active': False})
+            if not self.env['product.product'].search(
+                    [('product_tmpl_id', '=', template.id)]):
                 logger.debug(
                     'No active products for this template. Setting inactive')
                 template.write({'active': False})
-                continue
-            moves = self.env['stock.move'].search(
-                [('product_id', 'in', products.ids),
-                 ('write_date', '>', cutoff_datetime)])
-            if moves:
-                logger.debug(
-                    'Recent stock moves: %s',
-                    ','.join(['%s:%s' % (move.id, move.write_date)
-                              for move in moves]))
-                continue
-            logger.info(
-                'Setting products %s and template %s inactive',
-                products.ids, template.id)
-            products.write({'active': False})
-            template.write({'active': False})
