@@ -1,3 +1,4 @@
+import time
 import logging
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
@@ -31,30 +32,26 @@ class ProductTemplate(models.Model):
         templates = self.search(
             [('state', 'in', ('end', 'obsolete')),
              ('write_date', '<', cutoff_datetime)])
+        start_time = time.time()
+        products = self.env['product.product'].search(
+            [('product_tmpl_id', 'in', templates.ids),
+             ('qty_available', '=', 0)])
         logger.debug(
-            'Found %s candidate templates to set inactive', len(templates))
-        for template in templates:
-            logger.debug(
-                'Template %s (%s) was modified at %s',
-                template.id, template.state, template.write_date)
-            modified = False
-            for product in self.env['product.product'].search(
-                    [('product_tmpl_id', '=', template.id),
-                     ('qty_available', '=', 0)]):
-                logger.info(
-                    'Found product %s with zero physical stock', product.id)
-                if self.env['stock.move'].search(
-                        [('product_id', '=', product.id),
-                         ('write_date', '>', cutoff_datetime)]):
-                    logger.debug(
-                        'Product %s has recent stock moves', product.id)
-                    continue
-                logger.info(
-                    'Setting product %s to inactive', product.id)
-                product.write({'active': False})
-                modified = True
-            if modified and not self.env['product.product'].search(
-                    [('product_tmpl_id', '=', template.id)]):
+            'Found %s candidate products in %s seconds to set inactive',
+            len(products), time.time() - start_time)
+        for product in products:
+            if self.env['stock.move'].search(
+                    [('product_id', '=', product.id),
+                     ('write_date', '>', cutoff_datetime)]):
                 logger.debug(
-                    'No active products for this template. Setting inactive')
-                template.write({'active': False})
+                    'Product %s has recent stock moves', product.id)
+                continue
+            logger.info(
+                'Setting product %s to inactive', product.id)
+            product.write({'active': False})
+            if not self.env['product.product'].search(
+                    [('product_tmpl_id', '=', product.product_tmpl_id.id)]):
+                logger.debug(
+                    'No active products for template %s. Setting inactive',
+                    product.product_tmpl_id.id)
+                product.product_tmpl_id.write({'active': False})
