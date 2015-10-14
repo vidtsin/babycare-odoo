@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- Overwrite original template with something a bit more restrictive -->
+        <template id="website.robots">User-agent: *
+Disallow: /
+        </template>
+    </data>
+</openerp>
