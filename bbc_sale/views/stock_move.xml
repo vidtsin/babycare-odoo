@@ -11,7 +11,7 @@
                     <field name="product_state" invisible="1" />
                 </field>
                 <tree position="attributes">
-                    <attribute name="colors">grey:scrapped == True;red:virtual_available&lt;0;blue:virtual_available&gt;=0 and product_state in ('draft', 'end', 'obsolete');black:virtual_available&gt;=0 and product_state not in ('draft', 'end', 'obsolete')</attribute>
+                    <attribute name="colors" translation="off">grey:scrapped == True;red:virtual_available&lt;0;blue:virtual_available&gt;=0 and product_state in ('draft', 'end', 'obsolete');black:virtual_available&gt;=0 and product_state not in ('draft', 'end', 'obsolete')</attribute>
                 </tree>
             </field>
         </record>

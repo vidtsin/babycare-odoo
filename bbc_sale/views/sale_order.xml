@@ -32,7 +32,7 @@ report/stock_graph.py:from openerp.report.misc import choice_colors
                     <field name="missing_stock" invisible="1" />
                 </field>
                 <tree position="attributes">
-                    <attribute name="colors">red:missing_stock==True or state in ('invoice_except','shipping_except');grey:state=='cancel';blue:state in ('waiting_date','manual')</attribute>
+                    <attribute name="colors" translation="off">red:missing_stock==True or state in ('invoice_except','shipping_except');grey:state=='cancel';blue:state in ('waiting_date','manual')</attribute>
                 </tree>
             </field>
         </record>

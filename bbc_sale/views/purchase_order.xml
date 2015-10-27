@@ -15,7 +15,7 @@
                     <field name="product_state" invisible="1" />
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree" position="attributes">
-                    <attribute name="colors">red:virtual_available&lt;0;blue:virtual_available&gt;=0 and product_state in ('draft', 'end', 'obsolete');black:virtual_available&gt;=0 and product_state not in ('draft', 'end', 'obsolete')</attribute>
+                    <attribute name="colors" translation="off">red:virtual_available&lt;0;blue:virtual_available&gt;=0 and product_state in ('draft', 'end', 'obsolete');black:virtual_available&gt;=0 and product_state not in ('draft', 'end', 'obsolete')</attribute>
                 </xpath>
             </field>
         </record>
@@ -30,7 +30,7 @@
                     <field name="missing_stock" invisible="1" />
                 </field>
                 <tree position="attributes">
-                    <attribute name="colors">grey:state=='cancel';blue:state in ('wait','confirmed');red:state in ('except_invoice','except_picking') or (state in ('draft', 'sent', 'bid') and missing_stock==True)</attribute>
+                    <attribute name="colors" translation="off">grey:state=='cancel';blue:state in ('wait','confirmed');red:state in ('except_invoice','except_picking') or (state in ('draft', 'sent', 'bid') and missing_stock==True)</attribute>
                 </tree>
             </field>
         </record>
