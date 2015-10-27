@@ -11,6 +11,14 @@
                 <field name="invoiced" position="after">
                     <field name="remarks" />
                 </field>
+                <xpath expr="//field[@name='order_line']/tree" position="inside">
+                    <field name="virtual_available" invisible="1" />
+                    <field name="product_state" invisible="1" />
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                    <attribute name="colors" translation="off">red:virtual_available&lt;0;blue:virtual_available&gt;=0 and product_state in ('draft', 'end', 'obsolete');black:virtual_available&gt;=0 and product_state not in ('draft', 'end', 'obsolete')</attribute>
+report/stock_graph.py:from openerp.report.misc import choice_colors
+                </xpath>
             </field>
         </record>
 
@@ -21,7 +29,11 @@
             <field name="arch" type="xml">
                 <field name="state" position="after">
                     <field name="remarks" />
+                    <field name="missing_stock" invisible="1" />
                 </field>
+                <tree position="attributes">
+                    <attribute name="colors">red:missing_stock==True or state in ('invoice_except','shipping_except');grey:state=='cancel';blue:state in ('waiting_date','manual')</attribute>
+                </tree>
             </field>
         </record>
 
