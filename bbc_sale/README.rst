@@ -12,6 +12,11 @@ not editable, on the related delivery orders.
 it does not had any stock moves in that period, it gets deactivated.
 * Add a clickable reference to SO or PO on picking. #1377
 * Sale order line colors reflect the product status and expected stock level
+* Purchase order line colors reflect the product status and expected stock level
 * Picking line colors reflect the product status and expected stock level
-* Sale orders are red if one of their products have a negative expected stock
-level (or are in an exception state, as red is the default color for that)
+* Sale orders are red in the list view if one of their products have a negative
+expected stock level (or are in an exception state, as red is the default color
+for that)
+* Draft purchase orders are red in the list view if one of their products have
+a negative expected stock level (or are in an exception state, as red is the
+default color for that)
