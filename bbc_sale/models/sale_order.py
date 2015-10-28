@@ -23,7 +23,6 @@ class SaleOrder(models.Model):
 
     @api.multi
     def _get_missing_stock(self):
-        print "getting missing_stock for %s orders" % len(self.ids)
         for order in self:
             order.missing_stock = False
             for line in order.order_line:
