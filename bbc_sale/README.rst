@@ -20,3 +20,9 @@ for that)
 * Draft purchase orders are red in the list view if one of their products have
 a negative expected stock level (or are in an exception state, as red is the
 default color for that)
+* Add product state 'Can be ordered'
+* Remove product state 'Development'
+* Sync Buy route with product state
+* Set orderpoint qtys to zero in product state EOL, Obsolete and Can be
+ordered.
+* Apply product colors to kanban view

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-27 10:47+0000\n"
-"PO-Revision-Date: 2015-10-27 10:47+0000\n"
+"POT-Creation-Date: 2015-10-28 12:03+0000\n"
+"PO-Revision-Date: 2015-10-28 12:03+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgstr "Eerste van de gerelateerde inkooporders in het systeem"
 #: field:sale.order.line,virtual_available:0
 #: field:stock.move,virtual_available:0
 msgid "Forecast Quantity"
-msgstr "Verwachte productvoorraad"
+msgstr "Verwachte voorraad"
 
 #. module: bbc_sale
 #: help:purchase.order.line,virtual_available:0
@@ -56,7 +56,7 @@ msgstr "Factuur"
 #: field:purchase.order,missing_stock:0
 #: field:sale.order,missing_stock:0
 msgid "Missing stock"
-msgstr "Negatieve productvoorraad"
+msgstr "Negatieve voorraad"
 
 #. module: bbc_sale
 #. openerp-web

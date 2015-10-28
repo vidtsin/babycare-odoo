@@ -8,16 +8,44 @@ from openerp import models, fields, api
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
+    state = fields.Selection(
+        selection_add=[('order', 'Can be ordered')])
+
     @api.multi
     def write(self, values):
         """
         Remove Buy route from products that are set to EOL
         """
-        if values.get('state') in ('end', 'obsolete'):
+        def add_route():
+            route_ids = values.get('route_ids') or []
+            route_ids.append(
+                (4, self.env.ref('purchase.route_warehouse0_buy').id))
+            values['route_ids'] = route_ids
+
+        def del_route():
             route_ids = values.get('route_ids') or []
             route_ids.append(
                 (3, self.env.ref('purchase.route_warehouse0_buy').id))
             values['route_ids'] = route_ids
+
+        def inactive_orderpoints():
+            self.env['stock.warehouse.orderpoint'].search(
+                [('product_id.product_tmpl_id', 'in', self.ids)]).write(
+                {'product_min_qty': 0.0, 'product_max_qty': 0.0})
+
+        if values.get('state'):
+            if values['state'] == 'end':
+                del_route()
+                inactive_orderpoints()
+            elif values['state'] == 'obsolete':
+                del_route()
+                inactive_orderpoints()
+            elif values['state'] == 'sellable':
+                add_route()
+            elif values['state'] == 'order':
+                add_route()
+                inactive_orderpoints()
+
         return super(ProductTemplate, self).write(values)
 
     @api.model
@@ -55,3 +83,11 @@ class ProductTemplate(models.Model):
                     'No active products for template %s. Setting inactive',
                     product.product_tmpl_id.id)
                 product.product_tmpl_id.write({'active': False})
+
+    def _register_hook(self, cr):
+        """ Remove draft state """
+        sel = self._columns['state'].selection
+        self._columns['state'].selection = [
+            (key, val) for key, val in sel if key != 'draft']
+        self._fields['state'].selection = self._columns['state'].selection[:]
+        return super(ProductTemplate, self)._register_hook(cr)

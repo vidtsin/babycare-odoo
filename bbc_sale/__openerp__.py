@@ -34,6 +34,7 @@
         'views/purchase_order.xml',
         'views/stock_picking.xml',
         'views/stock_move.xml',
+        'views/product.xml',
         'data/ir_cron.xml',
     ],
 }
