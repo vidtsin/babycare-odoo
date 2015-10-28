@@ -23,8 +23,10 @@ class SaleOrder(models.Model):
 
     @api.multi
     def _get_missing_stock(self):
-        missing_stock_orders = self.search(
-            [('id', 'in', self.ids),
-             ('order_line.product_id.virtual_available', '<', 0)])
-        for sale in self:
-            sale.missing_stock = sale in missing_stock_orders
+        print "getting missing_stock for %s orders" % len(self.ids)
+        for order in self:
+            order.missing_stock = False
+            for line in order.order_line:
+                if line.product_id.virtual_available < 0:
+                    order.missing_stock = True
+                    break

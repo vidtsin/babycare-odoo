@@ -16,8 +16,8 @@ class Picking(models.Model):
         for picking in self:
             for move in picking.move_lines:
                 if move.purchase_line_id:
-                    self.purchase_id = move.purchase_line_id.order_id
-                    continue
+                    picking.purchase_id = move.purchase_line_id.order_id
+                    break
 
     @api.depends('move_lines')
     @api.one
