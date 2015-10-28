@@ -13,7 +13,7 @@ class ProductTemplate(models.Model):
         """
         Remove Buy route from products that are set to EOL
         """
-        if values.get('state') in ('end', 'obsolete'):
+        if values.get('state') == 'end':
             route_ids = values.get('route_ids') or []
             route_ids.append(
                 (3, self.env.ref('purchase.route_warehouse0_buy').id))
@@ -30,7 +30,7 @@ class ProductTemplate(models.Model):
         cutoff_datetime = fields.Date.to_string(
             datetime.now() - relativedelta(months=3))
         templates = self.search(
-            [('state', 'in', ('end', 'obsolete')),
+            [('state', '=', 'end'),
              ('write_date', '<', cutoff_datetime)])
         start_time = time.time()
         products = self.env['product.product'].search(
