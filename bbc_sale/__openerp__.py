@@ -27,6 +27,7 @@
         'sale_stock',
         'point_of_sale',
         'purchase',
+        'mrp',
     ],
     'data': [
         'views/templates.xml',

@@ -91,3 +91,49 @@ class ProductTemplate(models.Model):
             (key, val) for key, val in sel if key != 'draft']
         self._fields['state'].selection = self._columns['state'].selection[:]
         return super(ProductTemplate, self)._register_hook(cr)
+
+
+class Product(models.Model):
+    _inherit = 'product.product'
+
+    @api.model
+    def update_product_availability(self):
+        # Update the Website availability of the current product
+        logger = logging.getLogger('odoo.addons.bbc_sale')
+        offset = 0
+        limit = 500
+        start_time = time.time()
+        products = self.search([], limit=limit, offset=offset)
+        while products:
+            for product in products:
+                x_availability = (
+                    product.virtual_available - product.incoming_qty)
+                if product.x_availability != x_availability:
+                    logger.debug(
+                        "Updating availability of product %s from %s to %s",
+                        product.default_code or product.name,
+                        product.x_availability, x_availability)
+                    product.write({'x_availability': x_availability})
+            offset += limit
+            products = self.search([], limit=limit, offset=offset)
+
+        for bom in self.env['mrp.bom'].search([]):
+            # Update the Website availability of the parent templates' variants
+            # Find all variants linked to this BoM
+            for variant in (bom.product_id and [bom.product_id] or
+                            bom.product_tmpl_id.product_variant_ids):
+                avail = []
+                for l in bom.bom_line_ids:
+                    if set(l.attribute_value_ids).issubset(
+                            set([variant.attribute_value_ids])):
+                        avail.append(
+                            int(l.product_id.x_availability / l.product_qty))
+                x_availability = avail and min(avail) or -999
+                if variant.x_availability != x_availability:
+                    logger.debug(
+                        "Updating availability of composed product %s from %s "
+                        "to %s", variant.default_code or variant.name,
+                        variant.x_availability, x_availability)
+                    variant.write({'x_availability': x_availability})
+        logger.debug(
+            'Updated availability in %ss', time.time() - start_time)
