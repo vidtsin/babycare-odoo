@@ -12,6 +12,9 @@ class PurchaseOrder(models.Model):
     @api.multi
     def _get_missing_stock(self):
         for order in self:
+            if order.state not in ('draft', 'sent', 'bid'):
+                # Ignored anyway
+                continue
             order.missing_stock = False
             for line in order.order_line:
                 if line.product_id.virtual_available < 0:
