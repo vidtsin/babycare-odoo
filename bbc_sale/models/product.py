@@ -103,7 +103,14 @@ class Product(models.Model):
         offset = 0
         limit = 500
         start_time = time.time()
-        products = self.search([], limit=limit, offset=offset)
+        product_exclude = []
+        for bom in self.env['mrp.bom'].search([]):
+            product_exclude += (
+                bom.product_id and [bom.product_id.id] or
+                bom.product_tmpl_id.product_variant_ids.ids)
+        products = self.search(
+            [('id', 'not in', product_exclude)],
+            limit=limit, offset=offset)
         while products:
             for product in products:
                 x_availability = (
@@ -115,7 +122,9 @@ class Product(models.Model):
                         product.x_availability, x_availability)
                     product.write({'x_availability': x_availability})
             offset += limit
-            products = self.search([], limit=limit, offset=offset)
+            products = self.search(
+                [('id', 'not in', product_exclude)],
+                limit=limit, offset=offset)
 
         for bom in self.env['mrp.bom'].search([]):
             # Update the Website availability of the parent templates' variants
