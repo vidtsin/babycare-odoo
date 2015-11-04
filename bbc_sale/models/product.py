@@ -134,7 +134,7 @@ class Product(models.Model):
                 avail = []
                 for l in bom.bom_line_ids:
                     if set(l.attribute_value_ids).issubset(
-                            set([variant.attribute_value_ids])):
+                            set(variant.attribute_value_ids)):
                         avail.append(
                             int(l.product_id.x_availability / l.product_qty))
                 x_availability = avail and min(avail) or -999
