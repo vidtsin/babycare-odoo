@@ -137,7 +137,7 @@ class Product(models.Model):
                             set(variant.attribute_value_ids)):
                         avail.append(
                             int(l.product_id.x_availability / l.product_qty))
-                x_availability = avail and min(avail) or -999
+                x_availability = avail and min(avail) or 0
                 if variant.x_availability != x_availability:
                     logger.debug(
                         "Updating availability of composed product %s from %s "
