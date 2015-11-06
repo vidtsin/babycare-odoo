@@ -55,7 +55,8 @@
                 <xpath expr="//li/field[@name='lst_price']" position="after">
                     <li>Special price: <field name="default_sale_price" /></li>
                 </xpath>
-
+            </field>
+        </record>
                     
     </data>
 </openerp>

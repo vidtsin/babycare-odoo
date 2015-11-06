@@ -21,12 +21,14 @@ class Product(models.Model):
             """
             SELECT COALESCE(
                 (SELECT value_reference FROM ir_property
-                     WHERE res_id IS NULL
-                     AND company_id = %s),
+                     WHERE name = 'property_product_pricelist'
+                         AND res_id IS NULL
+                         AND company_id = %s),
                 (SELECT value_reference FROM ir_property
-                     WHERE res_id IS NULL
-                     AND company_id IS NULL))
-            """)
+                     WHERE name = 'property_product_pricelist'
+                         AND res_id IS NULL
+                         AND company_id IS NULL))
+            """, (self.env.user.company_id.id,))
         row = self.env.cr.fetchone()
         if row:
             pricelist = self.env['product.pricelist'].browse(
@@ -36,7 +38,7 @@ class Product(models.Model):
                 product.default_sale_price = 0.0
             else:
                 product.default_sale_price = pricelist.price_get(
-                    product.id)[pricelist.id]
+                    product.id, 1.0)[pricelist.id]
 
 
 class Template(models.Model):
