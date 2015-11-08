@@ -2,6 +2,7 @@
 <openerp>
     <data>
 
+        <!-- NB field sale_id comes from sale_stock but is not added to the view -->
         <record id="view_picking_form" model="ir.ui.view">
             <field name="name">Add remarks to picking form</field>
             <field name="model">stock.picking</field>
@@ -9,6 +10,10 @@
             <field name="arch" type="xml">
                 <field name="origin" position="after">
                     <field name="remarks" />
+                </field>
+                <field name="partner_id" position="after">
+                    <field name="sale_id" attrs="{'invisible': [('sale_id', '=', False)]}" />
+                    <field name="purchase_id" attrs="{'invisible': [('purchase_id', '=', False)]}" />
                 </field>
             </field>
         </record>

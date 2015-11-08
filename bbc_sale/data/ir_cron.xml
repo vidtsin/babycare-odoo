@@ -14,4 +14,18 @@
             <field name="function">deactivate_obsolete_products</field>
         </record>
     </data>
+
+    <data noupdate="0">
+        <record model="ir.cron" id="cron_update_product_availability">
+            <field name="name">Update product availability</field>
+            <field name="interval_number">1</field>
+            <field name="user_id" ref="base.user_root" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False" />
+            <field name="model">product.product</field>
+            <field name="function">update_product_availability</field>
+        </record>
+    </data>
 </openerp>

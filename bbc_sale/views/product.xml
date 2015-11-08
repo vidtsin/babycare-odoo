@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="product_template_kanban_view" model="ir.ui.view">
+            <field name="name">Product.template.product.kanban</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view" />
+            <field name="arch" type="xml">
+                <field name="product_variant_ids" position="after">
+                    <field name="state" />
+                    <field name="virtual_available" />
+                </field>
+                <field name="name" position="replace">
+                    <t t-if="record.state.raw_value == 'obsolete'">
+                        <t t-set="color_style" t-value="'color:blue'" />
+                    </t>
+                    <t t-if="record.state.raw_value == 'end'">
+                        <t t-set="color_style" t-value="'color:blue'" />
+                    </t>
+                    <t t-if="record.state.raw_value == 'obsolete'">
+                        <t t-set="color_style" t-value="'color:blue'" />
+                    </t>
+                    <t t-if="record.virtual_available.raw_value &lt; 0">
+                        <t t-set="color_style" t-value="'color:red'" />
+                    </t>
+                    <span t-att-style="color_style"><field name="name"/></span>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

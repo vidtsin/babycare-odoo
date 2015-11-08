@@ -19,3 +19,9 @@ msgstr ""
 #: field:stock.picking,remarks:0
 msgid "Remarks"
 msgstr "Opmerkingen"
+
+#. module: product
+#: selection:product.template,state:0
+msgid "Can be ordered"
+msgstr "Bestelbaar"
+

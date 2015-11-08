@@ -18,24 +18,15 @@
 #
 ##############################################################################
 {
-    "name": "Babycare Sales customizations",
-    "category": "Sale",
+    "name": "Babycare Meta module with dependencies",
+    "category": "Custom",
     "version": "1.0",
     "author": "Opener B.V.",
     "website": 'https://opener.am',
     "depends": [
-        'sale_stock',
-        'point_of_sale',
-        'purchase',
-        'mrp',
-    ],
-    'data': [
-        'views/templates.xml',
-        'views/sale_order.xml',
-        'views/purchase_order.xml',
-        'views/stock_picking.xml',
-        'views/stock_move.xml',
-        'views/product.xml',
-        'data/ir_cron.xml',
+        'bbc_restrictions',
+        'bbc_sale',
+        'bbc_website',
+        'sale_delivery_address_modify',
     ],
 }
