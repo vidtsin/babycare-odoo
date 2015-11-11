@@ -10,6 +10,9 @@ class Product(models.Model):
         'Special price',
         compute="_get_default_sale_price",
         digits_compute=dp.get_precision('Product Price'))
+    sale_price_emphasis = fields.Boolean(
+        'Show sales price with emphasis',
+        compute="_get_default_sale_price")
 
     @api.multi
     def _get_default_sale_price(self):
@@ -39,6 +42,8 @@ class Product(models.Model):
             else:
                 product.default_sale_price = pricelist.price_get(
                     product.id, 1.0)[pricelist.id]
+            product.sale_price_emphasis = (
+                product.default_sale_price != product.list_price)
 
 
 class Template(models.Model):
@@ -48,12 +53,18 @@ class Template(models.Model):
         'Special price',
         compute="_get_default_sale_price",
         digits_compute=dp.get_precision('Product Price'))
+    sale_price_emphasis = fields.Boolean(
+        'Show sales price with emphasis',
+        compute="_get_default_sale_price")
 
     @api.multi
     def _get_default_sale_price(self):
         for template in self:
             if not template.product_variant_ids:
                 template.default_sale_price = 0.0
+                template.sale_price_emphasis = False
                 continue
             template.default_sale_price = (
                 template.product_variant_ids[0].default_sale_price)
+            template.sale_price_emphasis = (
+                template.default_sale_price != template.list_price)
