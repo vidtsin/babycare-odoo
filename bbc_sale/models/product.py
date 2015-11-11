@@ -58,7 +58,7 @@ class ProductTemplate(models.Model):
         cutoff_datetime = fields.Date.to_string(
             datetime.now() - relativedelta(months=3))
         templates = self.search(
-            [('state', '=', 'end'),
+            [('state', 'in', ('end', 'obsolete')),
              ('write_date', '<', cutoff_datetime)])
         start_time = time.time()
         products = self.env['product.product'].search(
