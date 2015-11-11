@@ -7,7 +7,7 @@ class Product(models.Model):
     _inherit = 'product.product'
 
     default_sale_price = fields.Float(
-        'Default sales price',
+        'Special price',
         compute="_get_default_sale_price",
         digits_compute=dp.get_precision('Product Price'))
 
@@ -45,15 +45,15 @@ class Template(models.Model):
     _inherit = 'product.template'
 
     default_sale_price = fields.Float(
-        'Default sales price',
+        'Special price',
         compute="_get_default_sale_price",
         digits_compute=dp.get_precision('Product Price'))
 
     @api.multi
     def _get_default_sale_price(self):
         for template in self:
-            if not self.product_variant_ids:
-                self.default_sale_price = 0.0
+            if not template.product_variant_ids:
+                template.default_sale_price = 0.0
                 continue
-            self.default_sale_price = (
-                self.product_variant_ids[0].default_sale_price)
+            template.default_sale_price = (
+                template.product_variant_ids[0].default_sale_price)
