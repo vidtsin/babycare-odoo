@@ -43,7 +43,7 @@ class Product(models.Model):
                 product.default_sale_price = pricelist.price_get(
                     product.id, 1.0)[pricelist.id]
             product.sale_price_emphasis = (
-                product.default_sale_price != product.list_price)
+                product.default_sale_price < product.list_price)
 
 
 class Template(models.Model):

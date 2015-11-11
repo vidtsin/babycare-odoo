@@ -15,11 +15,12 @@
            <field name="arch" type="xml">
                 <field name="list_price" position="after">
                     <field name="sale_price_emphasis" invisible="1" />
-                    <label for="default_sale_price" attrs="{'invisible': [('sale_price_emphasis', '!=', True)]}" />
-                    <div attrs="{'invisible': [('sale_price_emphasis', '!=', True)]}" >
+                    <label for="default_sale_price" />
+                    <div>
                         <field name="default_sale_price" class="oe_inline" />
-                        <img src="/product_sales_price/static/img/discount.png" style="height: 30px"
-                             class="oe_inline" />
+                        <img src="/web/static/src/img/icons/gtk-no.png" style="height: 15px"
+                             class="oe_inline"
+                             attrs="{'invisible': [('sale_price_emphasis', '!=', True)]}" />
                     </div>
                 </field>
             </field>
@@ -32,6 +33,10 @@
            <field name="arch" type="xml">
                 <field name="lst_price" position="after" >
                     <field name="default_sale_price" />
+                    <field name="sale_price_emphasis" invisible="1" />
+                    <button name="dummy" icon="gtk-no"
+                            attrs="{'invisible': [('sale_price_emphasis', '!=', True)]}"
+                            />
                 </field>
             </field>
         </record>
@@ -46,12 +51,12 @@
                 </xpath>
                 <xpath expr="//li/field[@name='lst_price']" position="replace">
                     <li >
-                        <t t-if="record.lst_price.raw_value != record.default_sale_price.raw_value">
+                        <t t-if="record.lst_price.raw_value &gt; record.default_sale_price.raw_value">
                             <span style="text-decoration: line-through"><field name="lst_price" /></span>
                             <span style="color: red"><field name="default_sale_price" /></span>
                         </t>
-                        <t t-if="record.lst_price.raw_value == record.default_sale_price.raw_value">
-                            <field name="lst_price" />
+                        <t t-if="record.lst_price.raw_value &lt;= record.default_sale_price.raw_value">
+                            <field name="default_sale_price" />
                         </t>
                     </li>
                 </xpath>
@@ -68,12 +73,12 @@
                 </xpath>
                 <xpath expr="//li/field[@name='lst_price']" position="replace">
                     <li >
-                        <t t-if="record.lst_price.raw_value != record.default_sale_price.raw_value">
+                        <t t-if="record.lst_price.raw_value &gt; record.default_sale_price.raw_value">
                             <span style="text-decoration: line-through"><field name="lst_price" /></span>
                             <span style="color: red"><field name="default_sale_price" /></span>
                         </t>
-                        <t t-if="record.lst_price.raw_value == record.default_sale_price.raw_value">
-                            <field name="lst_price" />
+                        <t t-if="record.lst_price.raw_value &lt;= record.default_sale_price.raw_value">
+                            <field name="default_sale_price" />
                         </t>
                     </li>
                 </xpath>
