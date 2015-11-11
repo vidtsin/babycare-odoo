@@ -38,8 +38,16 @@
                 <xpath expr="/kanban/field[@name='lst_price']" position="after">
                     <field name="default_sale_price" />
                 </xpath>
-                <xpath expr="//li/field[@name='lst_price']" position="after">
-                    <li>Special price: <field name="default_sale_price" /></li>
+                <xpath expr="//li/field[@name='lst_price']" position="replace">
+                    <li >
+                        <t t-if="record.lst_price.raw_value != record.default_sale_price.raw_value">
+                            <span style="text-decoration: line-through"><field name="lst_price" /></span>
+                            <span style="color: red"><field name="default_sale_price" /></span>
+                        </t>
+                        <t t-if="record.lst_price.raw_value == record.default_sale_price.raw_value">
+                            <field name="lst_price" />
+                        </t>
+                    </li>
                 </xpath>
             </field>
         </record>
@@ -52,8 +60,16 @@
                 <xpath expr="/kanban/field[@name='lst_price']" position="after">
                     <field name="default_sale_price" />
                 </xpath>
-                <xpath expr="//li/field[@name='lst_price']" position="after">
-                    <li>Special price: <field name="default_sale_price" /></li>
+                <xpath expr="//li/field[@name='lst_price']" position="replace">
+                    <li >
+                        <t t-if="record.lst_price.raw_value != record.default_sale_price.raw_value">
+                            <span style="text-decoration: line-through"><field name="lst_price" /></span>
+                            <span style="color: red"><field name="default_sale_price" /></span>
+                        </t>
+                        <t t-if="record.lst_price.raw_value == record.default_sale_price.raw_value">
+                            <field name="lst_price" />
+                        </t>
+                    </li>
                 </xpath>
             </field>
         </record>
