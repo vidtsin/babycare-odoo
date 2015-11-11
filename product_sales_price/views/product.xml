@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- Check this hack in addons/product/product.xml, product form modifying template form.
+        On the model, list_price is a related field on lst_price. -->
+        <!-- field name="list_price" position="attributes">
+            <attribute name="name">lst_price</attribute>
+        </field -->
+
+        <record id="product_template_form_view" model="ir.ui.view">
+            <field name="name">Add default sale price to product form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view" /> 
+           <field name="arch" type="xml">
+                <field name="list_price" position="after">
+                    <field name="sale_price_emphasis" invisible="1" />
+                    <label for="default_sale_price" />
+                    <div>
+                        <field name="default_sale_price" class="oe_inline" />
+                        <img src="/web/static/src/img/icons/gtk-no.png" style="height: 15px"
+                             class="oe_inline"
+                             attrs="{'invisible': [('sale_price_emphasis', '!=', True)]}" />
+                    </div>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_product_tree_view" model="ir.ui.view">
+            <field name="name">Add default sale price to product tree</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view" /> 
+           <field name="arch" type="xml">
+                <field name="lst_price" position="after" >
+                    <field name="default_sale_price" />
+                    <field name="sale_price_emphasis" invisible="1" />
+                    <button name="dummy" icon="gtk-no"
+                            attrs="{'invisible': [('sale_price_emphasis', '!=', True)]}"
+                            />
+                </field>
+            </field>
+        </record>
+
+        <record id="product_kanban_view" model="ir.ui.view">
+            <field name="name">Add default sale price to product kanban</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_kanban_view" />
+            <field name="arch" type="xml">
+                <xpath expr="/kanban/field[@name='lst_price']" position="after">
+                    <field name="default_sale_price" />
+                </xpath>
+                <xpath expr="//li/field[@name='lst_price']" position="replace">
+                    <li >
+                        <t t-if="record.lst_price.raw_value &gt; record.default_sale_price.raw_value">
+                            <span style="text-decoration: line-through"><field name="lst_price" /></span>
+                            <span style="color: red"><field name="default_sale_price" /></span>
+                        </t>
+                        <t t-if="record.lst_price.raw_value &lt;= record.default_sale_price.raw_value">
+                            <field name="default_sale_price" />
+                        </t>
+                    </li>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_template_kanban_view" model="ir.ui.view">
+            <field name="name">Add default sale price to template kanban</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view" />
+            <field name="arch" type="xml">
+                <xpath expr="/kanban/field[@name='lst_price']" position="after">
+                    <field name="default_sale_price" />
+                </xpath>
+                <xpath expr="//li/field[@name='lst_price']" position="replace">
+                    <li >
+                        <t t-if="record.lst_price.raw_value &gt; record.default_sale_price.raw_value">
+                            <span style="text-decoration: line-through"><field name="lst_price" /></span>
+                            <span style="color: red"><field name="default_sale_price" /></span>
+                        </t>
+                        <t t-if="record.lst_price.raw_value &lt;= record.default_sale_price.raw_value">
+                            <field name="default_sale_price" />
+                        </t>
+                    </li>
+                </xpath>
+            </field>
+        </record>
+                    
+    </data>
+</openerp>
+

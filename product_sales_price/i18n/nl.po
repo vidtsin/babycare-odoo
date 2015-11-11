@@ -1,0 +1,39 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_sales_price
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-11 13:11+0000\n"
+"PO-Revision-Date: 2015-11-11 13:11+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_sales_price
+#: model:ir.model,name:product_sales_price.model_product_product
+msgid "Product"
+msgstr "Product"
+
+#. module: product_sales_price
+#: model:ir.model,name:product_sales_price.model_product_template
+msgid "Product Template"
+msgstr "Productsjabloon"
+
+#. module: product_sales_price
+#: field:product.product,sale_price_emphasis:0
+#: field:product.template,sale_price_emphasis:0
+msgid "Show sales price with emphasis"
+msgstr "Toon speciaalprijs met nadruk"
+
+#. module: product_sales_price
+#: field:product.product,default_sale_price:0
+#: field:product.template,default_sale_price:0
+msgid "Special price"
+msgstr "Speciaalprijs"
+
