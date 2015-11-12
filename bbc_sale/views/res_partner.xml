@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+
+        <record id="view_partner_form" model="ir.ui.view">
+            <field name="name">Add commercial field to partner</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority">40</field>
+            <field name="arch" type="xml">
+                <page name="sales_purchases" position="inside">
+                    <field name="free_shipping"
+                           attrs="{'invisible': [('supplier', '=', False)], 'readonly': [('is_company', '!=', True), ('parent_id', '!=', False)]}"
+                           />
+                </page>
+            </field>
+        </record>
+
+    </data>
+</openerp>
