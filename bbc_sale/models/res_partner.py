@@ -5,7 +5,10 @@ from openerp import models, fields, api
 class Partner(models.Model):
     _inherit = 'res.partner'
 
-    amount_free_shipping = fields.Float('Free shipping from')
+    amount_free_shipping = fields.Float(
+        'Free shipping from',
+        help=('The amount from which purchase orders are shipped out free '
+              'from this supplier'))
 
     @api.model
     def _commercial_fields(self):

@@ -13,6 +13,12 @@ class PurchaseOrder(models.Model):
         compute='_get_free_shipping',
         search='_search_free_shipping')
 
+    def _get_free_shipping(self):
+        for order in self:
+            order.free_shipping = (
+                order.amount_total >= order.partner_id.commercial_partner_id
+                .amount_free_shipping)
+
     def _search_free_shipping(self, operator, value):
         if operator not in ('=', '==') and not isinstance(value, bool):
             raise UserError(
@@ -20,9 +26,9 @@ class PurchaseOrder(models.Model):
                 'You can only search on "= True" or "= False"')
         self.env.cr.execute(
             """
-            SELECT id FROM purchase_order po, res_partner rp
+            SELECT po.id FROM purchase_order po, res_partner rp
                 WHERE po.partner_id = rp.id
-                    AND amount_total < rp.amount_free_shipping
+                    AND amount_total >= rp.amount_free_shipping
             """)
         ids = [res_id for res_id, in self.env.cr.fetchall()]
         return [('id', 'in', ids)]

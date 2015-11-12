@@ -9,7 +9,8 @@
             <field name="priority">40</field>
             <field name="arch" type="xml">
                 <page name="sales_purchases" position="inside">
-                    <field name="free_shipping"
+                    <label for="amount_free_shipping" />
+                    <field name="amount_free_shipping"
                            attrs="{'invisible': [('supplier', '=', False)], 'readonly': [('is_company', '!=', True), ('parent_id', '!=', False)]}"
                            />
                 </page>

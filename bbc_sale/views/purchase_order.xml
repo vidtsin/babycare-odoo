@@ -2,10 +2,10 @@
 <openerp>
     <data>
 
-        <record id="view_request_for_quotation_filter" model="ir.ui.view">
+        <record id="view_purchase_order_filter" model="ir.ui.view">
             <field name="name">Add free shipping and missing stock filters to quotation search view</field>
             <field name="model">purchase.order</field>
-            <field name="inherit_id" ref="purchase.view_request_for_quotation_filter" />
+            <field name="inherit_id" ref="purchase.view_purchase_order_filter" />
             <field name="arch" type="xml">
                 <filter name="not_invoiced" position="after">
                     <filter name="free_shipping" string="Free shipping"
@@ -47,6 +47,10 @@
                     <attribute name="colors" translation="off">grey:state=='cancel';blue:state in ('wait','confirmed');red:state in ('except_invoice','except_picking') or (state in ('draft', 'sent', 'bid') and missing_stock==True)</attribute>
                 </tree>
             </field>
+        </record>
+
+        <record id="purchase.purchase_rfq" model="ir.actions.act_window">
+            <field name="context">{'search_default_missing_stock': True, 'search_default_free_shipping': True}</field>
         </record>
 
     </data>
