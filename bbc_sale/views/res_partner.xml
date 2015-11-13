@@ -8,12 +8,11 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="priority">40</field>
             <field name="arch" type="xml">
-                <page name="sales_purchases" position="inside">
-                    <label for="amount_free_shipping" />
+                <xpath expr="//page[@name='sales_purchases']//field[@name='supplier']" position="after">
                     <field name="amount_free_shipping"
                            attrs="{'invisible': [('supplier', '=', False)], 'readonly': [('is_company', '!=', True), ('parent_id', '!=', False)]}"
                            />
-                </page>
+                </xpath>
             </field>
         </record>
 

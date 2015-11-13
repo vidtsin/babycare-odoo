@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-28 12:03+0000\n"
-"PO-Revision-Date: 2015-10-28 12:03+0000\n"
+"POT-Creation-Date: 2015-11-13 07:27+0000\n"
+"PO-Revision-Date: 2015-11-13 07:27+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,6 +23,31 @@ msgid "An amount higher than €10.000 has been entered as a payment. Please che
 msgstr "Het bedrag van deze betaling is meer dan €10.000,-. Is het bedrag wel correct?"
 
 #. module: bbc_sale
+#: field:product.product,available_in_pos:0
+msgid "Available in the Point of Sale"
+msgstr "Beschikbaar in de kassa"
+
+#. module: bbc_sale
+#: help:product.product,to_weight:0
+msgid "Check if the product should be weighted using the hardware scale integration"
+msgstr "Controleer of het product moet worden gewogen d.m.v. de weegschaalintegratie"
+
+#. module: bbc_sale
+#: help:product.product,available_in_pos:0
+msgid "Check if you want this product to appear in the Point of Sale"
+msgstr "Vink deze optie aan als u het product wilt kunnen verkopen binnen de kassa."
+
+#. module: bbc_sale
+#: help:product.product,income_pdt:0
+msgid "Check if, this is a product you can use to put cash into a statement for the point of sale backend."
+msgstr "Vink deze optie aan, indien dit een product is welk te gebruiken is om geld (saldo) toe te voegen in de kassa."
+
+#. module: bbc_sale
+#: help:product.product,expense_pdt:0
+msgid "Check if, this is a product you can use to take cash from a statement for the point of sale backend, example: money lost, transfer to bank, etc."
+msgstr "Vink deze optie aan, indien dit een product is welk te gebruiken is om geld (saldo) te halen uit de kassa.. Bijvoorbeeld: Verschil, storten op bankrekening, etc."
+
+#. module: bbc_sale
 #: help:stock.picking,purchase_id:0
 msgid "First of any related purchase orders in the system"
 msgstr "Eerste van de gerelateerde inkooporders in het systeem"
@@ -32,7 +57,7 @@ msgstr "Eerste van de gerelateerde inkooporders in het systeem"
 #: field:sale.order.line,virtual_available:0
 #: field:stock.move,virtual_available:0
 msgid "Forecast Quantity"
-msgstr "Verwachte voorraad"
+msgstr "Verwachte hoeveelheid"
 
 #. module: bbc_sale
 #: help:purchase.order.line,virtual_available:0
@@ -42,10 +67,18 @@ msgid "Forecast quantity (computed as Quantity On Hand - Outgoing + Incoming)\n"
 "In a context with a single Stock Location, this includes goods stored in this location, or any of its children.\n"
 "In a context with a single Warehouse, this includes goods stored in the Stock Location of this Warehouse, or any of its children.\n"
 "Otherwise, this includes goods stored in any Stock Location with 'internal' type."
-msgstr "Forecast quantity (computed as Quantity On Hand - Outgoing + Incoming)\n"
-"In a context with a single Stock Location, this includes goods stored in this location, or any of its children.\n"
-"In a context with a single Warehouse, this includes goods stored in the Stock Location of this Warehouse, or any of its children.\n"
-"Otherwise, this includes goods stored in any Stock Location with 'internal' type."
+msgstr "Virtuele hoeveelheid (berekend als: Werkelijke voorraad - Uitgaand + Inkomend). \nBij gebruik van een enkele voorraadlocatie, omvat dit de goederen opgeslagen in deze locatie, of één van de onderliggende locaties. \nBij gebruik van een enkel magazijn, omvat dit de goederen die bij de locatie voorraadlocatie van dit magazijn zijn opgeslagen, of één van de onderliggende locaties. \nAnders, dit omvat goederen die zijn opgeslagen op alle voorraadlocaties van het type 'intern'."
+
+#. module: bbc_sale
+#: view:purchase.order:bbc_sale.view_purchase_order_filter
+#: field:purchase.order,free_shipping:0
+msgid "Free shipping"
+msgstr "Vrachtvij"
+
+#. module: bbc_sale
+#: field:res.partner,amount_free_shipping:0
+msgid "Free shipping from"
+msgstr "Vrachtvrij vanaf (bedrag)"
 
 #. module: bbc_sale
 #: model:ir.model,name:bbc_sale.model_account_invoice
@@ -53,10 +86,16 @@ msgid "Invoice"
 msgstr "Factuur"
 
 #. module: bbc_sale
+#: view:purchase.order:bbc_sale.view_purchase_order_filter
 #: field:purchase.order,missing_stock:0
 #: field:sale.order,missing_stock:0
 msgid "Missing stock"
-msgstr "Negatieve voorraad"
+msgstr "Ter uitlevering"
+
+#. module: bbc_sale
+#: model:ir.model,name:bbc_sale.model_res_partner
+msgid "Partner"
+msgstr "Relatie"
 
 #. module: bbc_sale
 #. openerp-web
@@ -69,6 +108,26 @@ msgstr "Ongeldig bedrag voor deze betaling"
 #: model:ir.model,name:bbc_sale.model_stock_picking
 msgid "Picking List"
 msgstr "Verzamellijst"
+
+#. module: bbc_sale
+#: field:product.product,income_pdt:0
+msgid "Point of Sale Cash In"
+msgstr "Kassa geld in"
+
+#. module: bbc_sale
+#: field:product.product,expense_pdt:0
+msgid "Point of Sale Cash Out"
+msgstr "Kassa geld uit"
+
+#. module: bbc_sale
+#: field:product.product,pos_categ_id:0
+msgid "Point of Sale Category"
+msgstr "Kassa categorie"
+
+#. module: bbc_sale
+#: model:ir.model,name:bbc_sale.model_product_product
+msgid "Product"
+msgstr "Product"
 
 #. module: bbc_sale
 #: model:ir.model,name:bbc_sale.model_product_template
@@ -118,6 +177,21 @@ msgstr "Status"
 #: model:ir.model,name:bbc_sale.model_stock_move
 msgid "Stock Move"
 msgstr "Voorraadmutatie"
+
+#. module: bbc_sale
+#: help:res.partner,amount_free_shipping:0
+msgid "The amount from which purchase orders are shipped out free from this supplier"
+msgstr "Orders van dit bedrag of hoger zijn franco/vrachtvrij voor deze leverancier"
+
+#. module: bbc_sale
+#: help:product.product,pos_categ_id:0
+msgid "Those categories are used to group similar products for point of sale."
+msgstr "De categorieën worden gebruikt om gelijkaardige producten te groeperen bij de kassa."
+
+#. module: bbc_sale
+#: field:product.product,to_weight:0
+msgid "To Weigh With Scale"
+msgstr "Te wegen met weegschaal"
 
 #. module: bbc_sale
 #: view:sale.order:bbc_sale.view_order_form
