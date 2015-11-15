@@ -11,7 +11,7 @@
                     <filter name="free_shipping" string="Free shipping"
                             domain="[('free_shipping', '=', True)]" />
                     <filter name="missing_stock" string="Missing stock"
-                            domain="[('order_line.product_id.virtual_available', '&lt;', 0)]" />
+                            domain="[('missing_stock', '=', True)]" />
                 </filter>
             </field>
         </record>
@@ -44,7 +44,7 @@
                     <field name="missing_stock" invisible="1" />
                 </field>
                 <tree position="attributes">
-                    <attribute name="colors" translation="off">grey:state=='cancel';blue:state in ('wait','confirmed');red:state in ('except_invoice','except_picking') or (state in ('draft', 'sent', 'bid') and missing_stock==True)</attribute>
+                    <attribute name="colors" translation="off">grey:state=='cancel';blue:state in ('wait','confirmed');red:state in ('except_invoice','except_picking') or missing_stock==True</attribute>
                 </tree>
             </field>
         </record>
