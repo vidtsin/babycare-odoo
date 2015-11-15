@@ -19,7 +19,7 @@ class PurchaseOrder(models.Model):
     def _get_free_shipping(self):
         for order in self:
             order.free_shipping = (
-                order.amount_total >= order.partner_id.commercial_partner_id
+                order.amount_untaxed >= order.partner_id.commercial_partner_id
                 .amount_free_shipping)
 
     def _search_free_shipping(self, operator, value):
@@ -31,7 +31,7 @@ class PurchaseOrder(models.Model):
             """
             SELECT po.id FROM purchase_order po, res_partner rp
                 WHERE po.partner_id = rp.id
-                    AND amount_total >= rp.amount_free_shipping
+                    AND amount_untaxed >= rp.amount_free_shipping
             """)
         ids = [res_id for res_id, in self.env.cr.fetchall()]
         return [('id', 'in', ids)]
