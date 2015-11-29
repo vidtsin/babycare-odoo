@@ -8,3 +8,10 @@ Lines are ordered as follows:
 * incomplete or overcomplete lines
 * lines with products that have not yet been scanned
 * lines that are satisfied
+
+Credits
+-------
+
+Audio files from Flashkit
+
+* Unknown barcode: http://www.flashkit.com/imagesvr_ce/flashkit/soundfx/Interfaces/Beeps/Alarm_Hi-Adam_A_-8903/Alarm_Hi-Adam_A_-8903_hifi.mp3
