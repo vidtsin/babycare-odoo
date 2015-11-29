@@ -27,5 +27,6 @@
         'stock',
     ],
     'data': [
+        'views/assets.xml',
     ],
 }
