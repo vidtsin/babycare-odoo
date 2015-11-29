@@ -8,6 +8,8 @@ openerp.bbc_stock = function(instance){
     module.PickingMainWidget = module.PickingMainWidget.extend({
         barcode_notify: function(mode) {
             // play a sound depending on the mode
+            var audio = new Audio('/bbc_stock/static/src/snd/' + mode + '.mp3');
+            audio.play();
         },
 
         scan: function(ean){ //scans a barcode, sends it to the server, then reload the ui
