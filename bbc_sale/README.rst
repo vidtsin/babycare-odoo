@@ -26,3 +26,4 @@ default color for that)
 * Set orderpoint qtys to zero in product state EOL, Obsolete and Can be
 ordered.
 * Apply product colors to kanban view
+* Allow product categories to be reordered in the category tree view

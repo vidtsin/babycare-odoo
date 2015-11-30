@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="product_category_list_view" model="ir.ui.view">
+            <field name="name">add sequence field to category tree view</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_list_view" />
+            <field name="arch" type="xml">
+                <field name="complete_name" position="before">
+                    <field name="sequence" invisible="1" />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
