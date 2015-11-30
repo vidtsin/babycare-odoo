@@ -29,16 +29,16 @@ class Operation(models.Model):
         for operation in self:
             if not operation.product_qty:
                 # Not on the original picking
-                self.sequence = 0
+                operation.sequence = 0
             elif not operation.qty_done:
                 # Still to scan
-                self.sequence = 20
+                operation.sequence = 20
             elif operation.qty_done != operation.product_qty:
-                # Still to scan
-                self.sequence = 10
+                # Not yet satisfied or excessively so
+                operation.sequence = 10
             else:
                 # Satisfied
-                self.sequence = 999
+                operation.sequence = 999
 
     _order = 'sequence, write_date desc'
     sequence = fields.Integer(compute="_get_sequence", store=True)
