@@ -1,7 +1,7 @@
-.table > tbody > tr.danger.js_pack_op_line.incorrect > td {
+.table > tbody > tr.incorrect.js_pack_op_line.incorrect > td {
     background-color: yellow;
 }
-.table > tbody > tr.danger.js_pack_op_line.unknown > td {
+.table > tbody > tr.js_pack_op_line.unknown > td {
     background-color: orangered;
 }
 .table > tbody > tr.js_pack_op_line.success > td {
