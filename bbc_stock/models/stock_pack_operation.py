@@ -40,5 +40,5 @@ class Operation(models.Model):
                 # Satisfied
                 self.sequence = 999
 
-    _order = 'sequence desc, write_date desc'
+    _order = 'sequence, write_date desc'
     sequence = fields.Integer(compute="_get_sequence", store=True)
