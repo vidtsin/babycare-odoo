@@ -44,7 +44,36 @@ openerp.bbc_stock = function(instance){
                     }
                     /* End of local change */
                 });
-        },
+        }
+    });
+    var PickingEditorWidgetSuper = module.PickingEditorWidget.prototype;
+    module.PickingEditorWidget = module.PickingEditorWidget.extend({
+        /* Assign specific classes to rows with product not on the original
+           picking, rows with insufficient or excessive amount and rows
+           not scanned yet.
 
+           Note that the Odoo js developer enjoyed thinking up new column names, such as
+           'rem' for qty_done, presumably refering to 'remaining quantity'. However,
+           the semantics of the field remained unchanged as 'scanned quantity'.
+        */
+        get_rows: function(){
+            var result = PickingEditorWidgetSuper.get_rows.apply(this, arguments);
+            _.each(result, function(row){
+                if (!row.cols.qty) {
+                    row.classes += 'unknown ';
+                    console.log(row.cols.id + 'unknown');
+                } else {
+                    if (!row.cols.rem) {
+                        console.log(row.cols.id + 'not scanned');
+                    } else {
+                        if (row.cols.qty != row.cols.rem) {
+                            row.classes += 'incorrect ';
+                            console.log(row.cols.id + 'qty not equal');
+                        }
+                    }
+                }
+            });
+            return result;
+        }
     });
 }
