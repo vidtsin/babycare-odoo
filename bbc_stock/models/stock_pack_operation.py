@@ -24,6 +24,7 @@ class Operation(models.Model):
     _inherit = 'stock.pack.operation'
 
     @api.multi
+    @api.depends('product_qty', 'qty_done')
     def _get_sequence(self):
         for operation in self:
             if not operation.product_qty:
@@ -40,4 +41,4 @@ class Operation(models.Model):
                 self.sequence = 999
 
     _order = 'sequence desc, write_date desc'
-    sequence = fields.Integer(compute="_get_sequence")
+    sequence = fields.Integer(compute="_get_sequence", store=True)

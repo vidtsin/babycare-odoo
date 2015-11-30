@@ -1,1 +1,1 @@
-from . import stock_pack_operation.py
+from . import stock_pack_operation
