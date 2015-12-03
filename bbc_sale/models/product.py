@@ -4,6 +4,8 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from openerp import models, fields, api
 
+logger = logging.getLogger('odoo.addons.bbc_sale')
+
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
@@ -54,7 +56,6 @@ class ProductTemplate(models.Model):
         have no physical stock and and that have no recent stock moves
         will be set to inactive. To be called from cron.
         """
-        logger = logging.getLogger('odoo.addons.bbc_sale')
         cutoff_datetime = fields.Date.to_string(
             datetime.now() - relativedelta(months=3))
         templates = self.search(
@@ -91,6 +92,15 @@ class ProductTemplate(models.Model):
             (key, val) for key, val in sel if key != 'draft']
         self._fields['state'].selection = self._columns['state'].selection[:]
         return super(ProductTemplate, self)._register_hook(cr)
+
+    @api.model
+    def load(self, fields, data):
+        """ Add context key to suppress creation of order points if missing """
+        return super(
+            self if self.env.context.get('no_autocreate_orderpoints')
+            else self.with_context('no_autocreate_orderpoints'),
+            Product
+        ).load(fields, data)
 
 
 class Product(models.Model):
@@ -146,3 +156,26 @@ class Product(models.Model):
                     variant.write({'x_availability': x_availability})
         logger.debug(
             'Updated availability in %ss', time.time() - start_time)
+
+    @api.model
+    def load(self, fields, data):
+        """ Add context key to suppress creation of order points if missing """
+        return super(
+            self if self.env.context.get('no_autocreate_orderpoints')
+            else self.with_context('no_autocreate_orderpoints'),
+            Product
+        ).load(fields, data)
+
+    @api.model
+    @api.returns('self', lambda value: value.id)
+    def create(self, vals):
+        res = super(Product, self).create(vals)
+
+        if self.env.context.get('no_autocreate_orderpoints'):
+            logger.debug('Suppressing autocreation of orderpoints')
+        else:
+            self.env['stock.warehouse.orderpoint'].create({
+                'product_id': res.id,
+                'product_min_qty': 0.0,
+                'product_max_qty': 0.0})
+        return res
