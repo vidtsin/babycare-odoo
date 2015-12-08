@@ -97,9 +97,9 @@ class ProductTemplate(models.Model):
     def load(self, fields, data):
         """ Add context key to suppress creation of order points if missing """
         return super(
+            ProductTemplate,
             self if self.env.context.get('no_autocreate_orderpoints')
-            else self.with_context('no_autocreate_orderpoints'),
-            Product
+            else self.with_context(no_autocreate_orderpoints=True)
         ).load(fields, data)
 
 
@@ -161,9 +161,9 @@ class Product(models.Model):
     def load(self, fields, data):
         """ Add context key to suppress creation of order points if missing """
         return super(
+            Product,
             self if self.env.context.get('no_autocreate_orderpoints')
-            else self.with_context('no_autocreate_orderpoints'),
-            Product
+            else self.with_context(no_autocreate_orderpoints=True),
         ).load(fields, data)
 
     @api.model
@@ -174,6 +174,7 @@ class Product(models.Model):
         if self.env.context.get('no_autocreate_orderpoints'):
             logger.debug('Suppressing autocreation of orderpoints')
         else:
+            logger.debug('Autocreating of orderpoints')
             self.env['stock.warehouse.orderpoint'].create({
                 'product_id': res.id,
                 'product_min_qty': 0.0,
