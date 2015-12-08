@@ -3,6 +3,8 @@ Stock customizations for Babycare
 
 Barcode interface
 -----------------
+Open in a new window.
+
 Lines are ordered, and colored as follows:
 * lines with products that do not have a corresponding line in the current picking (Red)
 * incomplete or overcomplete lines (Yellow)
