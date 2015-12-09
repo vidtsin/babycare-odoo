@@ -169,14 +169,22 @@ class Product(models.Model):
     @api.model
     @api.returns('self', lambda value: value.id)
     def create(self, vals):
+        """ Create zero level orderpoints for each warehouse """
         res = super(Product, self).create(vals)
-
         if self.env.context.get('no_autocreate_orderpoints'):
             logger.debug('Suppressing autocreation of orderpoints')
         else:
             logger.debug('Autocreating of orderpoints')
-            self.env['stock.warehouse.orderpoint'].create({
-                'product_id': res.id,
-                'product_min_qty': 0.0,
-                'product_max_qty': 0.0})
+            for warehouse in self.env['stock.warehouse'].search(
+                    ['|', ('company_id', '=', self.env.user.company_id.id)
+                     ('company_id', '=', False),
+                     ('lot_stock_id', '!=', False)]):
+                self.env['stock.warehouse.orderpoint'].create({
+                    'warehouse_id': warehouse.id,
+                    'location_id': warehouse.lot_stock_id.id,
+                    'product_id': res.id,
+                    'product_uom': res.uom_id.id,
+                    'product_min_qty': 0.0,
+                    'product_max_qty': 0.0,
+                })
         return res
