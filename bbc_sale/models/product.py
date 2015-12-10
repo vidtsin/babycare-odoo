@@ -176,7 +176,7 @@ class Product(models.Model):
         else:
             logger.debug('Autocreating of orderpoints')
             for warehouse in self.env['stock.warehouse'].search(
-                    ['|', ('company_id', '=', self.env.user.company_id.id)
+                    ['|', ('company_id', '=', self.env.user.company_id.id),
                      ('company_id', '=', False),
                      ('lot_stock_id', '!=', False)]):
                 self.env['stock.warehouse.orderpoint'].create({
