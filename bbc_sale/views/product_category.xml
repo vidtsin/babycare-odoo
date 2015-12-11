@@ -8,7 +8,9 @@
             <field name="inherit_id" ref="product.product_category_list_view" />
             <field name="arch" type="xml">
                 <field name="complete_name" position="before">
-                    <field name="sequence" invisible="1" />
+                    <field name="parent_left" invisible="0" />
+                    <field name="parent_sequence" invisible="0" />
+                    <field name="sequence" invisible="0" />
                 </field>
             </field>
         </record>

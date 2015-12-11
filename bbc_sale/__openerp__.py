@@ -20,7 +20,7 @@
 {
     "name": "Babycare Sales customizations",
     "category": "Sale",
-    "version": "1.0",
+    "version": "8.0.1.1",
     "author": "Opener B.V.",
     "website": 'https://opener.am',
     "depends": [

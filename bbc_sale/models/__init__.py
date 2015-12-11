@@ -7,3 +7,4 @@ from . import stock_picking
 from . import stock_move
 from . import product
 from . import res_partner
+from . import product_category
