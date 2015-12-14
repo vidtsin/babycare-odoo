@@ -19,3 +19,4 @@ a negative expected stock level (or are in an exception state, as red is the def
 * Set orderpoint qtys to zero in product state EOL, Obsolete and Can be ordered.
 * Apply product colors to kanban view
 * Allow product categories to be reordered in the category tree view
+* For products created from the interface (not through import), minimum orderrules are created automatically
