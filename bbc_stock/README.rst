@@ -3,7 +3,8 @@ Stock customizations for Babycare
 
 Barcode interface
 -----------------
-Open in a new window.
+* Open in a new window
+* Display order number, delivery address
 
 Lines are ordered, and colored as follows:
 * lines with products that do not have a corresponding line in the current picking (Red)

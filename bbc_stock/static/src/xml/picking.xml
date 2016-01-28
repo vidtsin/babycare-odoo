@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend="PickingEditorWidget">
+        <t t-jquery="table.js_op_table_todo" t-operation="before">
+            <div id="address" class="col-md-3 col-sm-4 col-xs-6"
+                 style="white-space: pre-line">
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6">
+                OK
+            </div>
+        </t>
+    </t>
+</templates>

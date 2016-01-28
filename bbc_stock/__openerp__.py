@@ -29,4 +29,5 @@
     'data': [
         'views/assets.xml',
     ],
+    'qweb': ['static/src/xml/picking.xml'],
 }

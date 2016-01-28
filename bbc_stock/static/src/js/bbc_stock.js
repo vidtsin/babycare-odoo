@@ -6,6 +6,28 @@ openerp.bbc_stock = function(instance){
        prototype. That means extend instead of include. */
 
     module.PickingMainWidget = module.PickingMainWidget.extend({
+        get_header: function(picking_id){
+            var res = '';
+            if(this.picking){
+                if(this.picking.partner_id) {
+                    // Render the delivery address
+                    var ctx = new instance.web.CompoundContext();
+                    ctx.add({'show_address': 1});
+                    var self = this
+                    var address = new instance.web.Model("res.partner").call(
+                        'name_get', [[this.picking.partner_id[0]], ctx]).then(function(result) {
+                            self.$('#address').text(result[0][1]);
+                        });
+                }
+                res = this.picking.name;
+                if(this.picking.origin){
+                    // Append the pickings origin to the header text
+                    res = res + ' - ' + this.picking.origin.split(":")[0];
+                }
+            }
+            return res;
+        },
+
         barcode_notify: function(mode) {
             // play a sound depending on the mode
             var audio = new Audio('/bbc_stock/static/src/snd/' + mode + '.mp3');
