@@ -2,17 +2,21 @@
 <templates id="template" xml:space="preserve">
     <t t-extend="PickingEditorWidget">
         <t t-jquery="table.js_op_table_todo" t-operation="before">
-            <div id="address" class="col-md-3 col-sm-4 col-xs-6 preformatted"
-                 />
-            <div id="pickinfo" class="col-md-3 col-sm-4 col-xs-6">
+            <!-- Whitespace is meaningful in the line below -->
+            <div id="address" class="col-md-3 col-sm-4 col-xs-6 preformatted"><t t-esc="widget.get_address()" /></div>
+            <div id="pickinfo" class="col-md-6 col-sm-6 col-xs-12">
                 <table style="width: 100%">
                     <tr>
                         <th>Carrier</th>
-                        <td id="info_carrier"><span t-esc="widget.get_carrier()" /></td>
+                        <td id="info_carrier"><t t-esc="widget.get_carrier()" /></td>
                     </tr>
                     <tr>
                         <th>Carrier tracking ref</th>
-                        <td id="info_carrier_ref"><span t-esc="widget.get_carrier_ref()" /></td>
+                        <td id="info_carrier_ref"><t t-esc="widget.get_carrier_ref()" /></td>
+                    </tr>
+                    <tr>
+                        <th>Remarks</th>
+                        <td id="info_remarks"><t t-esc="widget.get_remarks()" /></td>
                     </tr>
                 </table>
             </div>

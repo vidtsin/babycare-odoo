@@ -62,26 +62,26 @@ openerp.bbc_stock = function(instance){
     module.PickingEditorWidget = module.PickingEditorWidget.extend({
         get_carrier: function() {
             var parent = this.getParent();
-            if(parent.picking.partner_id) {
-                // While we are at it, render the delivery address. Dodgy
-                // async racing I think, as the element is not rendered yet
-                // when this is called but it usually is when the ajax call
-                // returns.
-                var ctx = new instance.web.CompoundContext();
-                ctx.add({'show_address': 1});
-                new instance.web.Model("res.partner").call(
-                    'name_get', [[parent.picking.partner_id[0]], ctx]).then(function(result) {
-                        parent.$('#address').text(result[0][1]);
-                    });
-            }
             if(parent.picking && parent.picking.carrier_id) {
                 return parent.picking.carrier_id[1];
+            }
+        },
+        get_address: function() {
+            var parent = this.getParent();
+            if(parent.picking.partner_address) {
+                return parent.picking.partner_address;
             }
         },
         get_carrier_ref: function() {
             var parent = this.getParent();
             if(parent.picking.carrier_tracking_ref) {
                 return parent.picking.carrier_tracking_ref;
+            }
+        },
+        get_remarks: function() {
+            var parent = this.getParent();
+            if(parent.picking.remarks) {
+                return parent.picking.remarks;
             }
         },
 
