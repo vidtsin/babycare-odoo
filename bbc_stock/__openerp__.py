@@ -24,6 +24,10 @@
     "author": "Opener B.V.",
     "website": 'https://opener.am',
     "depends": [
+        # NB keep the dependency on stock even though delivery already depends
+        # on stock, because it seems like the webclient does not do transitive
+        # dependencies...
+        'stock',
         'delivery',
     ],
     'data': [
