@@ -1,5 +1,5 @@
 openerp.bbc_stock = function(instance){
-    module = instance.stock,
+    module = instance.stock;
     _t = instance.web._t;
 
     /* the stock wizard won't be initialized at this point, so we work on the
@@ -9,16 +9,6 @@ openerp.bbc_stock = function(instance){
         get_header: function(picking_id){
             var res = '';
             if(this.picking){
-                if(this.picking.partner_id) {
-                    // Render the delivery address
-                    var ctx = new instance.web.CompoundContext();
-                    ctx.add({'show_address': 1});
-                    var self = this
-                    var address = new instance.web.Model("res.partner").call(
-                        'name_get', [[this.picking.partner_id[0]], ctx]).then(function(result) {
-                            self.$('#address').text(result[0][1]);
-                        });
-                }
                 res = this.picking.name;
                 if(this.picking.origin){
                     // Append the pickings origin to the header text
@@ -70,6 +60,31 @@ openerp.bbc_stock = function(instance){
     });
     var PickingEditorWidgetSuper = module.PickingEditorWidget.prototype;
     module.PickingEditorWidget = module.PickingEditorWidget.extend({
+        get_carrier: function() {
+            var parent = this.getParent();
+            if(parent.picking.partner_id) {
+                // While we are at it, render the delivery address. Dodgy
+                // async racing I think, as the element is not rendered yet
+                // when this is called but it usually is when the ajax call
+                // returns.
+                var ctx = new instance.web.CompoundContext();
+                ctx.add({'show_address': 1});
+                new instance.web.Model("res.partner").call(
+                    'name_get', [[parent.picking.partner_id[0]], ctx]).then(function(result) {
+                        parent.$('#address').text(result[0][1]);
+                    });
+            }
+            if(parent.picking && parent.picking.carrier_id) {
+                return parent.picking.carrier_id[1];
+            }
+        },
+        get_carrier_ref: function() {
+            var parent = this.getParent();
+            if(parent.picking.carrier_tracking_ref) {
+                return parent.picking.carrier_tracking_ref;
+            }
+        },
+
         /* Assign specific classes to rows with product not on the original
            picking, rows with insufficient or excessive amount and rows
            not scanned yet.

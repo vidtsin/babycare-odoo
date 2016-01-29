@@ -24,7 +24,7 @@
     "author": "Opener B.V.",
     "website": 'https://opener.am',
     "depends": [
-        'stock',
+        'delivery',
     ],
     'data': [
         'views/assets.xml',

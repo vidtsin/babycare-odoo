@@ -7,3 +7,10 @@
 .table > tbody > tr.js_pack_op_line.success > td {
     background-color: chartreuse;
 }
+#address.preformatted, #pickinfo {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+#address.preformatted {
+    white-space: pre-line;
+}
