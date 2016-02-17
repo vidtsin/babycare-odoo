@@ -24,9 +24,26 @@ openerp.bbc_stock = function(instance){
             audio.play();
         },
 
+        done: function(){
+            if (this.picking_editor.check_done()){
+                self.barcode_notify('done');
+            }
+            else {
+                self.barcode_notify('backorder');
+            }
+            return this._super();
+        },
+
         scan: function(ean){ //scans a barcode, sends it to the server, then reload the ui
             /* Overwrite this function from core (addons/stock/static/src/widgets.js).
-               We add in a notification if the product cannot be found */
+               We add in a notification if the product cannot be found.
+               Additionally, we intercept a specific scanning code to trigger put-in-cart.
+            */
+            /* Start of additional local change that could have been done in an override */
+            if (ean === 'MKG') {
+                return this.drop_down();
+            }
+            /* End of additional local change that could have been done in an override */
             var self = this;
             var product_visible_ids = this.picking_editor.get_visible_ids();
             return new instance.web.Model('stock.picking')
