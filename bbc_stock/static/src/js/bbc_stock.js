@@ -69,6 +69,11 @@ openerp.bbc_stock = function(instance){
                     /* End of local change */
                     if (result.operation_id !== false){
                         self.refresh_ui(self.picking.id).then(function(){
+                            /* Start of local change */
+                            if (result.done) {
+                                self.$('#info_carrier_ref').focus();
+                            }
+                            /* End of local change */
                             return self.picking_editor.blink(result.operation_id);
                         });
                     }

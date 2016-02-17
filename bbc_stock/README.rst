@@ -7,6 +7,8 @@ Barcode interface
 * Display order number, delivery address, tracking info and remarks, and sale order paid status
 * Tracking reference is editable
 
+The tracking reference field will be set to focus after the last of the expected products has been scanned on a customer bound shipment
+
 Lines are ordered, and colored as follows:
 * lines with products that do not have a corresponding line in the current picking (Red)
 * incomplete or overcomplete lines (Yellow)

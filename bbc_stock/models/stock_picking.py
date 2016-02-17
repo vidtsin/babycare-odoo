@@ -25,10 +25,20 @@ class Picking(models.Model):
 
     @api.model
     def process_barcode_from_ui(self, picking_id, barcode_str, visible_op_ids):
+        """ Add a couple of keys that will trigger sounds and behaviour in the
+        interface """
         res = super(Picking, self).process_barcode_from_ui(
             picking_id, barcode_str, visible_op_ids)
         if not res.get('filter_loc'):
             if res.get('operation_id'):
+                if (picking_id and
+                        self.browse(picking_id).location_dest_id
+                        .usage == 'customer'):
+                    ops = self.env['stock.pack.operation'].search(
+                        [('picking_id', '=', picking_id)])
+                    if not any(op.qty_done != op.product_qty
+                               for op in ops):
+                        res['done'] = True
                 op = self.env['stock.pack.operation'].browse(
                     res['operation_id'])
                 if op.qty_done < op.product_qty:
