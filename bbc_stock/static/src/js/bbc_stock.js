@@ -45,16 +45,16 @@ openerp.bbc_stock = function(instance){
                             }
                         }
                     }
+                    /* Start of local change */
+                    if (result.sound) {
+                        self.barcode_notify(result.sound);
+                    }
+                    /* End of local change */
                     if (result.operation_id !== false){
                         self.refresh_ui(self.picking.id).then(function(){
                             return self.picking_editor.blink(result.operation_id);
                         });
                     }
-                    /* Start of local change */
-                    else {
-                        self.barcode_notify('unknown');
-                    }
-                    /* End of local change */
                 });
         }
     });

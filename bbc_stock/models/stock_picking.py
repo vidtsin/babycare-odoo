@@ -23,6 +23,22 @@ class Picking(models.Model):
 
     partner_address = fields.Text(compute="_get_partner_address")
 
+    @api.model
+    def process_barcode_from_ui(self, picking_id, barcode_str, visible_op_ids):
+        res = super(Picking, self).process_barcode_from_ui(
+            picking_id, barcode_str, visible_op_ids)
+        if not res.get('filter_loc'):
+            if res.get('operation_id'):
+                op = self.env['stock.pack.operation'].browse(
+                    res['operation_id'])
+                if op.qty_done < op.product_qty:
+                    res['sound'] = 'error'
+                else:
+                    res['sound'] = 'success'
+            else:
+                res['sound'] = 'unknown'
+        return res
+
 
 class PickingType(models.Model):
     _inherit = 'stock.picking.type'
