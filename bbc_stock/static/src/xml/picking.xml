@@ -12,11 +12,16 @@
                     </tr>
                     <tr>
                         <th>Carrier tracking ref</th>
-                        <td id="info_carrier_ref"><t t-esc="widget.get_carrier_ref()" /></td>
+                        <td><input id="info_carrier_ref" type="text" t-att-value="widget.get_carrier_ref()" /></td>
                     </tr>
                     <tr>
                         <th>Remarks</th>
                         <td id="info_remarks"><t t-esc="widget.get_remarks()" /></td>
+                    </tr>
+                    <tr>
+                        <th>Paid</th>
+                        <t t-set="checked" t-value="widget.get_paid() ? 'checked': null"/>
+                        <td><input id="info_paid" disabled="1" type="checkbox" t-att-checked="checked" /></td>
                     </tr>
                 </table>
             </div>

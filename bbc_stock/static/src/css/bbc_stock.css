@@ -14,3 +14,8 @@
 #address.preformatted {
     white-space: pre-line;
 }
+#info_carrier_ref {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    border-color: #adadad;
+}

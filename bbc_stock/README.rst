@@ -4,7 +4,8 @@ Stock customizations for Babycare
 Barcode interface
 -----------------
 * Open in a new window
-* Display order number, delivery address, tracking info and remarks
+* Display order number, delivery address, tracking info and remarks, and sale order paid status
+* Tracking reference is editable
 
 Lines are ordered, and colored as follows:
 * lines with products that do not have a corresponding line in the current picking (Red)

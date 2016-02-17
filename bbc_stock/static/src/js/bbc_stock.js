@@ -78,13 +78,28 @@ openerp.bbc_stock = function(instance){
                 return parent.picking.carrier_tracking_ref;
             }
         },
+        set_carrier_ref: function(val) {
+            var parent = this.getParent();
+            if(parent.picking) {
+                new instance.web.Model('stock.picking')
+                    .call(
+                        'write',
+                        [[parent.picking.id], {'carrier_tracking_ref': val}],
+                        {context: new instance.web.CompoundContext()});
+            }
+        },
         get_remarks: function() {
             var parent = this.getParent();
             if(parent.picking.remarks) {
                 return parent.picking.remarks;
             }
         },
-
+        get_paid: function() {
+            var parent = this.getParent();
+            if(parent.picking) {
+                return parent.picking.x_is_paid;
+            }
+        },
         /* Assign specific classes to rows with product not on the original
            picking, rows with insufficient or excessive amount and rows
            not scanned yet.
@@ -111,6 +126,13 @@ openerp.bbc_stock = function(instance){
                 }
             });
             return result;
+        },
+        renderElement: function() {
+            this._super();
+            var self = this;
+            this.$('#info_carrier_ref').change(function(){
+                self.set_carrier_ref(self.$('#info_carrier_ref').val());
+            });
         }
     });
 }
