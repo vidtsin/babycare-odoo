@@ -129,6 +129,10 @@ openerp.bbc_stock = function(instance){
            Note that the Odoo js developer enjoyed thinking up new column names, such as
            'rem' for qty_done, presumably refering to 'remaining quantity'. However,
            the semantics of the field remained unchanged as 'scanned quantity'.
+
+           Also, override sorting order imposed by the parent. In case of an associated
+           package, we do not know the packop id, so we arbitrarily give them the highest
+           position.
         */
         get_rows: function(){
             var result = PickingEditorWidgetSuper.get_rows.apply(this, arguments);
