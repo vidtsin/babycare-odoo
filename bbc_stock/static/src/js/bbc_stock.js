@@ -26,10 +26,10 @@ openerp.bbc_stock = function(instance){
 
         done: function(){
             if (this.picking_editor.check_done()){
-                self.barcode_notify('done');
+                this.barcode_notify('done');
             }
             else {
-                self.barcode_notify('backorder');
+                this.barcode_notify('backorder');
             }
             return this._super();
         },
@@ -40,7 +40,8 @@ openerp.bbc_stock = function(instance){
                Additionally, we intercept a specific scanning code to trigger put-in-cart.
             */
             /* Start of additional local change that could have been done in an override */
-            if (ean === 'MKG') {
+            var ean_clean = ean.replace(/[\s\0]/, '');
+            if (ean_clean === 'MKG') {
                 return this.drop_down();
             }
             /* End of additional local change that could have been done in an override */
