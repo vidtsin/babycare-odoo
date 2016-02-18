@@ -158,6 +158,16 @@ openerp.bbc_stock = function(instance){
             this.$('#info_carrier_ref').change(function(){
                 self.set_carrier_ref(self.$('#info_carrier_ref').val());
             });
+
+            // Prevent scanned carrier ref to be passed on as product code
+            this.$('#info_carrier_ref').focus(function(){
+                self.getParent().barcode_scanner.disconnect();
+            });
+            this.$('#info_carrier_ref').blur(function(){
+                self.getParent().barcode_scanner.connect(function(ean){
+                    self.getParent().scan(ean);
+                });
+            })
         }
     });
 }
