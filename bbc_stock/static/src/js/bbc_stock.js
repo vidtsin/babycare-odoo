@@ -132,19 +132,18 @@ openerp.bbc_stock = function(instance){
         */
         get_rows: function(){
             var result = PickingEditorWidgetSuper.get_rows.apply(this, arguments);
+            var sorted = [];
+            _.each(this.getParent().packoplines, function(line){
+                sorted[line.id] = line.sequence;
+            });
+            result.sort(function(a, b){
+                return (sorted[!a.package_id && a.cols.id] || 0) - (sorted[!b.package_id && b.cols.id] || 0);
+            });
             _.each(result, function(row){
                 if (!row.cols.qty) {
                     row.classes += 'unknown ';
-                    console.log(row.cols.id + 'unknown');
-                } else {
-                    if (!row.cols.rem) {
-                        console.log(row.cols.id + 'not scanned');
-                    } else {
-                        if (row.cols.qty != row.cols.rem) {
-                            row.classes += 'incorrect ';
-                            console.log(row.cols.id + 'qty not equal');
-                        }
-                    }
+                } else if (row.cols.rem && row.cols.qty != row.cols.rem) {
+                    row.classes += 'incorrect ';
                 }
             });
             return result;

@@ -32,13 +32,17 @@ class Operation(models.Model):
                 operation.sequence = 0
             elif not operation.qty_done:
                 # Still to scan
-                operation.sequence = 20
-            elif operation.qty_done != operation.product_qty:
-                # Not yet satisfied or excessively so
+                operation.sequence = 30
+            elif operation.qty_done > operation.product_qty:
+                # Excess amount
                 operation.sequence = 10
-            else:
+            elif operation.qty_done == operation.product_qty:
                 # Satisfied
                 operation.sequence = 999
+            else:
+                # partially scanned
+                operation.sequence = 20
+            print operation.product_id.name, operation.sequence
 
     _order = 'sequence, write_date desc'
     sequence = fields.Integer(compute="_get_sequence", store=True)

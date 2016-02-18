@@ -41,7 +41,7 @@ class Picking(models.Model):
                         res['done'] = True
                 op = self.env['stock.pack.operation'].browse(
                     res['operation_id'])
-                if op.qty_done < op.product_qty:
+                if op.qty_done > op.product_qty:
                     res['sound'] = 'error'
                 else:
                     res['sound'] = 'success'
