@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="barcode_index" name="barcode assets" inherit_id="stock.barcode_index">
+            <xpath expr="//head" position="inside">
+                <script type="text/javascript"
+                        src="/bbc_stock/static/src/js/bbc_stock.js"
+                        />
+                <link rel="stylesheet"
+                      href="/bbc_stock/static/src/css/bbc_stock.css"
+                        />
+            </xpath>
+        </template>
+
+    </data>
+</openerp>
+
+
