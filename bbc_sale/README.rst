@@ -20,3 +20,4 @@ a negative expected stock level (or are in an exception state, as red is the def
 * Apply product colors to kanban view
 * Allow product categories to be reordered in the category tree view
 * For products created from the interface (not through import), minimum orderrules are created automatically
+* No stock moves can be created from the standalone stock move view (for instance, referred to from the product form)
