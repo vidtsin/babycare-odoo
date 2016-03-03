@@ -42,7 +42,6 @@ class Operation(models.Model):
             else:
                 # partially scanned
                 operation.sequence = 20
-            print operation.product_id.name, operation.sequence
 
     _order = 'sequence, write_date desc'
     sequence = fields.Integer(compute="_get_sequence", store=True)
