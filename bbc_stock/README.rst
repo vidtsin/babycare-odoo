@@ -32,3 +32,6 @@ Credits
 Audio files from Flashkit
 
 * Unknown barcode: http://www.flashkit.com/imagesvr_ce/flashkit/soundfx/Interfaces/Beeps/Alarm_Hi-Adam_A_-8903/Alarm_Hi-Adam_A_-8903_hifi.mp3
+
+Audio file from Freesound:
+* Ready to deliver: https://freesound.org/people/philitup321/sounds/204369/

@@ -73,6 +73,7 @@ openerp.bbc_stock = function(instance){
                             /* Start of local change */
                             if (result.done) {
                                 self.$('#info_carrier_ref').focus();
+                                self.barcode_notify('ready');
                             }
                             /* End of local change */
                             return self.picking_editor.blink(result.operation_id);
