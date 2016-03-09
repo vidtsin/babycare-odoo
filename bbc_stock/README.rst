@@ -15,7 +15,7 @@ Lines are ordered, and colored as follows:
 * lines with products that have not yet been scanned (White)
 * lines that are satisfied (Green)
 
-A special scan code 'MKG' triggers put-in-cart.
+A special scan code 'MKG' triggers put-in-cart. Afterwards, the menu will be shown instead of moving on to the next picking.
 
 Different sounds play on
 * Scanning unknown code

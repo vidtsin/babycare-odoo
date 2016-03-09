@@ -31,7 +31,13 @@ openerp.bbc_stock = function(instance){
             else {
                 this.barcode_notify('backorder');
             }
-            return this._super();
+            var self = this;
+            return this._super().then(function(res) {
+                if (!res) {
+                    return self.menu();
+                }
+                return res;
+            });
         },
 
         scan: function(ean){ //scans a barcode, sends it to the server, then reload the ui
@@ -111,6 +117,8 @@ openerp.bbc_stock = function(instance){
                         [[parent.picking.id], {'carrier_tracking_ref': val}],
                         {context: new instance.web.CompoundContext()});
             }
+            // Allow scanning to continue
+            self.$('#info_carrier_ref').blur();
         },
         get_remarks: function() {
             var parent = this.getParent();
@@ -169,7 +177,7 @@ openerp.bbc_stock = function(instance){
                 self.getParent().barcode_scanner.connect(function(ean){
                     self.getParent().scan(ean);
                 });
-            })
+            });
         }
     });
 }
