@@ -49,6 +49,14 @@ class Picking(models.Model):
                 res['sound'] = 'unknown'
         return res
 
+    @api.model
+    def action_done_from_ui(self, picking_id):
+        """ Trigger a return to the menu by not passing on the next picking
+        as per override of javascript done() method.
+        """
+        res = super(Picking, self).action_done_from_ui(picking_id)
+        return False
+
 
 class PickingType(models.Model):
     _inherit = 'stock.picking.type'
