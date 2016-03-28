@@ -7,7 +7,13 @@ openerp.bbc_lightbox = function (instance) {
             var self = this;
             $(img).click(function(e) {
                 if(self.view.get("actual_mode") == "view") {
-                    $.featherlight(img, {'image': 'http://www.geenstijl.nl/archives/images/brilvrouw.png'});
+                    var parent = self.getParent();
+                    var field = img.name;
+                    if (img.name === 'image_medium' || img.name === 'image_small') {
+                        field = 'image'
+                    }
+                    url = '/web/binary/image?model=' + parent.dataset.model + '&amp;field=' + field + '&amp;id=' + parent.datarecord.id;
+                    $.featherlight(img, {'image': url});
                     e.stopPropagation();
                 }
             });
