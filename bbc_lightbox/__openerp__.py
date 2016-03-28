@@ -24,7 +24,7 @@
     "author": "Opener B.V.",
     "website": 'https://opener.am',
     "depends": [
-        'web',
+        'web_kanban',
     ],
     'data': [
         'views/templates.xml',
