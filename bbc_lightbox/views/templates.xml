@@ -4,8 +4,9 @@
         <template id="assets_backend" name="lightbox"
                   inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
-                <script type="text/javascript" src="/bbc_lightbox/static/lib/lightbox2/js/lightbox.js"></script>
-                <link rel="stylesheet" src="/bbc_lightbox/static/lib/lightbox2/css/lightbox.css"></script>
+                <script type="text/javascript" src="/bbc_lightbox/static/lib/featherlight/featherlight.js" />
+                <link rel="stylesheet" href="/bbc_lightbox/static/lib/featherlight/featherlight.css" />
+                <script type="text/javascript" src="/bbc_lightbox/static/src/js/bbc_lightbox.js" />
             </xpath>
         </template>
     </data>

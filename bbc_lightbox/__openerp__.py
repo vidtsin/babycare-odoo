@@ -24,7 +24,7 @@
     "author": "Opener B.V.",
     "website": 'https://opener.am',
     "depends": [
-        'mob_extra_images',
+        'web',
     ],
     'data': [
         'views/templates.xml',
