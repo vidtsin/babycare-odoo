@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <template id="assets_backend" name="lightbox"
+                  inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/bbc_lightbox/static/lib/lightbox2/js/lightbox.js"></script>
+                <link rel="stylesheet" src="/bbc_lightbox/static/lib/lightbox2/css/lightbox.css"></script>
+            </xpath>
+        </template>
+    </data>
+</openerp>
