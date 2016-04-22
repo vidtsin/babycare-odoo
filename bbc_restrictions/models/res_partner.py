@@ -35,6 +35,6 @@ class ResPartner(models.Model):
         arch = etree.fromstring(result['arch'])
         for field in arch.xpath("//field[@name='state_id']"):
             field.attrib['options'] = \
-                "{'create': False, 'create_edit': False, 'no_open': True}"
+                "{'no_create': true, 'no_open': true}"
         result['arch'] = etree.tostring(arch)
         return result
