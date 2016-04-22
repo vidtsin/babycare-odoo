@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    This module copyright (C) 2012-2015 Therp BV (<http://therp.nl>).
+#                          (C) 2016 Opener BV (<https://opener.am>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,26 +20,19 @@
 #
 ##############################################################################
 {
-        "name": "Baby care restrictions",
-        "summary": "Adds restrictions to odoo",
-        "category": "security",
-        "version": "1.0",
-        "author": "Therp BV",
-        "website": 'http://therp.nl',
-        "depends": [
-            'base',
-            'sale',
-            'point_of_sale',
-            'web_m2x_options'
-            
-            ],
-        "qweb": [
-            ],
-        "data": [
-            'views/sale_order.xml', 
-            'views/res_partner.xml', 
-            'views/pos_order.xml', 
-            ],
-        'active': True,
-        }
-
+    "name": "Baby care restrictions",
+    "summary": "Prevent creation of records in various places",
+    "category": "security",
+    "version": "1.0",
+    "author": "Therp BV,Opener BV",
+    "depends": [
+        'base',
+        'sale',
+        'point_of_sale',
+    ],
+    "data": [
+        'views/sale_order.xml',
+        'views/res_partner.xml',
+        'views/pos_order.xml',
+    ],
+}

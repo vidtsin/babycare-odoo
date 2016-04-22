@@ -7,17 +7,11 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//field[@name='state_id']" position="attributes">
+                    <attribute name="options">{'no_create': true}</attribute>
+                </xpath>
+            </field>
+        </record>
 
-            <xpath expr="//field[@name='country_id']" position="attributes">
-                <attribute name="options">{'create': false, 'create_edit' : false }</attribute>
-            </xpath>
-            <xpath expr="//field[@name='state_id']" position="attributes">
-                <attribute name="options">{'create': false, 'create_edit' : false }</attribute>
-            </xpath>
-
-
-
-         </field>
-     </record>
-</data>
+    </data>
 </openerp>
