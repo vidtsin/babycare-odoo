@@ -20,7 +20,5 @@ class Invoice(models.Model):
         res = super(Invoice, self)._prepare_refund(
             invoice, date=date, period_id=period_id,
             description=description, journal_id=journal_id)
-        import pdb
-        pdb.set_trace()
         res['sale_order_ids'] = [(6, 0, invoice.sale_order_ids.ids)]
         return res
