@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_account_invoice_refund" model="ir.ui.view">
+            <field name="name">account.invoice.refund.form</field>
+            <field name="model">account.invoice.refund</field>
+            <field name="inherit_id" ref="account.view_account_invoice_refund" />
+            <field name="arch" type="xml">
+                <xpath expr="//group/label[@for='filter_refund']" position="before">
+                    <group colspan="2" string="Related invoices found"
+                           attrs="{'invisible': [('other_invoice_ids', '=', [(6, False, [])])]}">
+                        <div><p>Other invoices are associated to this invoice's sale order. Please check if the invoice has been refunded before.</p></div>
+                        <br /><field name="other_invoice_ids" nolabel="1" />
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
