@@ -76,6 +76,12 @@ msgid "Free shipping"
 msgstr "Vrachtvij"
 
 #. module: bbc_sale
+#: field:product.product,supplier_code:0
+#: field:product.template,supplier_code:0
+msgid "Supplier Product Code"
+msgstr "Leverancierscode"
+
+#. module: bbc_sale
 #: field:res.partner,amount_free_shipping:0
 msgid "Free shipping from"
 msgstr "Vrachtvrij vanaf (bedrag)"

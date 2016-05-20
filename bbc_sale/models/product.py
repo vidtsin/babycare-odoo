@@ -12,6 +12,8 @@ class ProductTemplate(models.Model):
 
     state = fields.Selection(
         selection_add=[('order', 'Can be ordered')])
+    supplier_code = fields.Char(
+        related='seller_ids.product_code', readonly=True)
 
     @api.multi
     def write(self, values):

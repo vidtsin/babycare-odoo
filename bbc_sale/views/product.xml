@@ -27,5 +27,28 @@
                 </field>
             </field>
         </record>
+
+        <record id="product_normal_form_view" model="ir.ui.view">
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <field name="default_code" position="after">
+                    <field name="supplier_code"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_template_search_view" model="ir.ui.view">
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="model">product.template</field>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="default_code" filter_domain="[('default_code', 'ilike', self)]"/>
+                    <field name="ean13" filter_domain="[('ean13', 'ilike', self)]"/>
+                    <field name="supplier_code" filter_domain="[('supplier_code', 'ilike', self)]"/>
+                </field>
+            </field>
+        </record>
+
     </data>
 </openerp>
