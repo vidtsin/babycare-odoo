@@ -14,11 +14,16 @@ class ProductTemplate(models.Model):
         selection_add=[('order', 'Can be ordered')])
     supplier_code = fields.Char(
         related='seller_ids.product_code', readonly=True)
+    description = fields.Text('Long description')
+    description_sale = fields.Text('Short description')
+    # Prevent copying of translations by setting copy to False
+    name = fields.Char(copy=False)
 
     @api.multi
     def write(self, values):
         """
-        Remove Buy route from products that are set to EOL
+        Remove Buy route from products that are set to EOL.
+        Also reset English name after copy.
         """
         def add_route():
             route_ids = values.get('route_ids') or []
@@ -49,6 +54,16 @@ class ProductTemplate(models.Model):
             elif values['state'] == 'order':
                 add_route()
                 inactive_orderpoints()
+
+        if ('name' in values and
+                self[0].with_context(lang='en_US').name == '/'):
+            if (self.env.context.get('lang') or 'en_US') != 'en_US':
+                super(ProductTemplate, self).with_context(lang='en_US').write(
+                    {'name': values['name']})
+            self.env['ir.translation'].sudo().search([
+                ('name', '=', 'product.template,name'),
+                ('res_id', 'in', self._ids),
+                ('value', '=', '/')]).write({'value': values['name']})
 
         return super(ProductTemplate, self).write(values)
 
@@ -103,6 +118,14 @@ class ProductTemplate(models.Model):
             self if self.env.context.get('no_autocreate_orderpoints')
             else self.with_context(no_autocreate_orderpoints=True)
         ).load(fields, data)
+
+    @api.one
+    def copy(self, default=None):
+        if default is None:
+            default = {}
+        if 'name' not in default:
+            default['name'] = '/'
+        return super(ProductTemplate, self).copy(default=default)
 
 
 class Product(models.Model):
@@ -190,3 +213,21 @@ class Product(models.Model):
                     'product_max_qty': 0.0,
                 })
         return res
+
+    @api.one
+    def copy(self, default=None):
+        if default is None:
+            default = {}
+        if 'name' not in default:
+            default['name'] = '/'
+        return super(Product, self).copy(default=default)
+
+    @api.multi
+    def write(self, values):
+        """ Reset English name after copy """
+        if ('name' in values and
+                (self.env.context.get('lang') or 'en_US') != 'en_US' and
+                self[0].with_context(lang='en_US').name == '/'):
+            super(Product, self).with_context(lang='en_US').write(
+                {'name': values['name']})
+        return super(Product, self).write(values)

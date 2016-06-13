@@ -28,6 +28,7 @@
         'point_of_sale',
         'purchase',
         'mrp',
+        'magento_bridge',  # Override of product view
     ],
     'data': [
         'views/templates.xml',
