@@ -25,3 +25,4 @@ a negative expected stock level (or are in an exception state, as red is the def
 * Search supplier code, default code and EAN by default
 * When copying a product, force product name to be '/'. On next name write, also overwrite the label instead of just the translation in the user's language.
 * Rename product description to Long description and sale description to short description.
+* Set supplier invoice number to required on incoming invoices

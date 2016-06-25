@@ -39,6 +39,7 @@
         'views/product.xml',
         'views/product_category.xml',
         'views/res_partner.xml',
+        'views/account_invoice.xml',
         'data/ir_cron.xml',
     ],
 }
