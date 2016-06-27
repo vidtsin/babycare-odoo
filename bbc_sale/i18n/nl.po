@@ -116,6 +116,12 @@ msgid "Picking List"
 msgstr "Verzamellijst"
 
 #. module: bbc_sale
+#: code:addons/bbc_sale/models/account_invoice.py:27
+#, python-format
+msgid "Please enter a supplier invoice number first"
+msgstr "Vul eerst het factuurnummer van de leverancier in."
+
+#. module: bbc_sale
 #: field:product.product,income_pdt:0
 msgid "Point of Sale Cash In"
 msgstr "Kassa geld in"

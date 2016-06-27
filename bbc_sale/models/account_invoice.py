@@ -1,4 +1,6 @@
 from openerp import models, api
+from openerp.exceptions import Warning as UserError
+from openerp.tools.translate import _
 
 
 class Invoice(models.Model):
@@ -18,3 +20,10 @@ class Invoice(models.Model):
              ('state', '=', 'shipping_except')]
         ).signal_workflow('ship_recreate')
         return res
+
+    @api.multi
+    def action_move_create(self):
+        if self.type.startswith('in_') and not self.supplier_invoice_number:
+            raise UserError(_(
+                'Please enter a supplier invoice number first'))
+        return super(Invoice, self).action_move_create()
