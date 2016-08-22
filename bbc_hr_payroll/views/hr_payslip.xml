@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_hr_payslip_form" model="ir.ui.view">
+            <field name="name">Make payslip form view accessible to regular users</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="model">hr.payslip</field>
+            <field name="arch" type="xml">
+                <button name="hr_verify_sheet"><attribute name="groups">base.group_hr_user</attribute></button>
+                <button name="refund_sheet"><attribute name="groups">base.group_hr_user</attribute></button>
+                <button name="draft"><attribute name="groups">base.group_hr_user</attribute></button> 
+                <button name="compute_sheet"><attribute name="groups">base.group_hr_user</attribute></button>
+                <button name="cancel_sheet"><attribute name="groups">base.group_hr_user</attribute></button>
+                <button name="%(hr_payroll.act_payslip_lines)d"><attribute name="groups">base.group_hr_user</attribute></button>
+                <field name="contract_id"><attribute name="groups">base.group_hr_user</attribute></field>
+                <field name="struct_id"><attribute name="groups">base.group_hr_user</attribute></field>
+                <xpath expr="//field[@name='line_ids']/form/group/field[@name='salary_rule_id']" position="attributes">
+                    <attribute name="groups">base.group_hr_user</attribute>
+                </xpath>
+                <xpath expr="//field[@name='input_line_ids']/tree/field[@name='contract_id']" position="attributes">
+                    <attribute name="groups">base.group_hr_user</attribute>
+                </xpath>
+                <xpath expr="//field[@name='input_line_ids']/form/group/field[@name='contract_id']" position="attributes">
+                    <attribute name="groups">base.group_hr_user</attribute>
+                </xpath>
+                <xpath expr="//field[@name='worked_days_line_ids']/tree/field[@name='contract_id']" position="attributes">
+                    <attribute name="groups">base.group_hr_user</attribute>
+                </xpath>
+                <xpath expr="//field[@name='worked_days_line_ids']/form/group/field[@name='contract_id']" position="attributes">
+                    <attribute name="groups">base.group_hr_user</attribute>
+                </xpath>
+                <page string="Details By Salary Rule Category" position="attributes">
+                    <attribute name="groups">base.group_hr_user</attribute>
+                </page>
+                <page string="Accounting Information" position="attributes">
+                    <attribute name="groups">base.group_hr_user</attribute>
+                </page>
+            </field>
+        </record>
+    </data>
+</openerp>
