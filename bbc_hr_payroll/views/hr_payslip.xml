@@ -6,14 +6,14 @@
             <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
             <field name="model">hr.payslip</field>
             <field name="arch" type="xml">
-                <button name="hr_verify_sheet"><attribute name="groups">base.group_hr_user</attribute></button>
-                <button name="refund_sheet"><attribute name="groups">base.group_hr_user</attribute></button>
-                <button name="draft"><attribute name="groups">base.group_hr_user</attribute></button> 
-                <button name="compute_sheet"><attribute name="groups">base.group_hr_user</attribute></button>
-                <button name="cancel_sheet"><attribute name="groups">base.group_hr_user</attribute></button>
-                <button name="%(hr_payroll.act_payslip_lines)d"><attribute name="groups">base.group_hr_user</attribute></button>
-                <field name="contract_id"><attribute name="groups">base.group_hr_user</attribute></field>
-                <field name="struct_id"><attribute name="groups">base.group_hr_user</attribute></field>
+                <button name="hr_verify_sheet" position="attributes"><attribute name="groups">base.group_hr_user</attribute></button>
+                <button name="refund_sheet" position="attributes"><attribute name="groups">base.group_hr_user</attribute></button>
+                <button name="draft" position="attributes"><attribute name="groups">base.group_hr_user</attribute></button>
+                <button name="compute_sheet" position="attributes"><attribute name="groups">base.group_hr_user</attribute></button>
+                <button name="cancel_sheet" position="attributes"><attribute name="groups">base.group_hr_user</attribute></button>
+                <button name="%(hr_payroll.act_payslip_lines)d" position="attributes"><attribute name="groups">base.group_hr_user</attribute></button>
+                <field name="contract_id" position="attributes"><attribute name="groups">base.group_hr_user</attribute></field>
+                <field name="struct_id" position="attributes"><attribute name="groups">base.group_hr_user</attribute></field>
                 <xpath expr="//field[@name='line_ids']/form/group/field[@name='salary_rule_id']" position="attributes">
                     <attribute name="groups">base.group_hr_user</attribute>
                 </xpath>

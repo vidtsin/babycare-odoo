@@ -13,6 +13,7 @@
     ],
     'data': [
         'views/hr_payslip.xml',
+        'views/menu.xml',
         'security/ir_rule.xml',
         'security/ir.model.access.csv',
     ],
