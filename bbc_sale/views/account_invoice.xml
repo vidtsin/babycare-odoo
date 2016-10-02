@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- Switch fiscal position and payment term around on the supplier invoice form -->
+        <record id="invoice_supplier_form" model="ir.ui.view">
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="priority" eval="999"/>
+            <field name="arch" type="xml">
+                <field name="fiscal_position" position="replace"/>
+                <field name="payment_term" position="replace">
+                    <field name="fiscal_position" options="{'no_create': True}"/>
+                </field>
+                <field name="origin" position="before">
+                    <field name="payment_term"
+                           on_change="onchange_payment_term_date_invoice(payment_term, date_invoice)"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

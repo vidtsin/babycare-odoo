@@ -25,3 +25,4 @@ a negative expected stock level (or are in an exception state, as red is the def
 * Search supplier code, default code and EAN by default
 * Rename product description to Long description and sale description to short description.
 * Supplier invoices cannot be confirmed without a supplier invoice number filled in.
+* Move fiscal position and payment term around on the supplier invoice form to make the latter more prominent
