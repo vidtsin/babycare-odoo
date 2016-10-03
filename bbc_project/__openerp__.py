@@ -9,7 +9,7 @@
     "author": "Opener B.V.",
     "website": 'https://opener.am',
     "depends": [
-        'project',
+        'project_issue',
     ],
     'data': [
         'views/project_task.xml',
