@@ -112,7 +112,8 @@ class Product(models.Model):
 
     @api.model
     def update_product_availability(self):
-        # Update the Website availability of the current product
+        """ Update the Website availability of the current product. Unpublish
+        end-of-life *stock* products that are not available anymore. """
         logger = logging.getLogger('odoo.addons.bbc_sale')
         offset = 0
         limit = 500
@@ -160,6 +161,16 @@ class Product(models.Model):
                     variant.write({'x_availability': x_availability})
         logger.debug(
             'Updated availability in %ss', time.time() - start_time)
+
+        to_unpublish = self.search([
+            ('x_availability', '=', 0),
+            ('type', '=', 'product'),
+            ('website_published', '=', True),
+            ('state', '=', 'end')])
+        logger.debug(
+            '%s products can be unpublished from the website',
+            len(to_unpublish))
+        to_unpublish.write({'website_published': False})
 
     @api.model
     def load(self, fields, data):

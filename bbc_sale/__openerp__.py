@@ -9,6 +9,7 @@
     "author": "Opener B.V.",
     "website": 'https://opener.am',
     "depends": [
+        'website_sale',
         'sale_stock',
         'point_of_sale',
         'purchase',
