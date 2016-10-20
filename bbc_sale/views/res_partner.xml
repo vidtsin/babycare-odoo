@@ -7,6 +7,7 @@
             <field name="res_model">pos.order</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form,graph</field>
+            <field name="domain">[('partner_id', '=', active_id)]</field>
             <field name="context">{'search_default_partner_id': active_id}</field>
             <field name="groups_id" eval="[(4, ref('point_of_sale.group_pos_user')), (4, ref('stock.group_stock_user'))]"/>
         </record>
