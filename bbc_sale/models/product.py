@@ -115,6 +115,7 @@ class Product(models.Model):
         """ Update the Website availability of the current product. Unpublish
         end-of-life *stock* products that are not available anymore. """
 
+        start_time = time.time()
         bom_lines = self.env['mrp.bom'].search([
             '|', ('product_id', 'in', self.ids),
             ('product_tmpl_id', '=', self.mapped('product_tmpl_id').ids)])
@@ -154,6 +155,9 @@ class Product(models.Model):
                         variant.default_code or variant.name,
                         variant.x_availability, x_availability)
                     variant.x_availability = x_availability
+        logger.debug(
+            'Updated availability of %s products in %ss',
+            len(self), time.time() - start_time)
 
     @api.model
     def update_product_availability(self):
