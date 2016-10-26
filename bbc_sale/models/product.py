@@ -115,7 +115,6 @@ class Product(models.Model):
         """ Update the Website availability of the current product. Unpublish
         end-of-life *stock* products that are not available anymore. """
 
-        logger.debug('update_availability of %s', self.ids)
         bom_lines = self.env['mrp.bom'].search([
             '|', ('product_id', 'in', self.ids),
             ('product_tmpl_id', '=', self.mapped('product_tmpl_id').ids)])
@@ -131,8 +130,6 @@ class Product(models.Model):
                     product.default_code or product.name,
                     product.x_availability, x_availability)
                 product.x_availability = x_availability
-            else:
-                logger.debug('same')
 
             if (not product.x_availability and product.state == 'end' and
                     product.type == 'product' and product.website_published):
