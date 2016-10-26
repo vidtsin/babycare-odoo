@@ -7,7 +7,7 @@ class Inventory(models.Model):
 
     @api.model
     def post_inventory(self, inv):
-        res = super(Inventory, self).post_inventory()
+        res = super(Inventory, self).post_inventory(inv)
         self.browse(inv.id).mapped('product_id').update_availability()
         return res
 

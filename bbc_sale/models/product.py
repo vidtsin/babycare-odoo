@@ -115,10 +115,12 @@ class Product(models.Model):
         """ Update the Website availability of the current product. Unpublish
         end-of-life *stock* products that are not available anymore. """
 
-        exclude_products = self.env['mrp.bom'].search([
+        logger.debug('update_availability of %s', self.ids)
+        bom_lines = self.env['mrp.bom'].search([
             '|', ('product_id', 'in', self.ids),
-            ('product_tmpl_id', '=', self.mapped('product_tmpl_id').ids),
-        ])
+            ('product_tmpl_id', '=', self.mapped('product_tmpl_id').ids)])
+        exclude_products = bom_lines.mapped('product_id') + bom_lines.mapped(
+            'product_tmpl_id.product_variant_ids')
         for product in self:
             if product in exclude_products:
                 continue
@@ -129,13 +131,15 @@ class Product(models.Model):
                     product.default_code or product.name,
                     product.x_availability, x_availability)
                 product.x_availability = x_availability
+            else:
+                logger.debug('same')
 
             if (not product.x_availability and product.state == 'end' and
                     product.type == 'product' and product.website_published):
                 product.website_published = False
 
         for bom in self.env['mrp.bom'].search([
-                ('bom_lines.product_id', 'in', self.ids)]):
+                ('bom_line_ids.product_id', 'in', self.ids)]):
             for variant in (bom.product_id or
                             bom.product_tmpl_id.product_variant_ids):
                 avail = []
