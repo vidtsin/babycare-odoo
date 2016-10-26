@@ -126,10 +126,6 @@ class Product(models.Model):
                 continue
             x_availability = product.virtual_available - product.incoming_qty
             if product.x_availability != x_availability:
-                logger.debug(
-                    "Updating availability of product %s from %s to %s",
-                    product.default_code or product.name,
-                    product.x_availability, x_availability)
                 product.x_availability = x_availability
 
             if (not product.x_availability and product.state == 'end' and
