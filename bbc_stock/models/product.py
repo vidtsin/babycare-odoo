@@ -46,8 +46,8 @@ class Product(models.Model):
             if not bom:
                 product.max_incoming_stock_date = False
                 continue
+            dates = []
             for line in bom.bom_line_ids:
-                dates = []
                 if (line.attribute_value_ids <= product.attribute_value_ids):
                     dates.append(max_date_product(line.product_id))
             product.max_incoming_stock_date = max(dates) if dates else today
