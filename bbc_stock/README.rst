@@ -26,6 +26,10 @@ Different sounds play on
 
 TODO: unscanned products stay on top even if there are red and yellow lines.
 
+Other functionality
+===================
+Add a field to the product form that displays the maximum delivery date for all of the incoming stock.
+
 Credits
 -------
 

@@ -54,7 +54,7 @@ class Picking(models.Model):
         """ Trigger a return to the menu by not passing on the next picking
         as per override of javascript done() method.
         """
-        res = super(Picking, self).action_done_from_ui(picking_id)
+        super(Picking, self).action_done_from_ui(picking_id)
         return False
 
 

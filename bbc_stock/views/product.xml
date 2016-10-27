@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- priority=15 so that the manual view with priority 16 is applied afterwards,
+             to preserve the order of the fields -->
+        <record id="product_normal_form_view" model="ir.ui.view">
+            <field name="name">Add incoming stock expected date to product form</field>
+            <field name="model">product.product</field>
+            <field name="priority" eval="15"/>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <field name="virtual_available" position="after">
+                    <field name="max_incoming_stock_date"/>
+                    <field name="max_incoming_stock_date_override"/>
+                    <field name="max_incoming_stock_date_override_value"
+                           class="oe_edit_only"
+                           attrs="{'invisible': [('max_incoming_stock_date_override', '=', False)], 'required': [('max_incoming_stock_date_override', '=', True)]}"
+                           />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

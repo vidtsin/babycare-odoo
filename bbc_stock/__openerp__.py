@@ -29,9 +29,11 @@
         # dependencies...
         'stock',
         'delivery',
+        'bbc_sale',
     ],
     'data': [
         'views/assets.xml',
+        'views/product.xml',
     ],
     'qweb': ['static/src/xml/picking.xml'],
 }
