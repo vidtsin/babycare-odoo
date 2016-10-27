@@ -19,6 +19,8 @@ class Product(models.Model):
             self.max_incoming_stock_date_override_value = False
 
     @api.multi
+    @api.depends('max_incoming_stock_date_override',
+                 'max_incoming_stock_date_override_value')
     def _compute_max_incoming_stock_date(self):
         today = fields.Date.context_today(self)
         _dql, domain, _dmol = self._get_domain_locations()
@@ -47,5 +49,30 @@ class Product(models.Model):
             for line in bom.bom_line_ids:
                 dates = []
                 if (line.attribute_value_ids <= product.attribute_value_ids):
-                    dates += max_date_product(line.product_id)
+                    dates.append(max_date_product(line.product_id))
             product.max_incoming_stock_date = max(dates) if dates else today
+
+    @api.model
+    def update_product_availability(self):
+        """ Reset expected stock date once we have incoming stock.
+        TODO: refactor into an override of update_availability """
+        res = super(Product, self)
+        self.search([
+            ('x_availability', '>', 0),
+            ('max_incoming_stock_date_override', '=', True),
+        ]).write({
+            'max_incoming_stock_date_override': False,
+            'max_incoming_stock_date_override_value': False,
+        })
+        return res
+
+    @api.model
+    def reset_max_incoming_date_override(self):
+        today = fields.Date.context_today(self)
+        self.search([
+            ('max_incoming_stock_date_override_value', '<=', today),
+        ]).write({
+            'max_incoming_stock_date_override': False,
+            'max_incoming_stock_date_override_value': False,
+        })
+        return True

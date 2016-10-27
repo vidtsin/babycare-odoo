@@ -34,6 +34,7 @@
     'data': [
         'views/assets.xml',
         'views/product.xml',
+        'data/ir_cron.xml',
     ],
     'qweb': ['static/src/xml/picking.xml'],
 }
