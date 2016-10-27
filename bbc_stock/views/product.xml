@@ -11,12 +11,14 @@
             <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="arch" type="xml">
                 <field name="virtual_available" position="after">
-                    <field name="max_incoming_stock_date"/>
-                    <field name="max_incoming_stock_date_override"/>
-                    <field name="max_incoming_stock_date_override_value"
-                           class="oe_edit_only"
-                           attrs="{'invisible': [('max_incoming_stock_date_override', '=', False)], 'required': [('max_incoming_stock_date_override', '=', True)]}"
-                           />
+                    <label for="max_incoming_stock_date" string="Expected on"/>
+                    <div>
+                        <field name="max_incoming_stock_date" string="Expected on" class="oe_inline"
+                               attrs="{'invisible': [('max_incoming_stock_date_override', '=', True)]}"
+                               /><field name="max_incoming_stock_date_override_value" string="Expected on" class="oe_inline"
+                               attrs="{'invisible': [('max_incoming_stock_date_override', '=', False)], 'required': [('max_incoming_stock_date_override', '=', True)]}"
+                               /> <field name="max_incoming_stock_date_override" style="margin-left: 1em" class="oe_inline"/> Override
+                    </div>
                 </field>
             </field>
         </record>
