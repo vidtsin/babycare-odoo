@@ -24,6 +24,6 @@ class StockMove(models.Model):
 
     @api.multi
     def action_done(self):
-        res = super(StockMove, self).action_cancel()
+        res = super(StockMove, self).action_done()
         self.mapped('product_id').update_availability()
         return res
