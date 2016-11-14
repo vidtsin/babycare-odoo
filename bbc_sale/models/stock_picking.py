@@ -30,25 +30,3 @@ class Picking(models.Model):
         self.remarks = '; '.join(
             [purchase.remarks for purchase in purchases if purchase.remarks] +
             [sale.remarks for sale in sales])
-
-    @api.multi
-    def action_confirm(self):
-        res = super(Picking, self).action_confirm()
-        self.update_product_availability()
-        return res
-
-    @api.multi
-    def action_cancel(self):
-        res = super(Picking, self).action_cancel()
-        self.update_product_availability()
-        return res
-
-    @api.multi
-    def do_transfer(self):
-        res = super(Picking, self).do_transfer()
-        self.update_product_availability()
-        return res
-
-    @api.multi
-    def update_product_availability(self):
-        self.mapped('move_lines.product_id').update_availability()
