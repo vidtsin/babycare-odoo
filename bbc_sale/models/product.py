@@ -16,6 +16,26 @@ class ProductTemplate(models.Model):
         related='seller_ids.product_code', readonly=True)
     description = fields.Text('Long description')
     description_sale = fields.Text('Short description')
+    is_component = fields.Boolean(
+        compute='compute_is_component',
+        search='search_is_component')
+
+    @api.multi
+    def compute_is_component(self):
+        for template in self:
+            template.is_component = bool(
+                self.env['mrp.bom.line'].search([
+                    ('product_id', 'in', template.product_variant_ids.ids)
+                ], limit=1))
+
+    @api.model
+    def search_is_component(self, operator, value):
+        negate = not bool(value)
+        if operator in ('!=', '<>'):
+            negate = not negate
+        templates = self.env['mrp.bom.line'].search(
+            []).mapped('product_id.product_tmpl_id')
+        return [('id', 'not in' if negate else 'in', templates.ids)]
 
     @api.multi
     def write(self, values):
@@ -109,6 +129,27 @@ class ProductTemplate(models.Model):
 
 class Product(models.Model):
     _inherit = 'product.product'
+
+    is_component = fields.Boolean(
+        compute='compute_is_component',
+        search='search_is_component')
+
+    @api.multi
+    def compute_is_component(self):
+        for product in self:
+            product.is_component = bool(
+                self.env['mrp.bom.line'].search([
+                    ('product_id', '=', product.id)
+                ], limit=1))
+
+    @api.model
+    def search_is_component(self, operator, value):
+        negate = not bool(value)
+        if operator in ('!=', '<>'):
+            negate = not negate
+        products = self.env['mrp.bom.line'].search(
+            []).mapped('product_id')
+        return [('id', 'not in' if negate else 'in', products.ids)]
 
     @api.model
     def update_product_availability(self):

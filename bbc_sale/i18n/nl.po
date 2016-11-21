@@ -28,6 +28,12 @@ msgid "BOM Components"
 msgstr "Onderdeel"
 
 #. module: bbc_sale
+#: field:product.product,is_component:0
+#: field:product.template,is_component:0
+msgid "Is component"
+msgstr "Is onderdeel"
+
+#. module: bbc_sale
 #: field:product.product,bom_component_count:0
 msgid "Bom component count"
 msgstr "Bom component count"
