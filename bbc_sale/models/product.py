@@ -192,3 +192,13 @@ class Product(models.Model):
                     'product_max_qty': 0.0,
                 })
         return res
+
+    @api.multi
+    def compute_bom_component_count(self):
+        for product in self:
+            product.bom_component_count = len(
+                self.env['mrp.bom.line'].search(
+                    [('product_id', '=', product.id)]).mapped('bom_id'))
+
+    bom_component_count = fields.Integer(
+        compute="compute_bom_component_count")
