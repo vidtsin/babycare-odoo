@@ -27,7 +27,7 @@ class ProductTemplate(models.Model):
         for template in self:
             template.bom_component_count = len(
                 self.env['mrp.bom.line'].search(
-                    [('product_id', 'in', template.product_variant_ids)]
+                    [('product_id', 'in', template.product_variant_ids.ids)]
                 ).mapped('bom_id'))
 
     @api.multi
