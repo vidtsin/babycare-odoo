@@ -26,5 +26,5 @@ a negative expected stock level (or are in an exception state, as red is the def
 * Rename product description to Long description and sale description to short description.
 * Supplier invoices cannot be confirmed without a supplier invoice number filled in.
 * Move fiscal position and payment term around on the supplier invoice form to make the latter more prominent
-* Show a box button on the product variant form that opens the BOMS in which the product is a component
+* Show a box button on the product and variant form views that opens the BOMS in which the product is a component
 * Can search on products and variants whether it is a component

@@ -37,6 +37,15 @@
             <field name="domain">[('bom_line_ids.product_id', 'in', active_ids)]</field>
         </record>
 
+        <record id="action_template_bom_component" model="ir.actions.act_window">
+            <field name="name">Component in BOM</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mrp.bom</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('bom_line_ids.product_id.product_tmpl_id', 'in', active_ids)]</field>
+        </record>
+
         <record id="product_normal_form_view" model="ir.ui.view">
             <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="model">product.product</field>
@@ -47,14 +56,28 @@
             </field>
         </record>
 
+        <record id="product_template_only_form_view" model="ir.ui.view">
+            <field name="inherit_id" ref="mrp.product_template_form_view_bom_button"/>
+            <field name="model">product.template</field>
+            <field name="arch" type="xml">
+                <button name="%(mrp.template_open_bom)d" position="after">
+                    <button class="oe_inline oe_stat_button" name="%(action_template_bom_component)d"
+                            type="action" attrs="{'invisible':[('type', '=', 'service')]}"
+                            icon="fa-flask">
+                        <field string="BOM Components" name="bom_component_count" widget="statinfo" />
+                    </button>
+                </button>
+            </field>
+        </record>
+
         <record id="product_mrp_form_view" model="ir.ui.view">
             <field name="inherit_id" ref="mrp.product_product_form_view_bom_button"/>
             <field name="model">product.product</field>
             <field name="arch" type="xml">
                 <button name="%(mrp.act_product_mrp_production)d" position="after">
                     <button class="oe_inline oe_stat_button" name="%(action_product_bom_component)d"
-                            type="action" attrs="{'invisible':[('type', '=', 'service')]}" icon="fa-flask"
-                            >
+                            type="action" attrs="{'invisible':[('type', '=', 'service')]}"
+                            icon="fa-flask">
                         <field string="BOM Components" name="bom_component_count" widget="statinfo" />
                     </button>
                 </button>

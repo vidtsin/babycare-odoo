@@ -19,6 +19,16 @@ class ProductTemplate(models.Model):
     is_component = fields.Boolean(
         compute='compute_is_component',
         search='search_is_component')
+    bom_component_count = fields.Integer(
+        compute="compute_bom_component_count")
+
+    @api.multi
+    def compute_bom_component_count(self):
+        for template in self:
+            template.bom_component_count = len(
+                self.env['mrp.bom.line'].search(
+                    [('product_id', 'in', template.product_variant_ids)]
+                ).mapped('bom_id'))
 
     @api.multi
     def compute_is_component(self):
