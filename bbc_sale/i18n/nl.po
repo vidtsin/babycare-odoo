@@ -24,6 +24,7 @@ msgstr "Het bedrag van deze betaling is meer dan €10.000,-. Is het bedrag wel 
 
 #. module: bbc_sale
 #: view:product.product:bbc_sale.product_mrp_form_view
+#: view:product.template:bbc_sale.product_template_only_form_view
 msgid "BOM Components"
 msgstr "Onderdeel"
 
@@ -40,6 +41,7 @@ msgstr "Bom component count"
 
 #. module: bbc_sale
 #: model:ir.actions.act_window,name:bbc_sale.action_product_bom_component
+#: model:ir.actions.act_window,name:bbc_sale.action_template_bom_component
 msgid "Component in BOM"
 msgstr "Onderdeel in materiaallijst"
 
