@@ -161,54 +161,64 @@ class Product(models.Model):
             []).mapped('product_id')
         return [('id', 'not in' if negate else 'in', products.ids)]
 
+    @api.multi
+    def update_availability(self):
+        """ Update the Website availability of the current product. Unpublish
+        end-of-life *stock* products that are not available anymore. """
+
+        start_time = time.time()
+        bom_lines = self.env['mrp.bom'].search([
+            '|', ('product_id', 'in', self.ids),
+            ('product_tmpl_id', '=', self.mapped('product_tmpl_id').ids)])
+        exclude_products = bom_lines.mapped('product_id') + bom_lines.mapped(
+            'product_tmpl_id.product_variant_ids')
+        for product in self:
+            if product in exclude_products:
+                continue
+            x_availability = product.virtual_available - product.incoming_qty
+            if product.x_availability != x_availability:
+                product.x_availability = x_availability
+
+            if (not product.x_availability and product.state == 'end' and
+                    product.type == 'product' and product.website_published):
+                product.website_published = False
+
+        for bom in self.env['mrp.bom'].search([
+                ('bom_line_ids.product_id', 'in', self.ids)]):
+            for variant in (bom.product_id or
+                            bom.product_tmpl_id.product_variant_ids):
+                avail = []
+                for line in bom.bom_line_ids:
+                    if (line.attribute_value_ids <=
+                            variant.attribute_value_ids):
+                        avail.append(
+                            int(line.product_id.x_availability /
+                                line.product_qty))
+                x_availability = avail and min(avail) or 0
+                if variant.x_availability != x_availability:
+                    logger.debug(
+                        "Updating availability of composed product %s "
+                        "from %s to %s",
+                        variant.default_code or variant.name,
+                        variant.x_availability, x_availability)
+                    variant.x_availability = x_availability
+        logger.debug(
+            'Updated availability of %s products in %ss',
+            len(self), time.time() - start_time)
+
     @api.model
     def update_product_availability(self):
-        # Update the Website availability of the current product
+        """ Wrapper around update_availability. Call from cron. """
         logger = logging.getLogger('odoo.addons.bbc_sale')
         offset = 0
         limit = 500
         start_time = time.time()
-        product_exclude = []
-        for bom in self.env['mrp.bom'].search([]):
-            product_exclude += (
-                bom.product_id and [bom.product_id.id] or
-                bom.product_tmpl_id.product_variant_ids.ids)
-        products = self.search(
-            [('id', 'not in', product_exclude)],
-            limit=limit, offset=offset)
+        products = self.search([], limit=limit, offset=offset)
         while products:
-            for product in products:
-                x_availability = (
-                    product.virtual_available - product.incoming_qty)
-                if product.x_availability != x_availability:
-                    logger.debug(
-                        "Updating availability of product %s from %s to %s",
-                        product.default_code or product.name,
-                        product.x_availability, x_availability)
-                    product.write({'x_availability': x_availability})
+            products.update_availability()
             offset += limit
-            products = self.search(
-                [('id', 'not in', product_exclude)],
-                limit=limit, offset=offset)
+            products = self.search([], limit=limit, offset=offset)
 
-        for bom in self.env['mrp.bom'].search([]):
-            # Update the Website availability of the parent templates' variants
-            # Find all variants linked to this BoM
-            for variant in (bom.product_id and [bom.product_id] or
-                            bom.product_tmpl_id.product_variant_ids):
-                avail = []
-                for l in bom.bom_line_ids:
-                    if set(l.attribute_value_ids).issubset(
-                            set(variant.attribute_value_ids)):
-                        avail.append(
-                            int(l.product_id.x_availability / l.product_qty))
-                x_availability = avail and min(avail) or 0
-                if variant.x_availability != x_availability:
-                    logger.debug(
-                        "Updating availability of composed product %s from %s "
-                        "to %s", variant.default_code or variant.name,
-                        variant.x_availability, x_availability)
-                    variant.write({'x_availability': x_availability})
         logger.debug(
             'Updated availability in %ss', time.time() - start_time)
 
