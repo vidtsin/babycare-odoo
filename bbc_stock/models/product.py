@@ -1,5 +1,6 @@
 # coding: utf-8
 from openerp import api, fields, models
+from datetime import timedelta
 
 
 class Product(models.Model):
@@ -20,7 +21,8 @@ class Product(models.Model):
 
     @api.multi
     @api.depends('max_incoming_stock_date_override',
-                 'max_incoming_stock_date_override_value')
+                 'max_incoming_stock_date_override_value',
+                 'virtual_available')
     def _compute_max_incoming_stock_date(self):
         today = fields.Date.context_today(self)
         _dql, domain, _dmol = self._get_domain_locations()
@@ -29,10 +31,14 @@ class Product(models.Model):
         def max_date_product(product):
             if product.max_incoming_stock_date_override:
                 return product.max_incoming_stock_date_override_value
-            dates = self.env['stock.move'].search(
-                domain + [('product_id', '=', product.id)]).mapped(
-                    'date_expected')
-            return max(dates) if dates else today
+            if product.virtual_available > 0:
+                dates = self.env['stock.move'].search(
+                    domain + [('product_id', '=', product.id)]).mapped(
+                        'date_expected')
+                return max(dates) if dates else today
+            delay = product.seller_ids[0].delay if product.seller_ids else 0
+            return fields.Date.to_string(
+                fields.Date.from_string(today) + timedelta(delay or 0))
 
         for product in self:
             if product.type == 'product':

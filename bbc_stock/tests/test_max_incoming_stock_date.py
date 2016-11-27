@@ -1,6 +1,7 @@
 # coding: utf-8
 from openerp.fields import Date
 from openerp.addons.stock.tests.common import TestStockCommon
+from datetime import timedelta
 
 
 class TestMaxDate(TestStockCommon):
@@ -9,6 +10,12 @@ class TestMaxDate(TestStockCommon):
         self.product = self.env['product.product'].create({
             'name': 'test max date',
             'type': 'product',
+        })
+        self.seller_delay = 5
+        self.env['product.supplierinfo'].create({
+            'name': self.partner_delta_id,
+            'delay': self.seller_delay,
+            'product_tmpl_id': self.product.product_tmpl_id.id,
         })
         self.bom_product = self.env['product.product'].create({
             'name': 'test max date bom',
@@ -25,8 +32,11 @@ class TestMaxDate(TestStockCommon):
     def test_01_max_date(self):
         next_year = '%s-01-01' % (int(self.today[:4]) + 1)
         next_year_feb = '%s-02-01' % (int(self.today[:4]) + 1)
+
+        delay = Date.to_string(
+            Date.from_string(self.today) + timedelta(days=self.seller_delay))
         self.assertEqual(
-            self.product.max_incoming_stock_date, self.today)
+            self.product.max_incoming_stock_date, delay)
         self.product.max_incoming_stock_date_override = True
         self.product.max_incoming_stock_date_override_value = next_year
         self.assertEqual(
