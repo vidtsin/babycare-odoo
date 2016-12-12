@@ -12,9 +12,10 @@ class StockMove(models.Model):
 
     @api.multi
     def action_confirm(self):
-        res = super(StockMove, self).action_confirm()
-        self.mapped('product_id').update_availability()
-        return res
+        """ The set of move ids can be changed by phantom boms """
+        move_ids = super(StockMove, self).action_confirm()
+        self.browse(move_ids).mapped('product_id').update_availability()
+        return move_ids
 
     @api.multi
     def action_cancel(self):
