@@ -29,6 +29,21 @@ msgid "BOM Components"
 msgstr "Onderdeel"
 
 #. module: bbc_sale
+#: model:ir.actions.act_window,help:bbc_sale.product_public_category_action
+msgid "<p>\n"
+"                Here is a list of all your products classified by public category. You\n"
+"                can click a public category to get the list of all products linked to\n"
+"                this public category or to a child of this public category.\n"
+"              </p>\n"
+"            "
+msgstr "<p>\n"
+"                Hier is een lijst van alle producten gegroepeerd op publieke categorie. Je\n"
+"                kunt een publieke categorie aanklikken om de lijst van producten in deze\n"
+"                categorie te tonen of om een onderliggende categorie te selecteren.\n"
+"              </p>\n"
+"            "
+
+#. module: bbc_sale
 #: field:product.product,is_component:0
 #: field:product.template,is_component:0
 msgid "Is component"
@@ -154,6 +169,10 @@ msgstr "Kassa geld in"
 msgid "Point of Sale Cash Out"
 msgstr "Kassa geld uit"
 
+#: view:product.public.category:bbc_sale.product_public_category_tree_view
+msgid "Product Public Categories"
+msgstr "Publieke productcategorieën"
+
 #. module: bbc_sale
 #: field:product.product,pos_categ_id:0
 msgid "Point of Sale Category"
@@ -232,6 +251,22 @@ msgstr "Te wegen met weegschaal"
 #: view:sale.order:bbc_sale.view_order_form
 msgid "report/stock_graph.py:from openerp.report.misc import choice_colors"
 msgstr "report/stock_graph.py:from openerp.report.misc import choice_colors"
+
+#. module: bbc_sale
+#: model:ir.actions.act_window,name:bbc_sale.product_public_category_action
+#: model:ir.ui.menu,name:bbc_sale.menu_products_by_public_category
+msgid "Products by Public Category"
+msgstr "Producten op publieke categorie"
+
+#. module: bbc_sale
+#: model:ir.model,name:bbc_sale.model_product_public_category
+msgid "Public Category"
+msgstr "Publieke categorie"
+
+#: code:addons/bbc_sale/models/product_public_category.py:21
+#, python-format
+msgid "There are still products in these categories."
+msgstr "Er zijn nog producten met deze categorie(ën)."
 
 #. module: bbc_sale
 #: view:product.template:bbc_sale.product_template_form_view

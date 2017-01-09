@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="product_public_category_tree_view" model="ir.ui.view">
+            <field name="model">product.public.category</field>
+            <field name="field_parent">child_id</field>
+            <field name="arch" type="xml">
+                <tree toolbar="True" string="Product Public Categories">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="product_public_category_action" model="ir.actions.act_window">
+            <field name="name">Products by Public Category</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.public.category</field>
+            <field name="domain">[('parent_id', '=' ,False)]</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="product_public_category_tree_view"/>
+            <field name="help" type="html">
+              <p>
+                Here is a list of all your products classified by public category. You
+                can click a public category to get the list of all products linked to
+                this public category or to a child of this public category.
+              </p>
+            </field>
+        </record>
+
+        <menuitem
+            id="menu_products_by_public_category"
+            action="product_public_category_action"
+            parent="base.menu_product"
+            sequence="31" groups="base.group_no_one"/>
+
+        <record id="action_product_open_by_public_category" model="ir.actions.act_window">
+            <field name="name">Product Variants</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="context">{'search_default_public_categ_ids': active_id}</field>
+        </record>
+
+        <record id="ir_product_public_category_open" model="ir.values">
+            <field eval="'tree_but_open'" name="key2"/>
+            <field eval="'product.public.category'" name="model"/>
+            <field name="name">Products by Public Categories</field>
+            <field eval="'ir.actions.act_window,%d'%action_product_open_by_public_category" name="value"/>
+        </record>
+
+    </data>
+</openerp>

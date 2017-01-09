@@ -91,6 +91,9 @@
                 <field name="name" position="attributes">
                     <attribute name="filter_domain">['|','|','|',('default_code','ilike',self),('name','ilike',self),('supplier_code','ilike',self),('ean13','ilike',self)]</attribute>
                 </field>
+                <field name="categ_id" position="after">
+                    <field name="public_categ_ids" filter_domain="[('public_categ_ids', 'child_of', self)]"/>
+                </field>
             </field>
         </record>
 
