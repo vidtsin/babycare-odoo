@@ -29,3 +29,4 @@ a negative expected stock level (or are in an exception state, as red is the def
 * Move fiscal position and payment term around on the supplier invoice form to make the latter more prominent
 * Show a box button on the product and variant form views that opens the BOMS in which the product is a component
 * Can search on products and variants whether it is a component
+* Activate _parent_store for product public categories plus primary ordering by parent

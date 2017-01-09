@@ -9,3 +9,4 @@ from . import stock_move
 from . import product
 from . import res_partner
 from . import product_category
+from . import product_public_category
