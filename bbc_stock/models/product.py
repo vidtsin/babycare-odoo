@@ -62,7 +62,7 @@ class Product(models.Model):
     def update_product_availability(self):
         """ Reset expected stock date once we have incoming stock.
         TODO: refactor into an override of update_availability """
-        res = super(Product, self)
+        res = super(Product, self).update_product_availability()
         self.search([
             ('x_availability', '>', 0),
             ('max_incoming_stock_date_override', '=', True),
