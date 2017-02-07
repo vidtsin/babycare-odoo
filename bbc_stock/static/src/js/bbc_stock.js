@@ -44,18 +44,18 @@ openerp.bbc_stock = function(instance){
         load: function(picking_id){
             var self = this;
             var deferred = this._super(picking_id);
-            if (picking_id){
-                deferred.then(
-                    function(){
-                        new instance.web.Model('magento.tracking.info').get_func('search_read')([['wk_picking_id', '=', parseInt(picking_id)]],[]).then(function(refs){
+            deferred.then(
+                function(){
+                    if (self.picking) {
+                        new instance.web.Model('magento.tracking.info').get_func('search_read')([['wk_picking_id', '=', parseInt(self.picking.id)]],[]).then(function(refs){
                             _.each(refs, function(ref){
                                 $(QWeb.render('CarrierRef', {'ref': ref}))
                                     .insertBefore($('tr.input-carrier-ref'));
                             });
                         });
                     }
-                );
-            }
+                }
+            );
             return deferred;
         },
 
@@ -198,7 +198,7 @@ openerp.bbc_stock = function(instance){
                 var val = self.$('#info_carrier_ref').val();
                 if (val){
                     if (val === 'MKG'){
-                        return self.drop_down();
+                        return self.getParent().drop_down();
                     }
                     self.set_carrier_ref(self.$('#info_carrier_ref').val());
                     self.$('#info_carrier_ref').val('');
@@ -215,11 +215,11 @@ openerp.bbc_stock = function(instance){
                     self.getParent().scan(ean);
                 });
             });
-            self.$('table.carrier-refs').on('click', 'td.delete', function(){
+            self.$('table.carrier-refs').on('click', 'td.delete > button', function(){
                 new instance.web.Model('magento.tracking.info')
-                    .call('unlink', [[parseInt($(this).parent().data('id'))]],
+                    .call('unlink', [[parseInt($(this).data('id'))]],
                           {context: new instance.web.CompoundContext()});
-                $(this).parent().remove();
+                $(this).parent().parent().remove();
             });
         }
     });

@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
     <t t-name="CarrierRef">
-        <tr class='carrier-ref' t-att-data-id='ref.id'>
-            <td><t t-esc='ref.magento_carrier_tracking_ref'/></td>
-            <td class="delete"><button style="font-family: 'mnmliconsRegular' !important; font-size: 21px;"
-                        name="delete">d</button></td>
+        <tr class='carrier-ref'>
+            <td>
+                <t t-esc='ref.magento_carrier_tracking_ref'/>
+            </td>
+            <td class="delete">
+                <button style="font-family: 'mnmliconsRegular' !important; font-size: 21px;"
+                        name="delete" t-att-data-id='ref.id'>d</button>
+            </td>
         </tr>
     </t>
     <t t-extend="PickingEditorWidget">
         <t t-jquery="table.js_op_table_todo" t-operation="before">
             <!-- Whitespace is meaningful in the line below -->
-            <div id="address" class="col-md-3 col-sm-4 col-xs-6 preformatted"><t t-esc="widget.get_address()" /></div>
-            <div id="pickinfo" class="col-md-6 col-sm-6 col-xs-12">
-                <table class='carrier-refs' style="width: 100%">
-                    <tr class='input-carrier-ref'>
-                        <td><input id="info_carrier_ref" type="text" /></td>
-                        <td />
-                    </tr>
-                </table>
+            <div id="address" class="col-md-3 col-sm-3 col-xs-3 preformatted"><t t-esc="widget.get_address()" /></div>
+            <div id="pickinfo" class="col-md-6 col-sm-6 col-xs-6">
                 <table style="width: 100%">
                     <tr>
                         <th>Carrier</th>
@@ -31,6 +29,15 @@
                         <th>Paid</th>
                         <t t-set="checked" t-value="widget.get_paid() ? 'checked': null"/>
                         <td><input id="info_paid" disabled="1" type="checkbox" t-att-checked="checked" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="carrierref" class="col-md-3 col-sm-3 col-xs-3">
+                <table class='carrier-refs' style="width: 100%">
+                    <tr><th>Carrier references</th></tr>
+                    <tr class='input-carrier-ref'>
+                        <td><input id="info_carrier_ref" type="text" /></td>
+                        <td />
                     </tr>
                 </table>
             </div>
