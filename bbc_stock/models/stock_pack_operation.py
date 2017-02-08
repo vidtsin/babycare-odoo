@@ -45,3 +45,12 @@ class Operation(models.Model):
 
     _order = 'sequence, write_date desc'
     sequence = fields.Integer(compute="_get_sequence", store=True)
+
+    @api.multi
+    def action_drop_down(self):
+        """ Set number of packages to minimum of one """
+        res = super(Operation, self).action_drop_down()
+        for picking in self.mapped('picking_id'):
+            if not picking.magento_carrier_ids:
+                picking.number_of_packages = 1
+        return res

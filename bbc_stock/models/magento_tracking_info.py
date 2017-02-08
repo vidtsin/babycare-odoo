@@ -11,7 +11,7 @@ class TrackingInfo(models.Model):
         res = super(TrackingInfo, self).unlink()
         for picking in pickings:
             picking.number_of_packages = len(
-                picking.magento_carrier_ids)
+                picking.magento_carrier_ids) or 1
         return res
 
     @api.model
