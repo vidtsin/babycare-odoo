@@ -5,7 +5,7 @@ Barcode interface
 -----------------
 * Open in a new window
 * Display order number, delivery address, tracking info and remarks, and sale order paid status
-* Tracking reference is editable
+* Add or delete multiple Magento tracking references. This will update the number of packages on the picking.
 
 The tracking reference field will be set to focus after the last of the expected products has been scanned on a customer bound shipment
 

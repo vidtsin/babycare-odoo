@@ -1,6 +1,7 @@
 openerp.bbc_stock = function(instance){
     module = instance.stock;
     _t = instance.web._t;
+    var QWeb   = instance.web.qweb;
 
     /* the stock wizard won't be initialized at this point, so we work on the
        prototype. That means extend instead of include. */
@@ -38,6 +39,24 @@ openerp.bbc_stock = function(instance){
                 }
                 return res;
             });
+        },
+
+        load: function(picking_id){
+            var self = this;
+            var deferred = this._super(picking_id);
+            deferred.then(
+                function(){
+                    if (self.picking) {
+                        new instance.web.Model('magento.tracking.info').get_func('search_read')([['wk_picking_id', '=', parseInt(self.picking.id)]],[]).then(function(refs){
+                            _.each(refs, function(ref){
+                                $(QWeb.render('CarrierRef', {'ref': ref}))
+                                    .insertBefore($('tr.input-carrier-ref'));
+                            });
+                        });
+                    }
+                }
+            );
+            return deferred;
         },
 
         scan: function(ean){ //scans a barcode, sends it to the server, then reload the ui
@@ -102,23 +121,33 @@ openerp.bbc_stock = function(instance){
                 return parent.picking.partner_address;
             }
         },
-        get_carrier_ref: function() {
+        del_carrier_id: function(val) {
             var parent = this.getParent();
-            if(parent.picking.carrier_tracking_ref) {
-                return parent.picking.carrier_tracking_ref;
+            if(parent.picking) {
+                new instance.web.Model('magento.tracking.info')
+                    .call('search', [
+                        ['wk_picking_id', '=', parent.picking.id],
+                        ['magento_carrier_tracking_ref', '=', val]],
+                          {context: new instance.web.CompoundContext()});
             }
         },
         set_carrier_ref: function(val) {
             var parent = this.getParent();
+            var self = this;
             if(parent.picking) {
-                new instance.web.Model('stock.picking')
-                    .call(
-                        'write',
-                        [[parent.picking.id], {'carrier_tracking_ref': val}],
-                        {context: new instance.web.CompoundContext()});
+                new instance.web.Model('magento.tracking.info')
+                    .call('create', [{
+                        'wk_picking_id': parent.picking.id,
+                        'magento_carrier_tracking_ref': val}],
+                          {context: new instance.web.CompoundContext()}).then(
+                              function(new_id){
+                                  $(QWeb.render('CarrierRef', {
+                                          'ref': {'id': new_id,
+                                                  'magento_carrier_tracking_ref': val}}))
+                                      .insertBefore($('tr.input-carrier-ref'));
+                              });
             }
-            // Allow scanning to continue
-            self.$('#info_carrier_ref').blur();
+            // TODO: set current line readonly. Create new line and focus.
         },
         get_remarks: function() {
             var parent = this.getParent();
@@ -166,7 +195,15 @@ openerp.bbc_stock = function(instance){
             this._super();
             var self = this;
             this.$('#info_carrier_ref').change(function(){
-                self.set_carrier_ref(self.$('#info_carrier_ref').val());
+                var val = self.$('#info_carrier_ref').val();
+                if (val){
+                    if (val === 'MKG'){
+                        return self.getParent().drop_down();
+                    }
+                    self.set_carrier_ref(self.$('#info_carrier_ref').val());
+                    self.$('#info_carrier_ref').val('');
+                    self.$('#info_carrier_ref').focus();
+                }
             });
 
             // Prevent scanned carrier ref to be passed on as product code
@@ -178,6 +215,12 @@ openerp.bbc_stock = function(instance){
                     self.getParent().scan(ean);
                 });
             });
+            self.$('table.carrier-refs').on('click', 'td.delete > button', function(){
+                new instance.web.Model('magento.tracking.info')
+                    .call('unlink', [[parseInt($(this).data('id'))]],
+                          {context: new instance.web.CompoundContext()});
+                $(this).parent().parent().remove();
+            });
         }
     });
-}
+};
