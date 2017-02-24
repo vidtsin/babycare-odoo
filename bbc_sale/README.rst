@@ -32,3 +32,4 @@ a negative expected stock level (or are in an exception state, as red is the def
 * Activate _parent_store for product public categories plus primary ordering by parent
 * Implement a hierarchy view for public categories that link to products in those categories
 * Prevent the removal of public categories that are still in use.
+* Hide 'Invoice' button from pos order, which seems to create a redundant receivable accounting entry

@@ -18,6 +18,7 @@
     ],
     'data': [
         'views/account_invoice.xml',
+        'views/pos_order.xml',
         'views/templates.xml',
         'views/sale_order.xml',
         'views/product_public_category.xml',

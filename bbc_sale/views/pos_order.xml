@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_pos_pos_form">
+            <field name="name">Hide invoice button from POS order</field>
+            <field name="model">pos.order</field>
+            <field name="priority" eval="99"/>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <button name="action_invoice" position="replace"/>
+            </field>
+        </record>
+    </data>
+</openerp>
