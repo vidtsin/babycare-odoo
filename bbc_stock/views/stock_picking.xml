@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="action_picking_late_source_supplier" model="ir.actions.act_window">
+            <field name="name">Late &lt;- suppliers</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{
+                'search_default_late': True,
+                'search_default_confirmed': True,
+                'search_default_source_supplier': True,
+                }</field>
+        </record>
+
+        <record id="action_picking_late_dest_customer" model="ir.actions.act_window">
+            <field name="name">Late -&gt; customers</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{
+                'search_default_late': True,
+                'search_default_confirmed': True,
+                'search_default_dest_customer': True,
+                }</field>
+        </record>
+
+        <record id="action_picking_late_source_customer" model="ir.actions.act_window">
+            <field name="name">Late &lt;- customers</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{
+                'search_default_late': True,
+                'search_default_confirmed': True,
+                'search_default_source_customer': True,
+                }</field>
+        </record>
+
+        <menuitem
+            action="action_picking_late_source_supplier"
+            id="menu_action_picking_late_source_supplier"
+            parent="stock.menu_stock_warehouse_mgmt" sequence="5"/>
+
+        <menuitem
+            action="action_picking_late_dest_customer"
+            id="menu_action_picking_late_dest_customer"
+            parent="stock.menu_stock_warehouse_mgmt" sequence="6"/>
+
+        <menuitem
+            action="action_picking_late_source_customer"
+            id="menu_action_picking_late_source_customer"
+            parent="stock.menu_stock_warehouse_mgmt" sequence="7"/>
+
+        <record id="view_picking_internal_search" model="ir.ui.view">
+            <field name="name">Redefine late pickings as per start of the day</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+                <filter name="late" position="attributes">
+                    <attribute name="domain">[('min_date','&lt;', time.strftime('%%Y-%%m-%%d'))]</attribute>
+                </filter>
+                <field name="product_id" position="before">
+                    <separator/>
+                    <filter name="dest_customer" string="-&gt; Customer" domain="[('location_dest_id.usage', '=', 'customer')]"/>
+                    <filter name="source_supplier" string="&lt;- Supplier" domain="[('location_id.usage', '=', 'supplier')]"/>
+                    <filter name="source_customer" string="&lt;- Customer" domain="[('location_id.usage', '=', 'customer')]"/>
+                    <filter name="dest_supplier" string="-&gt; Supplier" domain="[('location_dest_id.usage', '=', 'supplier')]"/>
+                    <separator/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

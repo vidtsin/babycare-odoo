@@ -3,7 +3,8 @@ from openerp import api, fields, models
 
 
 class Picking(models.Model):
-    _inherit = 'stock.picking'
+    _name = 'stock.picking'
+    _inherit = ['stock.picking', 'ir.needaction_mixin']
 
     @api.multi
     def open_barcode_interface(self):
@@ -56,6 +57,28 @@ class Picking(models.Model):
         """
         super(Picking, self).action_done_from_ui(picking_id)
         return False
+
+    @api.model
+    def _needaction_domain_get(self):
+        """ Convert default search values in the context to needaction domain
+        """
+        domain = []
+        if self.env.context.get('search_default_late'):
+            domain.append(('min_date', '<', fields.Date.context_today(self)))
+        if self.env.context.get('search_default_source_supplier'):
+            domain.append(('location_id.usage', '=', 'supplier'))
+        if self.env.context.get('search_default_dest_supplier'):
+            domain.append(('location_dest_id.usage', '=', 'supplier'))
+        if self.env.context.get('search_default_source_customer'):
+            domain.append(('location_id.usage', '=', 'customer'))
+        if self.env.context.get('search_default_dest_customer'):
+            domain.append(('location_dest_id.usage', '=', 'customer'))
+        if self.env.context.get('search_default_confirmed'):
+            domain.append(
+                ('state', 'in', ('confirmed', 'waiting', 'assigned')))
+        if not domain:
+            return [('id', '=', -1)]
+        return domain
 
 
 class PickingType(models.Model):

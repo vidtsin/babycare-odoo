@@ -35,6 +35,7 @@
     'data': [
         'views/assets.xml',
         'views/product.xml',
+        'views/stock_picking.xml',
         'data/ir_cron.xml',
     ],
     'qweb': ['static/src/xml/picking.xml'],
