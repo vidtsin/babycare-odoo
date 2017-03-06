@@ -183,25 +183,9 @@ class Product(models.Model):
                     product.type == 'product' and product.website_published):
                 product.website_published = False
 
-        for bom in self.env['mrp.bom'].search([
-                ('bom_line_ids.product_id', 'in', self.ids)]):
-            for variant in (bom.product_id or
-                            bom.product_tmpl_id.product_variant_ids):
-                avail = []
-                for line in bom.bom_line_ids:
-                    if (line.attribute_value_ids <=
-                            variant.attribute_value_ids):
-                        avail.append(
-                            int(line.product_id.x_availability /
-                                line.product_qty))
-                x_availability = avail and min(avail) or 0
-                if variant.x_availability != x_availability:
-                    logger.debug(
-                        "Updating availability of composed product %s "
-                        "from %s to %s",
-                        variant.default_code or variant.name,
-                        variant.x_availability, x_availability)
-                    variant.x_availability = x_availability
+        self.env['mrp.bom'].search([
+            ('bom_line_ids.product_id', 'in', self.ids),
+        ]).update_availability()
         logger.debug(
             'Updated availability of %s products in %ss',
             len(self), time.time() - start_time)

@@ -1,4 +1,6 @@
 from . import account_invoice
+from . import mrp_bom
+from . import mrp_bom_line
 from . import sale_order
 from . import sale_order_line
 from . import purchase_order
