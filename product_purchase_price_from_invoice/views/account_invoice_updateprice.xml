@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="invoice_supplier_form" model="ir.ui.view">
+            <field name="name">updateprice view addbutton</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"> </field>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='invoice_open']" position="before">
+                    <button name="price_update_wizard"
+                            string="Update Product Prices" type="object"
+                            attrs="{'invisible': [('state', '!=', 'open')]}"
+                            />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_updateprice_line_tree" model="ir.ui.view">
+            <field name="model">account.invoice.updateprice.line</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" create="false" delete="false">
+                    <field name="update"/>
+                    <field name="product"/>
+                    <field name="current_cost_price"/>
+                    <field name="price_on_invoice"/>
+                    <field name="current_sale_price"/>
+                    <field name="new_sale_price"
+                           attrs="{'readonly': [('update', '=', False)]}"/>
+                    <field name="standard_margin"
+                           attrs="{'readonly': [('update', '=', False)]}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="account_invoice_updateprice_form" model="ir.ui.view">
+            <field name="name">account.invoice.updateprice.form</field>
+            <field name="model">account.invoice.updateprice</field>
+            <field name="arch" type="xml">
+                <form string="Update Prices">
+                    <sheet>
+                        <group>
+                            <p colspan="2">Here you can update the cost prices of products using the prices from the invoice. Uncheck lines that do not need updating. You can also modify the sales prices or sales margin.</p>
+                        </group>
+                        <field name="line_ids"/>
+                    </sheet>
+                    <footer>
+                        <button name="save_new_prices" string="Save product prices" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

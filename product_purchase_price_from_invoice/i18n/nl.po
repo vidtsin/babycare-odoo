@@ -1,0 +1,142 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* product_purchase_price_from_invoice
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-13 18:24+0000\n"
+"PO-Revision-Date: 2017-03-13 18:24+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_purchase_price_from_invoice
+#: view:account.invoice.updateprice:product_purchase_price_from_invoice.account_invoice_updateprice_form
+msgid "Cancel"
+msgstr "Annuleer"
+
+#. module: product_purchase_price_from_invoice
+#: field:account.invoice.updateprice.line,current_cost_price:0
+msgid "Current cost price"
+msgstr "Huidige kostprijs"
+
+#. module: product_purchase_price_from_invoice
+#: field:account.invoice.updateprice.line,current_sale_price:0
+msgid "Current sale price"
+msgstr "Huidige going-prijs"
+
+#. module: product_purchase_price_from_invoice
+#: view:account.invoice.updateprice:product_purchase_price_from_invoice.account_invoice_updateprice_form
+msgid "Here you can update the cost prices of products using the prices from the invoice. Uncheck lines that do not need updating. You can also modify the sales prices or sales margin."
+msgstr "Hier kunnen de kostprijzen van de producten worden geupdate met de prijzen op de factuur. Per regel kan het bijwerken worden uitgezet met een vinkje. Ook de verkoopprijzen en -marge kunnen handmatig worden bijgesteld."
+
+#. module: product_purchase_price_from_invoice
+#: model:ir.model,name:product_purchase_price_from_invoice.model_account_invoice
+msgid "Invoice"
+msgstr "Factuur"
+
+#. module: product_purchase_price_from_invoice
+#: model:ir.model,name:product_purchase_price_from_invoice.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Factuurregel"
+
+#. module: product_purchase_price_from_invoice
+#: field:account.invoice.updateprice,line_ids:0
+msgid "Line ids"
+msgstr "Productprijsregels"
+
+#. module: product_purchase_price_from_invoice
+#: field:account.invoice.updateprice,name:0
+msgid "Name"
+msgstr "Naam"
+
+#. module: product_purchase_price_from_invoice
+#: field:account.invoice.updateprice.line,new_sale_price:0
+msgid "New sale price"
+msgstr "Nieuwe going-prijs"
+
+#. module: product_purchase_price_from_invoice
+#: code:addons/product_purchase_price_from_invoice/model/account_invoice.py:33
+#, python-format
+msgid "No product found with a deviating cost price"
+msgstr "Op deze factuur staat geen product met een afwijkende prijs"
+
+#. module: product_purchase_price_from_invoice
+#: field:account.invoice.updateprice.line,price_on_invoice:0
+msgid "Price on invoice"
+msgstr "Prijs op factuur"
+
+#. module: product_purchase_price_from_invoice
+#: field:account.invoice.updateprice.line,product:0
+msgid "Product"
+msgstr "Product"
+
+#. module: product_purchase_price_from_invoice
+#: view:account.invoice.updateprice:product_purchase_price_from_invoice.account_invoice_updateprice_form
+msgid "Save product prices"
+msgstr "Productprijzen bijwerken"
+
+#. module: product_purchase_price_from_invoice
+#: field:account.invoice.updateprice.line,standard_margin:0
+msgid "Standard margin"
+msgstr "Marge"
+
+#. module: product_purchase_price_from_invoice
+#: code:addons/product_purchase_price_from_invoice/model/account_invoice_updateprice_line.py:48
+#, python-format
+msgid "Tax of type %s is not supported"
+msgstr "Belasting van type %s kan niet worden omgerekend"
+
+#. module: product_purchase_price_from_invoice
+#: code:addons/product_purchase_price_from_invoice/model/account_invoice_updateprice_line.py:54
+#, python-format
+msgid "Tax with child ids is not supported"
+msgstr "Een complexe belasting kan niet worden omgerekend"
+
+#. module: product_purchase_price_from_invoice
+#: field:account.invoice.updateprice.line,update:0
+msgid "Update"
+msgstr "Bijwerken"
+
+#. module: product_purchase_price_from_invoice
+#: view:account.invoice.updateprice:product_purchase_price_from_invoice.account_invoice_updateprice_form
+msgid "Update Prices"
+msgstr "Leveranciersprijzen bijwerken"
+
+#. module: product_purchase_price_from_invoice
+#: model:ir.model,name:product_purchase_price_from_invoice.model_account_invoice_updateprice
+msgid "Update Prices on this invoice"
+msgstr "Productprijzen bijwerken"
+
+#. module: product_purchase_price_from_invoice
+#: view:account.invoice:product_purchase_price_from_invoice.invoice_supplier_form
+msgid "Update Product Prices"
+msgstr "Productprijzen bijwerken"
+
+#. module: product_purchase_price_from_invoice
+#: model:ir.model,name:product_purchase_price_from_invoice.model_account_invoice_updateprice_line
+msgid "Update price wizard line"
+msgstr "Productprijzen bijwerken - regel"
+
+#. module: product_purchase_price_from_invoice
+#: field:account.invoice.updateprice.line,updateprice_id:0
+msgid "Updateprice id"
+msgstr "Wizard"
+
+#. module: product_purchase_price_from_invoice
+#: code:addons/product_purchase_price_from_invoice/model/account_invoice_updateprice_line.py:47
+#: code:addons/product_purchase_price_from_invoice/model/account_invoice_updateprice_line.py:53
+#, python-format
+msgid "Warning"
+msgstr "Waarschuwing"
+
+#. module: product_purchase_price_from_invoice
+#: view:account.invoice.updateprice:product_purchase_price_from_invoice.account_invoice_updateprice_form
+msgid "or"
+msgstr "of"
+
