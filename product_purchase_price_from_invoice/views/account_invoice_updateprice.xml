@@ -29,6 +29,7 @@
                            attrs="{'readonly': [('update', '=', False)]}"/>
                     <field name="standard_margin_rate"
                            attrs="{'readonly': [('update', '=', False)]}"/>
+                    <field name="standard_margin"/>
                 </tree>
             </field>
         </record>

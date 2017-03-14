@@ -41,4 +41,5 @@ class InvoiceLine(models.Model):
             'new_sale_price': self.product_id.lst_price,
             'standard_margin_rate': (
                 ex_vat - self.price_unit) / ex_vat * 100,
+            'standard_margin': ex_vat - self.price_unit,
         }

@@ -87,6 +87,11 @@ msgid "Margin %"
 msgstr "Marge %"
 
 #. module: product_purchase_price_from_invoice
+#: field:account.invoice.updateprice.line,standard_margin:0
+msgid "Standard margin"
+msgstr "Marge €"
+
+#. module: product_purchase_price_from_invoice
 #: code:addons/product_purchase_price_from_invoice/model/account_invoice_updateprice_line.py:48
 #, python-format
 msgid "Tax of type %s is not supported"
