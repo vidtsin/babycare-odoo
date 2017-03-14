@@ -22,7 +22,8 @@ class UpdatePriceLine(models.TransientModel):
     price_on_invoice = fields.Float(
         digits=dp.get_precision('Product Price'),
         readonly=True)
-    standard_margin = fields.Float(
+    standard_margin_rate = fields.Float(
+        string='Margin %',
         digits=dp.get_precision('Product Price'))
     current_sale_price = fields.Float(
         digits=dp.get_precision('Product Price'),
@@ -34,11 +35,18 @@ class UpdatePriceLine(models.TransientModel):
     def _onchange_new_sale_price(self):
         price_vat_excl = self.product.taxes_id.compute_all(
             self.new_sale_price, 1, product=self.product.id)['total']
-        self.standard_margin = price_vat_excl - self.price_on_invoice
+        if not price_vat_excl:
+            self.standard_margin_rate = 999
+        else:
+            self.standard_margin_rate = (
+                price_vat_excl - self.price_on_invoice) / price_vat_excl * 100
 
-    @api.onchange('standard_margin')
-    def _onchange_standard_margin(self):
-        price_vat_excl = self.price_on_invoice + self.standard_margin
+    @api.onchange('standard_margin_rate')
+    def _onchange_standard_margin_rate(self):
+        if self.standard_margin_rate >= 100:
+            return
+        price_vat_excl = 100 * (
+            self.price_on_invoice / (100 - self.standard_margin_rate))
         tax = self.product.taxes_id
         if tax:
             if tax.type != 'percent':

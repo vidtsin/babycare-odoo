@@ -27,7 +27,7 @@
                     <field name="current_sale_price"/>
                     <field name="new_sale_price"
                            attrs="{'readonly': [('update', '=', False)]}"/>
-                    <field name="standard_margin"
+                    <field name="standard_margin_rate"
                            attrs="{'readonly': [('update', '=', False)]}"/>
                 </tree>
             </field>

@@ -82,9 +82,9 @@ msgid "Save product prices"
 msgstr "Productprijzen bijwerken"
 
 #. module: product_purchase_price_from_invoice
-#: field:account.invoice.updateprice.line,standard_margin:0
-msgid "Standard margin"
-msgstr "Marge"
+#: field:account.invoice.updateprice.line,standard_margin_rate:0
+msgid "Margin %"
+msgstr "Marge %"
 
 #. module: product_purchase_price_from_invoice
 #: code:addons/product_purchase_price_from_invoice/model/account_invoice_updateprice_line.py:48
