@@ -32,6 +32,11 @@ class InvoiceLine(models.Model):
             return
 
         ex_vat = self.product_id.list_price_vat_excl
+        if ex_vat:
+            rate = (ex_vat - self.price_unit) / ex_vat * 100
+        else:
+            rate = 999
+
         return {
             'updateprice_id': wizard.id,
             'product': self.product_id.id,
@@ -39,7 +44,6 @@ class InvoiceLine(models.Model):
             'price_on_invoice': self.price_unit,
             'current_sale_price': self.product_id.lst_price,
             'new_sale_price': self.product_id.lst_price,
-            'standard_margin_rate': (
-                ex_vat - self.price_unit) / ex_vat * 100,
+            'standard_margin_rate': rate,
             'standard_margin': ex_vat - self.price_unit,
         }

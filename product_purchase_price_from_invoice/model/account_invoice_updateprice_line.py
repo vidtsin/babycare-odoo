@@ -37,14 +37,14 @@ class UpdatePriceLine(models.TransientModel):
 
     @api.onchange('new_sale_price')
     def _onchange_new_sale_price(self):
-        price_vat_excl = self.product.taxes_id.compute_all(
+        ex_vat = self.product.taxes_id.compute_all(
             self.new_sale_price, 1, product=self.product.id)['total']
-        self.standard_margin = price_vat_excl - self.price_on_invoice
-        if not price_vat_excl:
-            self.standard_margin_rate = 999
-        else:
+        self.standard_margin = ex_vat - self.price_on_invoice
+        if ex_vat:
             self.standard_margin_rate = (
-                price_vat_excl - self.price_on_invoice) / price_vat_excl * 100
+                ex_vat - self.price_on_invoice) / ex_vat * 100
+        else:
+            self.standard_margin_rate = 999
 
     @api.onchange('standard_margin_rate')
     def _onchange_standard_margin_rate(self):
