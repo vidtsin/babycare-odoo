@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_attachment_search" model="ir.ui.view">
+            <field name="model">ir.attachment</field>
+            <field name="inherit_id" ref="document.view_attach_filter_inherit0"/>
+            <field name="arch" type="xml">
+                <field name="name" position="attributes">
+                    <attribute name="filter_domain">['|', '|', ('name','ilike',self), ('datas_fname','ilike',self), ('index_content', 'like', self)]</attribute>
+                </field>
+            </field>
+        </record>
+
+        <menuitem id="menu_knowledge_documents"
+                  name="Documents"
+                  parent="knowledge.menu_document"
+                  sequence="40"/>
+
+        <menuitem action="base.action_attachment"
+                  id="menu_action_attachment"
+                  parent="menu_knowledge_documents"/>
+
+    </data>
+</openerp>
