@@ -11,6 +11,10 @@ class Partner(models.Model):
               'from this supplier'))
     pos_order_count = fields.Integer(
         compute='_pos_order_count', string='# of POS Orders')
+    default_delay = fields.Integer(
+        'Supplier delay',
+        help='Default supplier delay when this supplier is linked to a product'
+    )
 
     @api.multi
     def _pos_order_count(self):

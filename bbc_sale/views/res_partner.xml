@@ -22,6 +22,9 @@
                     <field name="amount_free_shipping"
                            attrs="{'invisible': [('supplier', '=', False)], 'readonly': [('is_company', '!=', True), ('parent_id', '!=', False)]}"
                            />
+                    <field name="default_delay"
+                           attrs="{'invisible': [('supplier', '=', False)], 'readonly': [('is_company', '!=', True), ('parent_id', '!=', False)]}"
+                           />
                 </xpath>
                 <xpath expr="//div[@name='buttons']" position="inside">
                     <button class="oe_inline oe_stat_button" type="action" name="%(action_res_partner_pos_orders)d"

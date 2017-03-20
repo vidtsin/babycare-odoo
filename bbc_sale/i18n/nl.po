@@ -269,6 +269,16 @@ msgid "There are still products in these categories."
 msgstr "Er zijn nog producten met deze categorie(ën)."
 
 #. module: bbc_sale
+#: field:res.partner,default_delay:0
+msgid "Supplier delay"
+msgstr "Levertijd"
+
+#. module: bbc_sale
+#: help:res.partner,default_delay:0
+msgid "Default supplier delay when this supplier is linked to a product"
+msgstr "Standaard levertijd op het moment dat de leverancier wordt gekoppeld aan een product"
+
+#. module: bbc_sale
 #: view:product.template:bbc_sale.product_template_form_view
 msgid "Short description"
 msgstr "Korte omschrijving"

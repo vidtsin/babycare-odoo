@@ -33,3 +33,5 @@ a negative expected stock level (or are in an exception state, as red is the def
 * Implement a hierarchy view for public categories that link to products in those categories
 * Prevent the removal of public categories that are still in use.
 * Hide 'Invoice' button from pos order, which seems to create a redundant receivable accounting entry
+* Add a field on the partner form to store the default purchase delay.
+* Take the default purchase delay from the supplier when it is linked to a product (in the client and through product import)

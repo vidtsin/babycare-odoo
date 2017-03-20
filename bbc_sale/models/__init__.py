@@ -9,6 +9,7 @@ from . import stock_inventory
 from . import stock_picking
 from . import stock_move
 from . import product
+from . import product_supplierinfo
 from . import res_partner
 from . import product_category
 from . import product_public_category

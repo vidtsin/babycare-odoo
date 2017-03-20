@@ -130,11 +130,13 @@ class ProductTemplate(models.Model):
     @api.model
     def load(self, fields, data):
         """ Add context key to suppress creation of order points if missing """
-        return super(
-            ProductTemplate,
+        self = (
             self if self.env.context.get('no_autocreate_orderpoints')
-            else self.with_context(no_autocreate_orderpoints=True)
-        ).load(fields, data)
+            else self.with_context(no_autocreate_orderpoints=True))
+        self = (
+            self if self.env.context.get('set_seller_default_delay')
+            else self.with_context(set_seller_default_delay=True))
+        return super(ProductTemplate, self).load(fields, data)
 
 
 class Product(models.Model):
@@ -209,11 +211,13 @@ class Product(models.Model):
     @api.model
     def load(self, fields, data):
         """ Add context key to suppress creation of order points if missing """
-        return super(
-            Product,
+        self = (
             self if self.env.context.get('no_autocreate_orderpoints')
-            else self.with_context(no_autocreate_orderpoints=True),
-        ).load(fields, data)
+            else self.with_context(no_autocreate_orderpoints=True))
+        self = (
+            self if self.env.context.get('set_seller_default_delay')
+            else self.with_context(set_seller_default_delay=True))
+        return super(Product, self).load(fields, data)
 
     @api.model
     @api.returns('self', lambda value: value.id)
