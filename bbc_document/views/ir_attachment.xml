@@ -6,7 +6,7 @@
             <field name="inherit_id" ref="document.view_attach_filter_inherit0"/>
             <field name="arch" type="xml">
                 <field name="name" position="attributes">
-                    <attribute name="filter_domain">['|', '|', ('name','ilike',self), ('datas_fname','ilike',self), ('index_content', 'like', self)]</attribute>
+                    <attribute name="filter_domain">['|', '|', ('name','ilike',self), ('datas_fname','ilike',self), ('index_content', 'ilike', self)]</attribute>
                 </field>
             </field>
         </record>
