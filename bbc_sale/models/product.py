@@ -21,6 +21,7 @@ class ProductTemplate(models.Model):
         search='search_is_component')
     bom_component_count = fields.Integer(
         compute="compute_bom_component_count")
+    x_availability = fields.Float('Website availability')
 
     @api.multi
     def compute_bom_component_count(self):
