@@ -30,6 +30,8 @@ Other functionality
 ===================
 * Add a field to the product form that displays the maximum delivery date for all of the incoming stock. A manual override can be entered. This override will be reset when the override date is reached, or when there is actually stock incoming.
 * Menu shortcuts to late deliveries to and from customers or from suppliers. This changes the cutoff time of the 'late' filter on pickings to start of the day (in UTC).
+* Hide the stock locations group on the product form
+* Hide the lot tracking group on the product form
 
 Credits
 -------
