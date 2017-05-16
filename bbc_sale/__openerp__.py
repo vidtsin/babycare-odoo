@@ -5,7 +5,7 @@
 {
     "name": "Babycare Sales customizations",
     "category": "Sale",
-    "version": "8.0.1.1",
+    "version": "8.0.1.2",
     "author": "Opener B.V.",
     "website": 'https://opener.am',
     "depends": [
@@ -17,6 +17,7 @@
         'magento_bridge',  # Override of product view
     ],
     'data': [
+        'data/account_fiscal_position.xml',
         'views/account_invoice.xml',
         'views/pos_order.xml',
         'views/templates.xml',

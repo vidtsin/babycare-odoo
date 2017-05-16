@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp><data noupdate="1">
+    <record id="fispos_nl" model="account.fiscal.position">
+        <field name="name">Binnenland</field>
+    </record>
+    <record id="fispos_eu" model="account.fiscal.position">
+        <field name="name">EU Consument</field>
+    </record>
+    <record id="fispos_intra" model="account.fiscal.position">
+        <field name="name">Bedrijf EU + VAT nr</field>
+    </record>
+    <record id="fispos_world" model="account.fiscal.position">
+        <field name="name">Buiten EU</field>
+    </record>
+</data></openerp>
