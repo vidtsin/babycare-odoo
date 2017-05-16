@@ -1,3 +1,4 @@
+
 # coding: utf-8
 def migrate(cr, version):
     if not version:
@@ -11,5 +12,5 @@ def migrate(cr, version):
             """ INSERT INTO ir_model_data (
             noupdate, name, module, model, res_id)
             SELECT true, %s, 'bbc_sale', 'account.fiscal.position', id
-            FROM account_fiscal_position WHERE id = id; """,
+            FROM account_fiscal_position WHERE id = %s; """,
             ref_res_id)
