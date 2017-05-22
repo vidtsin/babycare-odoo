@@ -47,6 +47,10 @@ class TestFiscalPosition(TransactionCase):
             self.create_order(
                 self.partner_nl, self.partner_eu_vat).fiscal_position,
             self.env.ref('bbc_sale.fispos_eu'))
+        self.assertEqual(
+            self.create_order(
+                self.partner_eu_vat, self.partner_eu_vat).fiscal_position,
+            self.env.ref('bbc_sale.fispos_eu'))
 
     def test_onchange(self):
         res = self.env['sale.order'].onchange_delivery_id(
@@ -55,9 +59,15 @@ class TestFiscalPosition(TransactionCase):
         self.assertEqual(
             res['value']['fiscal_position'],
             self.env.ref('bbc_sale.fispos_eu').id)
-        # Intra *is* applied
+        # Intra *is* applied but only if the main partner is not in NL
         res = self.env['sale.order'].onchange_delivery_id(
             self.env.user.company_id.id, self.partner_nl.id,
+            self.partner_eu_vat.id, False)
+        self.assertEqual(
+            res['value']['fiscal_position'],
+            self.env.ref('bbc_sale.fispos_eu').id)
+        res = self.env['sale.order'].onchange_delivery_id(
+            self.env.user.company_id.id, self.partner_eu_vat.id,
             self.partner_eu_vat.id, False)
         self.assertEqual(
             res['value']['fiscal_position'],

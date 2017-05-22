@@ -31,18 +31,23 @@ class SaleOrder(models.Model):
                     break
 
     @api.multi
-    def _get_fiscal_position(self, partner, allow_intra=False):
+    def _get_fiscal_position(self, partner, intra_partner=False):
         country = partner.country_id
         if not country:
             return False
         ref = 'bbc_sale.fispos_world'
-        if country == self.env.ref('base.nl'):
+        nl = self.env.ref('base.nl')
+        if country == nl:
             ref = 'bbc_sale.fispos_nl'
-        elif country in self.env.ref('base.europe').country_ids:
-            if partner.vat and allow_intra:
-                ref = 'bbc_sale.fispos_intra'
-            else:
-                ref = 'bbc_sale.fispos_eu'
+        else:
+            europe = self.env.ref('base.europe').country_ids
+            if country in europe:
+                if (intra_partner and intra_partner.vat and
+                        intra_partner.country_id != nl and
+                        intra_partner.country_id in europe):
+                    ref = 'bbc_sale.fispos_intra'
+                else:
+                    ref = 'bbc_sale.fispos_eu'
         return self.env.ref(ref)
 
     @api.model
@@ -62,8 +67,11 @@ class SaleOrder(models.Model):
             self, company_id, partner_id, delivery_id, fiscal_position):
         res = super(SaleOrder, self).onchange_delivery_id(
             company_id, partner_id, delivery_id, fiscal_position)
-        fiscal_position = self._get_fiscal_position(
-            self.env['res.partner'].browse(delivery_id), allow_intra=True)
-        if fiscal_position:
-            res.setdefault('value', {})['fiscal_position'] = fiscal_position.id
+        if partner_id and delivery_id:
+            fiscal_position = self._get_fiscal_position(
+                self.env['res.partner'].browse(delivery_id),
+                intra_partner=self.env['res.partner'].browse(partner_id))
+            if fiscal_position:
+                res.setdefault(
+                    'value', {})['fiscal_position'] = fiscal_position.id
         return res
