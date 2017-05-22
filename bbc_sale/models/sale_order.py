@@ -31,7 +31,7 @@ class SaleOrder(models.Model):
                     break
 
     @api.multi
-    def _get_fiscal_position(self, partner):
+    def _get_fiscal_position(self, partner, allow_intra=False):
         country = partner.country_id
         if not country:
             return False
@@ -39,12 +39,16 @@ class SaleOrder(models.Model):
         if country == self.env.ref('base.nl'):
             ref = 'bbc_sale.fispos_nl'
         elif country in self.env.ref('base.europe').country_ids:
-            # Explicitely no intracom in any case. Handled manually.
-            ref = 'bbc_sale.fispos_eu'
+            if partner.vat and allow_intra:
+                ref = 'bbc_sale.fispos_intra'
+            else:
+                ref = 'bbc_sale.fispos_eu'
         return self.env.ref(ref)
 
     @api.model
     def create(self, vals):
+        """ Look up fiscal position by shipping address country but don't
+        apply intra as these orders typically originate from Magento """
         res = super(SaleOrder, self).create(vals)
         if not vals.get('fiscal_position'):
             fiscal_position = self._get_fiscal_position(
@@ -59,7 +63,7 @@ class SaleOrder(models.Model):
         res = super(SaleOrder, self).onchange_delivery_id(
             company_id, partner_id, delivery_id, fiscal_position)
         fiscal_position = self._get_fiscal_position(
-            self.env['res.partner'].browse(delivery_id))
+            self.env['res.partner'].browse(delivery_id), allow_intra=True)
         if fiscal_position:
             res.setdefault('value', {})['fiscal_position'] = fiscal_position.id
         return res

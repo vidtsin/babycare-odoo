@@ -15,6 +15,8 @@ class TestFiscalPosition(TransactionCase):
         super(TestFiscalPosition, self).setUp()
         self.partner_nl = self.create_partner('nl')
         self.partner_eu = self.create_partner('fr')
+        self.partner_eu_vat = self.create_partner('fr')
+        self.partner_eu_vat.vat = 'BE0476243769'
         self.partner_world = self.create_partner('us')
 
     def create_order(self, partner, shipping):
@@ -40,6 +42,11 @@ class TestFiscalPosition(TransactionCase):
             self.create_order(
                 self.partner_nl, self.partner_eu).fiscal_position,
             self.env.ref('bbc_sale.fispos_eu'))
+        # Intra is not applied (because from Magento)
+        self.assertEqual(
+            self.create_order(
+                self.partner_nl, self.partner_eu_vat).fiscal_position,
+            self.env.ref('bbc_sale.fispos_eu'))
 
     def test_onchange(self):
         res = self.env['sale.order'].onchange_delivery_id(
@@ -48,6 +55,13 @@ class TestFiscalPosition(TransactionCase):
         self.assertEqual(
             res['value']['fiscal_position'],
             self.env.ref('bbc_sale.fispos_eu').id)
+        # Intra *is* applied
+        res = self.env['sale.order'].onchange_delivery_id(
+            self.env.user.company_id.id, self.partner_nl.id,
+            self.partner_eu_vat.id, False)
+        self.assertEqual(
+            res['value']['fiscal_position'],
+            self.env.ref('bbc_sale.fispos_intra').id)
 
         res = self.env['sale.order'].onchange_delivery_id(
             self.env.user.company_id.id, self.partner_eu.id,
