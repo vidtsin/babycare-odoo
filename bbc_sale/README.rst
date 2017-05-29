@@ -37,3 +37,4 @@ a negative expected stock level (or are in an exception state, as red is the def
 * Take the default purchase delay from the supplier when it is linked to a product (in the client and through product import)
 * #2665, reroute messages from picking and invoice to the related sale order
 * #2780, apply fiscal position based on the shipping address' country regardless of the customer's fiscal position
+* Add a custom, stored definition of configurable products

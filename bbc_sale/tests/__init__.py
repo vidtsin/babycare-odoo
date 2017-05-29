@@ -1,2 +1,3 @@
+from . import test_configurable
 from . import test_supplier_invoice_number
 from . import test_fiscal_position

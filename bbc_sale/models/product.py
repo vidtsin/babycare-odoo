@@ -21,7 +21,19 @@ class ProductTemplate(models.Model):
         search='search_is_component')
     bom_component_count = fields.Integer(
         compute="compute_bom_component_count")
-    x_availability = fields.Float('Website availability')
+    x_availability = fields.Float('Website availability', default=0)
+    configurable = fields.Boolean(
+        compute='get_configurable', store=True)
+
+    @api.multi
+    @api.depends('type', 'bom_ids', 'product_variant_ids')
+    def get_configurable(self):
+        for template in self:
+            if template.type == 'consu' and template.bom_ids and len(
+                    template.product_variant_ids) > 1:
+                template.configurable = True
+            else:
+                template.configurable = False
 
     @api.multi
     def compute_bom_component_count(self):

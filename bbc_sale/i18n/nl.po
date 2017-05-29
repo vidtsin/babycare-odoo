@@ -50,6 +50,12 @@ msgid "Is component"
 msgstr "Is onderdeel"
 
 #. module: bbc_sale
+#: field:product.product,configurable:0
+#: field:product.template,configurable:0
+msgid "Configurable"
+msgstr "Configureerbaar"
+
+#. module: bbc_sale
 #: field:product.product,bom_component_count:0
 msgid "Bom component count"
 msgstr "Bom component count"
