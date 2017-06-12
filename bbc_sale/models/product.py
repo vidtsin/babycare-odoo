@@ -226,8 +226,11 @@ class Product(models.Model):
     def update_availability(self):
         """ Update the Website availability of the current product. Unpublish
         end-of-life stockable/consumable products that are not available
-        anymore. """
+        anymore.
 
+        This is a nightly sweep up which should be (mostly?) redundant as
+        update_availability is already called from the relevant operations
+        on stock moves and inventories. """
         start_time = time.time()
         bom_lines = self.env['mrp.bom'].search([
             '|', ('product_id', 'in', self.ids),
