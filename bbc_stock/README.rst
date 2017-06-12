@@ -32,6 +32,7 @@ Other functionality
 * Menu shortcuts to late deliveries to and from customers or from suppliers. This changes the cutoff time of the 'late' filter on pickings to start of the day (in UTC).
 * Hide the stock locations group on the product form
 * Hide the lot tracking group on the product form
+* #2660, don't allow consumables to be selected on a manually created stock move
 
 Credits
 -------

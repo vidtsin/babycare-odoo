@@ -9,6 +9,8 @@ class SaleOrderLine(models.Model):
         related='product_id.state')
     virtual_available = fields.Float(
         related='product_id.virtual_available')
+    product_id = fields.Many2one(
+        domain=[('sale_ok', '=', True), ('type', '!=', 'consu')])
 
     @api.multi
     def product_id_change(

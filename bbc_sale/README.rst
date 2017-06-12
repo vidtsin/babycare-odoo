@@ -38,3 +38,4 @@ a negative expected stock level (or are in an exception state, as red is the def
 * #2665, reroute messages from picking and invoice to the related sale order
 * #2780, apply fiscal position based on the shipping address' country regardless of the customer's fiscal position
 * Add a custom, stored definition of configurable products
+* #2660, don't allow consumables to be selected on a sale order line
