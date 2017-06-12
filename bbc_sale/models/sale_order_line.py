@@ -10,7 +10,7 @@ class SaleOrderLine(models.Model):
     virtual_available = fields.Float(
         related='product_id.virtual_available')
     product_id = fields.Many2one(
-        domain=[('sale_ok', '=', True), ('type', '!=', 'consu')])
+        domain=[('sale_ok', '=', True), ('consu_single_attr', '=', False)])
 
     @api.multi
     def product_id_change(

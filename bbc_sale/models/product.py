@@ -158,6 +158,20 @@ class Product(models.Model):
     is_component = fields.Boolean(
         compute='compute_is_component',
         search='search_is_component')
+    consu_single_attr = fields.Boolean(
+        compute='get_consu_single_attr',
+        string='Consumable with just one attribute',
+        store=True)
+
+    @api.multi
+    @api.depends('type', 'attribute_value_ids')
+    def get_consu_single_attr(self):
+        for product in self:
+            if product.type == 'consu' and len(
+                    product.attribute_value_ids) == 1:
+                product.consu_single_attr = True
+            else:
+                product.consu_single_attr = False
 
     @api.multi
     def compute_is_component(self):
