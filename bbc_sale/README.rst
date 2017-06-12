@@ -39,3 +39,4 @@ a negative expected stock level (or are in an exception state, as red is the def
 * #2780, apply fiscal position based on the shipping address' country regardless of the customer's fiscal position
 * Add a custom, stored definition of configurable products
 * #2660, don't allow consumables with one attribute to be selected on a sale order line
+* For configurable products, mask the default code on the template

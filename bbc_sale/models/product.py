@@ -16,6 +16,7 @@ class ProductTemplate(models.Model):
         related='seller_ids.product_code', readonly=True)
     description = fields.Text('Long description')
     description_sale = fields.Text('Short description')
+    display_code = fields.Char(compute='get_configurable')
     is_component = fields.Boolean(
         compute='compute_is_component',
         search='search_is_component')
@@ -28,12 +29,16 @@ class ProductTemplate(models.Model):
     @api.multi
     @api.depends('type', 'bom_ids', 'product_variant_ids')
     def get_configurable(self):
+        """ Compute if a product is configurable, and if it is, mask the
+        default code with a label 'configurable' """
         for template in self:
             if template.type == 'consu' and template.bom_ids and len(
                     template.product_variant_ids) > 1:
                 template.configurable = True
+                template.display_code = 'Configurabel'
             else:
                 template.configurable = False
+                template.display_code = template.default_code
 
     @api.multi
     def compute_bom_component_count(self):
