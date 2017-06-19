@@ -341,6 +341,15 @@ class Product(models.Model):
                         template.with_context(propagate_state=False).write(
                             {'state': 'end'})
             else:
+                if 'variant_published' not in vals:
+                    # If template is published, now that variant_eol has been
+                    # set to false we can republish this variant.
+                    to_publish = self.filtered(
+                        lambda p: p.product_tmpl_id.configurable and
+                        p.product_tmpl_id.website_published)
+                    if to_publish:
+                        super(Product, to_publish).write({
+                            'variant_published': True})
                 for template in self.mapped('product_tmpl_id'):
                     if template.state not in ('draft', 'sellable'):
                         template.with_context(propagate_state=False).write(
