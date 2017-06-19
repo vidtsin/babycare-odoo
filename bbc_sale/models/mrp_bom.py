@@ -12,9 +12,12 @@ class MrpBom(models.Model):
 
     @api.multi
     def update_availability(self):
+        all_variants = self.env['product.product']
         for bom in self:
-            for variant in (bom.product_id or
-                            bom.product_tmpl_id.product_variant_ids):
+            variants = (bom.product_id or
+                        bom.product_tmpl_id.product_variant_ids)
+            all_variants += variants
+            for variant in variants:
                 avail = []
                 for line in bom.bom_line_ids:
                     if (line.attribute_value_ids <=
@@ -30,6 +33,8 @@ class MrpBom(models.Model):
                         variant.default_code or variant.name,
                         variant.x_availability, x_availability)
                     variant.write({'x_availability': x_availability})
+
+        return all_variants
 
     @api.model
     def create(self, vals):

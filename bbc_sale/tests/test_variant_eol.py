@@ -81,6 +81,7 @@ class TestVariantEOL(TransactionCase):
         self.assertEqual(self.bom_product.state, 'end')
         self.bom_product.update_availability()
         self.assertFalse(self.bom_product.variant_published)
+        self.assertFalse(self.bom_product.website_published)
 
         self.env.cr.execute(
             """ UPDATE product_product

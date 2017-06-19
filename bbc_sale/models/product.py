@@ -227,11 +227,7 @@ class Product(models.Model):
         """ Update the Website availability of the current product. Unpublish
         end-of-life stockable/consumable products that are not available
         anymore.
-
-        This is a nightly sweep up which should be (mostly?) redundant as
-        update_availability is already called from the relevant operations
-        on stock moves and inventories. """
-        start_time = time.time()
+        """
         bom_lines = self.env['mrp.bom'].search([
             '|', ('product_id', 'in', self.ids),
             ('product_tmpl_id', '=', self.mapped('product_tmpl_id').ids)])
@@ -245,25 +241,27 @@ class Product(models.Model):
                     product.x_availability is False):
                 product.write({'x_availability': x_availability})
 
-        self.env['mrp.bom'].search([
+        boms = self.env['mrp.bom'].search([
             ('bom_line_ids.product_id', 'in', self.ids),
-        ]).update_availability()
+        ])
+        affected = self + boms.update_availability()
 
         to_unpublish = self.env['product.product'].search([
-            ('id', 'in', self.ids),
+            ('id', 'in', affected.ids),
             ('x_availability', '=', 0),
             ('variant_eol', '=', True),
             ('variant_published', '=', True),
         ])
         if to_unpublish:
             to_unpublish.write({'variant_published': False})
-        logger.debug(
-            'Updated availability of %s products in %ss',
-            len(self), time.time() - start_time)
 
     @api.model
     def update_product_availability(self):
-        """ Wrapper around update_availability. Call from cron. """
+        """ Wrapper around update_availability. Call from cron.
+
+        This is a nightly sweep up which should be (mostly?) redundant as
+        update_availability is already called from the relevant operations
+        on stock moves and inventories. """
         logger = logging.getLogger('odoo.addons.bbc_sale')
         offset = 0
         limit = 500
