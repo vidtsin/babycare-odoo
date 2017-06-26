@@ -70,6 +70,8 @@ class ProductTemplate(models.Model):
     def write(self, values):
         """
         Remove Buy route from products that are set to EOL.
+        Propagate state and website_published to the underlying variants
+        for nonconfigurable templates.
         """
         def add_route():
             route_ids = values.get('route_ids') or []
@@ -88,29 +90,42 @@ class ProductTemplate(models.Model):
                 [('product_id.product_tmpl_id', 'in', self.ids)]).write(
                 {'product_min_qty': 0.0, 'product_max_qty': 0.0})
 
-        if values.get('state') and self.env.context.get(
-                'propagate_state', True):
-            if values['state'] in ('end', 'obsolete'):
-                del_route()
-                inactive_orderpoints()
-                to_eol = self.filtered(
-                    lambda t: not t.configurable).mapped(
-                        'product_variant_ids').filtered(
-                            lambda p: not p.variant_eol)
+        nonconfigurable = self.filtered(lambda t: not t.configurable)
+        if values.get('state') in ('end', 'obsolete'):
+            del_route()
+            inactive_orderpoints()
+            if self.env.context.get('propagate_state', True):
+                to_eol = nonconfigurable.mapped(
+                    'product_variant_ids').filtered(
+                        lambda p: not p.variant_eol)
                 if to_eol:
                     to_eol.write({'variant_eol': True})
+        elif values.get('state'):
+            if values['state'] == 'sellable':
+                add_route()
+            if values['state'] == 'draft':
+                add_route()
+                inactive_orderpoints()
+            if self.env.context.get('propagate_state', True):
+                un_eol = nonconfigurable.mapped(
+                    'product_variant_ids').filtered(
+                        lambda p: p.variant_eol)
+                if un_eol:
+                    un_eol.write({'variant_eol': False})
+
+        if 'website_published' in values and self.env.context.get(
+                'propagate_state', True):
+            if values['website_published']:
+                publish = nonconfigurable.mapped(
+                    'product_variant_ids').filtered(
+                        lambda p: not p.variant_published)
             else:
-                if values['state'] == 'sellable':
-                    add_route()
-                if values['state'] == 'draft':
-                    add_route()
-                    inactive_orderpoints()
-                to_eol = self.filtered(
-                    lambda t: t.type != 'consu').mapped(
-                        'product_variant_ids').filtered(
-                            lambda p: p.variant_eol)
-                if to_eol:
-                    to_eol.write({'variant_eol': False})
+                publish = nonconfigurable.mapped(
+                    'product_variant_ids').filtered(
+                        lambda p: p.variant_published)
+            if publish:
+                publish.write(
+                    {'variant_published': values['website_published']})
 
         return super(ProductTemplate, self).write(values)
 
@@ -178,7 +193,7 @@ class Product(models.Model):
     variant_eol = fields.Boolean(
         'Variant is end-of-life', readonly=True)
     variant_published = fields.Boolean(
-        'Variant is published', default=True, readonly=True)
+        'Variant is published', readonly=True)
 
     @api.multi
     @api.depends('type', 'attribute_value_ids')
@@ -292,6 +307,9 @@ class Product(models.Model):
                     'product_min_qty': 0.0,
                     'product_max_qty': 0.0,
                 })
+        if 'variant_published' not in vals and (
+                res.product_tmpl_id.website_published):
+            res.write({'variant_published': True})
         return res
 
     @api.multi
@@ -306,45 +324,39 @@ class Product(models.Model):
 
     @api.multi
     def write(self, vals):
-        """ If all variants of a product are variant_eol, set the template
-        state to 'end' """
+        """ For non configurable products, propagate variant_published and
+        variant_eol to the template"""
         res = super(Product, self).write(vals)
-        if vals.get('variant_eol'):
-            for template in self.mapped('product_tmpl_id').filtered(
-                    lambda t: not t.configurable):
-                if template.state in ('end', 'obsolete'):
-                    continue
-                if all(variant.variant_eol
-                       for variant in template.product_variant_ids):
-                    template.write({'state': 'end'})
+        nonconfigurable = self.mapped('product_tmpl_id').filtered(
+            lambda t: not t.configurable)
         if 'variant_eol' in vals:
             self.set_bom_line_variant_eol()
-        if self and self[0].type != 'consu':
-            if 'variant_eol' in vals:
-                if vals['variant_eol']:
-                    for template in self.mapped('product_tmpl_id'):
-                        if template.state in ('end', 'obsolete'):
-                            continue
-                        if all(variant.variant_eol
-                               for variant in template.product_variant_ids):
-                            template.with_context(propagate_state=False).write(
-                                {'state': 'end'})
-                else:
-                    for template in self.mapped('product_tmpl_id'):
-                        if template.state not in ('draft', 'sellable'):
-                            template.with_context(propagate_state=False).write(
-                                {'state': 'sellable'})
-            if 'variant_published' in vals:
-                if not vals['variant_published']:
-                    for template in self.mapped('product_tmpl_id'):
-                        if template.website_published and all(
-                                not variant.variant_eol
-                                for variant in template.product_variant_ids):
-                            template.write({'website_published': False})
-                else:
-                    for template in self.mapped('product_tmpl_id'):
-                        if not template.website_published:
-                            template.write({'website_published': True})
+            if vals['variant_eol']:
+                for template in nonconfigurable:
+                    if template.state in ('end', 'obsolete'):
+                        continue
+                    if all(variant.variant_eol
+                           for variant in template.product_variant_ids):
+                        template.with_context(propagate_state=False).write(
+                            {'state': 'end'})
+            else:
+                for template in self.mapped('product_tmpl_id'):
+                    if template.state not in ('draft', 'sellable'):
+                        template.with_context(propagate_state=False).write(
+                            {'state': 'sellable'})
+        if 'variant_published' in vals:
+            if not vals['variant_published']:
+                for template in nonconfigurable:
+                    if template.website_published and all(
+                            not variant.variant_published
+                            for variant in template.product_variant_ids):
+                        template.with_context(propagate_state=False).write(
+                            {'website_published': False})
+            else:
+                for template in nonconfigurable:
+                    if not template.website_published:
+                        template.with_context(propagate_state=False).write(
+                            {'website_published': True})
         return res
 
     @api.multi

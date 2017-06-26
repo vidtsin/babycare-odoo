@@ -47,9 +47,28 @@ class TestVariantEOL(TransactionCase):
         variants[1].write({'variant_eol': True})
         self.assertEqual(self.product.state, 'end')
 
-    def test_03_bom_component_eol(self):
+    def test_03_variant_published_to_website_published(self):
+        self.assertFalse(self.product.website_published)
+        self.assertFalse(self.product.variant_published)
+        self.template.write({'website_published': True})
+        self.assertTrue(self.product.variant_published)
+        self.env['product.product'].create({
+            'product_tmpl_id': self.template.id})
+        variants = self.template.product_variant_ids
+        self.assertEqual(len(variants), 2)
+        self.assertTrue(variants[0].variant_published)
+        self.assertTrue(variants[1].variant_published)
+        variants[0].write({'variant_published': False})
+        self.assertTrue(self.template.website_published)
+        variants[1].write({'variant_published': False})
+        self.assertFalse(self.template.website_published)
+        variants[0].write({'variant_published': True})
+        self.assertTrue(self.template.website_published)
+
+    def test_04_bom_component_eol(self):
         self.assertFalse(self.bom_product.variant_eol)
         self.bom_product.update_availability()
+        self.bom_product.write({'website_published': True})
         self.assertTrue(self.bom_product.variant_published)
 
         self.component.write({'variant_eol': True})

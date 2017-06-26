@@ -54,8 +54,11 @@
                     <field name="supplier_code"/>
                 </field>
                 <field name="state" position="after">
-                    <field name="variant_eol"/>
-                    <field name="variant_published"/>
+                    <field name="configurable" invisible="1"/>
+                    <field name="variant_eol"
+                           attrs="{'readonly': [('configurable', '=', False)]}"/>
+                    <field name="variant_published"
+                           attrs="{'readonly': [('configurable', '=', False)]}"/>
                 </field>
             </field>
         </record>

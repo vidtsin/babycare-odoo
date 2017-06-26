@@ -18,8 +18,6 @@ a negative expected stock level (or are in an exception state, as red is the def
 * Remove product state 'Development'
 * Sync Buy route with product state
 * Set orderpoint qtys to zero in product state EOL, Obsolete and Can be ordered.
-* Introduce variant_published flag on the variant level (cf. template's website_published flag)
-* For EOL variants with zero available, unpublish
 * Apply product colors to kanban view
 * Allow product categories to be reordered in the category tree view
 * For products created from the interface (not through import), minimum orderrules are created automatically
@@ -42,3 +40,6 @@ a negative expected stock level (or are in an exception state, as red is the def
 * Add a custom, stored definition of configurable products
 * #2660, don't allow consumables with one attribute to be selected on a sale order line
 * For configurable products, mask the default code on the template
+* Introduce variant_published flag on the variant level (cf. template's website_published flag)
+* Introduce variant_eol flag on the variant level (cf. template's eol/obsolete states)
+* variant_published and variant_eol are kept in sync with nonconfigurable templates
