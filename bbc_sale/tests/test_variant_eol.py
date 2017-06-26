@@ -117,3 +117,14 @@ class TestVariantEOL(TransactionCase):
         self.assertTrue(pr2.product_tmpl_id.website_published)
         self.bom_product.write({'variant_published': False})
         self.assertFalse(pr2.product_tmpl_id.website_published)
+
+        # Setting template published publishes all non-eol variant
+        self.bom_product.product_tmpl_id.write({'website_published': False})
+        self.bom_product.write(
+            {'variant_eol': True, 'variant_published': False})
+        pr2.write(
+            {'variant_eol': False, 'variant_published': False})
+        self.assertFalse(pr2.variant_published)
+        self.bom_product.product_tmpl_id.write({'website_published': True})
+        self.assertFalse(self.bom_product.variant_published)
+        self.assertTrue(pr2.variant_published)

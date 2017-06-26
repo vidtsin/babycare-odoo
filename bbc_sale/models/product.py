@@ -116,9 +116,10 @@ class ProductTemplate(models.Model):
         if 'website_published' in values and self.env.context.get(
                 'propagate_state', True):
             if values['website_published']:
-                publish = nonconfigurable.mapped(
+                publish = self.mapped(
                     'product_variant_ids').filtered(
-                        lambda p: not p.variant_published)
+                        lambda p: not p.variant_published and
+                        not p.variant_eol)
             else:
                 publish = nonconfigurable.mapped(
                     'product_variant_ids').filtered(
