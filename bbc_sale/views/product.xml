@@ -53,6 +53,10 @@
                 <field name="default_code" position="after">
                     <field name="supplier_code"/>
                 </field>
+                <field name="state" position="after">
+                    <field name="variant_eol"/>
+                    <field name="variant_published"/>
+                </field>
             </field>
         </record>
 

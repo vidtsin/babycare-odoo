@@ -4,6 +4,7 @@ Sale customizations for Babycare
 * When a payment is registered for a sales order that is in state 'Shipping exception', the outgoing delivery is recreated
 * In the POS interface, it is not possible to register payments larger than €10.000,-.
 * Add a field for remarks on sales and purchase orders that are visible, but not editable, on the related delivery orders.
+* Introduce end-of-life flag on product variants and keep in sync with product template state
 * If a product is set to end-of-life, its Buy route is removed.
 * If a product is end-of-life and has not been modified in three months, and it does not had any stock moves in that period, it gets deactivated.
 * Add a clickable reference to SO or PO on picking. #1377
@@ -17,7 +18,8 @@ a negative expected stock level (or are in an exception state, as red is the def
 * Remove product state 'Development'
 * Sync Buy route with product state
 * Set orderpoint qtys to zero in product state EOL, Obsolete and Can be ordered.
-* For products in product state EOL and zero available, unpublish from website
+* Introduce variant_published flag on the variant level (cf. template's website_published flag)
+* For EOL variants with zero available, unpublish
 * Apply product colors to kanban view
 * Allow product categories to be reordered in the category tree view
 * For products created from the interface (not through import), minimum orderrules are created automatically

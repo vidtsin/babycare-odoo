@@ -29,7 +29,7 @@ class MrpBom(models.Model):
                         "from %s to %s",
                         variant.default_code or variant.name,
                         variant.x_availability, x_availability)
-                    variant.x_availability = x_availability
+                    variant.write({'x_availability': x_availability})
 
     @api.model
     def create(self, vals):

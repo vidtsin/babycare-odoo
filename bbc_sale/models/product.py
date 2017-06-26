@@ -1,3 +1,4 @@
+# coding: utf-8
 import time
 import logging
 from datetime import datetime
@@ -87,18 +88,29 @@ class ProductTemplate(models.Model):
                 [('product_id.product_tmpl_id', 'in', self.ids)]).write(
                 {'product_min_qty': 0.0, 'product_max_qty': 0.0})
 
-        if values.get('state'):
-            if values['state'] == 'end':
+        if values.get('state') and self.env.context.get(
+                'propagate_state', True):
+            if values['state'] in ('end', 'obsolete'):
                 del_route()
                 inactive_orderpoints()
-            elif values['state'] == 'obsolete':
-                del_route()
-                inactive_orderpoints()
-            elif values['state'] == 'sellable':
-                add_route()
-            elif values['state'] == 'order':
-                add_route()
-                inactive_orderpoints()
+                to_eol = self.filtered(
+                    lambda t: not t.configurable).mapped(
+                        'product_variant_ids').filtered(
+                            lambda p: not p.variant_eol)
+                if to_eol:
+                    to_eol.write({'variant_eol': True})
+            else:
+                if values['state'] == 'sellable':
+                    add_route()
+                if values['state'] == 'draft':
+                    add_route()
+                    inactive_orderpoints()
+                to_eol = self.filtered(
+                    lambda t: t.type != 'consu').mapped(
+                        'product_variant_ids').filtered(
+                            lambda p: p.variant_eol)
+                if to_eol:
+                    to_eol.write({'variant_eol': False})
 
         return super(ProductTemplate, self).write(values)
 
@@ -107,35 +119,31 @@ class ProductTemplate(models.Model):
         """ Products that have been set to EOL at least three months ago,
         have no physical stock and and that have no recent stock moves
         will be set to inactive. To be called from cron.
+
+        Legacy note: works on product products even if defined on
+        product.template.
         """
         cutoff_datetime = fields.Date.to_string(
             datetime.now() - relativedelta(months=3))
-        templates = self.search(
-            [('state', 'in', ('end', 'obsolete')),
-             ('write_date', '<', cutoff_datetime)])
         start_time = time.time()
-        products = self.env['product.product'].search(
-            [('product_tmpl_id', 'in', templates.ids),
-             ('qty_available', '=', 0)])
+        products = self.env['product.product'].search([
+            ('variant_eol', '=', True),
+            ('write_date', '<', cutoff_datetime),
+            ('qty_available', '=', 0),
+            ('bom_ids', '=', False)])
         logger.debug(
             'Found %s candidate products in %s seconds to set inactive',
             len(products), time.time() - start_time)
         for product in products:
-            if self.env['stock.move'].search(
-                    [('product_id', '=', product.id),
-                     ('write_date', '>', cutoff_datetime)]):
+            if self.env['stock.move'].search([
+                    ('product_id', '=', product.id),
+                    ('write_date', '>', cutoff_datetime)]):
                 logger.debug(
                     'Product %s has recent stock moves', product.id)
                 continue
             logger.info(
                 'Setting product %s to inactive', product.id)
             product.write({'active': False})
-            if not self.env['product.product'].search(
-                    [('product_tmpl_id', '=', product.product_tmpl_id.id)]):
-                logger.debug(
-                    'No active products for template %s. Setting inactive',
-                    product.product_tmpl_id.id)
-                product.product_tmpl_id.write({'active': False})
 
     def _register_hook(self, cr):
         """ Remove draft state """
@@ -167,6 +175,10 @@ class Product(models.Model):
         compute='get_consu_single_attr',
         string='Consumable with just one attribute',
         store=True)
+    variant_eol = fields.Boolean(
+        'Variant is end-of-life', readonly=True)
+    variant_published = fields.Boolean(
+        'Variant is published', default=True, readonly=True)
 
     @api.multi
     @api.depends('type', 'attribute_value_ids')
@@ -198,7 +210,8 @@ class Product(models.Model):
     @api.multi
     def update_availability(self):
         """ Update the Website availability of the current product. Unpublish
-        end-of-life *stock* products that are not available anymore. """
+        end-of-life stockable/consumable products that are not available
+        anymore. """
 
         start_time = time.time()
         bom_lines = self.env['mrp.bom'].search([
@@ -210,16 +223,22 @@ class Product(models.Model):
             if product in exclude_products:
                 continue
             x_availability = product.virtual_available - product.incoming_qty
-            if product.x_availability != x_availability:
-                product.x_availability = x_availability
-
-            if (not product.x_availability and product.state == 'end' and
-                    product.type == 'product' and product.website_published):
-                product.website_published = False
+            if (product.x_availability != x_availability or
+                    product.x_availability is False):
+                product.write({'x_availability': x_availability})
 
         self.env['mrp.bom'].search([
             ('bom_line_ids.product_id', 'in', self.ids),
         ]).update_availability()
+
+        to_unpublish = self.env['product.product'].search([
+            ('id', 'in', self.ids),
+            ('x_availability', '=', 0),
+            ('variant_eol', '=', True),
+            ('variant_published', '=', True),
+        ])
+        if to_unpublish:
+            to_unpublish.write({'variant_published': False})
         logger.debug(
             'Updated availability of %s products in %ss',
             len(self), time.time() - start_time)
@@ -231,11 +250,12 @@ class Product(models.Model):
         offset = 0
         limit = 500
         start_time = time.time()
-        products = self.search([], limit=limit, offset=offset)
+        domain = [('type', 'in', ('product', 'consu'))]
+        products = self.search(domain, limit=limit, offset=offset)
         while products:
             products.update_availability()
             offset += limit
-            products = self.search([], limit=limit, offset=offset)
+            products = self.search(domain, limit=limit, offset=offset)
 
         logger.debug(
             'Updated availability in %ss', time.time() - start_time)
@@ -283,3 +303,65 @@ class Product(models.Model):
 
     bom_component_count = fields.Integer(
         compute="compute_bom_component_count")
+
+    @api.multi
+    def write(self, vals):
+        """ If all variants of a product are variant_eol, set the template
+        state to 'end' """
+        res = super(Product, self).write(vals)
+        if vals.get('variant_eol'):
+            for template in self.mapped('product_tmpl_id').filtered(
+                    lambda t: not t.configurable):
+                if template.state in ('end', 'obsolete'):
+                    continue
+                if all(variant.variant_eol
+                       for variant in template.product_variant_ids):
+                    template.write({'state': 'end'})
+        if 'variant_eol' in vals:
+            self.set_bom_line_variant_eol()
+        if self and self[0].type != 'consu':
+            if 'variant_eol' in vals:
+                if vals['variant_eol']:
+                    for template in self.mapped('product_tmpl_id'):
+                        if template.state in ('end', 'obsolete'):
+                            continue
+                        if all(variant.variant_eol
+                               for variant in template.product_variant_ids):
+                            template.with_context(propagate_state=False).write(
+                                {'state': 'end'})
+                else:
+                    for template in self.mapped('product_tmpl_id'):
+                        if template.state not in ('draft', 'sellable'):
+                            template.with_context(propagate_state=False).write(
+                                {'state': 'sellable'})
+            if 'variant_published' in vals:
+                if not vals['variant_published']:
+                    for template in self.mapped('product_tmpl_id'):
+                        if template.website_published and all(
+                                not variant.variant_eol
+                                for variant in template.product_variant_ids):
+                            template.write({'website_published': False})
+                else:
+                    for template in self.mapped('product_tmpl_id'):
+                        if not template.website_published:
+                            template.write({'website_published': True})
+        return res
+
+    @api.multi
+    def set_bom_line_variant_eol(self):
+        """ If a component is end-of-life, set variants with the component
+        in its BOM to variant_eol """
+        bom_lines = self.env['mrp.bom.line'].search([
+            ('product_id', 'in', self.ids)])
+        eol_variants = self.env['product.product']
+        for bom_line in bom_lines:
+            if bom_line.bom_id.product_id:
+                variants = bom_line.bom_id.product_id
+            else:
+                variants = bom_line.bom_id.product_tmpl_id.product_variant_ids
+            for variant in variants.filtered(
+                    lambda v: v.variant_eol != self[0].variant_eol):
+                if bom_line.attribute_value_ids <= variant.attribute_value_ids:
+                    eol_variants += variant
+        if eol_variants:
+            eol_variants.write({'variant_eol': self[0].variant_eol})
