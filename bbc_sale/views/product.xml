@@ -132,5 +132,19 @@
             </field>
         </record>
 
+        <record id="view_stock_product_tree" model="ir.ui.view">
+            <field name="name">Configurable eol variants show up as blue</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock.view_stock_product_tree"/>
+            <field name="arch" type="xml">
+                <tree position="attributes">
+                    <attribute name="colors" translation="off">red:virtual_available&lt;0;blue:blue==True;black:virtual_available&gt;=0 and state not in ('draft', 'end', 'obsolete')</attribute>
+                </tree>
+                <field name="price" position="after">
+                    <field name="blue" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
     </data>
 </openerp>

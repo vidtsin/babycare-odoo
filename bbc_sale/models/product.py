@@ -194,6 +194,21 @@ class Product(models.Model):
         'Variant is end-of-life', readonly=True)
     variant_published = fields.Boolean(
         'Variant is published', readonly=True)
+    blue = fields.Boolean(
+        compute='_compute_blue',
+        string='Show as blue in tree view')
+
+    @api.multi
+    @api.depends('product_tmpl_id.configurable', 'variant_eol',
+                 'state', 'virtual_available')
+    def _compute_blue(self):
+        for product in self:
+            if product.configurable:
+                product.blue = product.variant_eol
+            else:
+                product.blue = (
+                    product.virtual_available >= 0 and product.state in (
+                        'draft', 'end', 'obsolete'))
 
     @api.multi
     @api.depends('type', 'attribute_value_ids')
@@ -356,7 +371,7 @@ class Product(models.Model):
                             {'state': 'sellable'})
         if 'variant_published' in vals:
             if not vals['variant_published']:
-                for template in nonconfigurable:
+                for template in self.mapped('product_tmpl_id'):
                     if template.website_published and all(
                             not variant.variant_published
                             for variant in template.product_variant_ids):

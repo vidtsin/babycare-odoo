@@ -94,17 +94,26 @@ class TestVariantEOL(TransactionCase):
         self.env['product.template'].deactivate_obsolete_products()
         self.assertFalse(self.bom_product.active)
 
-    def test_00_bom_configurable_eol(self):
+    def test_05_bom_configurable_eol(self):
         """ Setting configurable variant to non-eol republishes the variant
         if its product is set to website_published """
         pr2 = self.bom_product.copy({
             'product_tmpl_id': self.bom_product.product_tmpl_id.id})
         self.assertTrue(self.bom_product.configurable)
-        self.bom_product.write({'website_published': True})
+        self.bom_product.write({
+            'variant_published': True,
+            'website_published': True})
+        self.assertFalse(pr2.blue)
         pr2.write({
             'variant_published': False,
             'variant_eol': True})
+        self.assertTrue(pr2.blue)
         self.assertTrue(pr2.product_tmpl_id.website_published)
         self.assertFalse(pr2.variant_published)
         pr2.write({'variant_eol': False})
         self.assertTrue(pr2.variant_published)
+
+        pr2.write({'variant_published': False})
+        self.assertTrue(pr2.product_tmpl_id.website_published)
+        self.bom_product.write({'variant_published': False})
+        self.assertFalse(pr2.product_tmpl_id.website_published)
