@@ -26,6 +26,8 @@ Different sounds play on
 
 TODO: unscanned products stay on top even if there are red and yellow lines.
 
+* When scanning products in the barcode interface, configurable products (as defined in the bbc_sale module) are ignored.
+
 Other functionality
 ===================
 * Add a field to the product form that displays the maximum delivery date for all of the incoming stock. A manual override can be entered. This override will be reset when the override date is reached, or when there is actually stock incoming.

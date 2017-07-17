@@ -1,4 +1,4 @@
-# -*- coding; utf-8 -*-
+# coding; utf-8
 from openerp import api, fields, models
 
 
@@ -28,8 +28,9 @@ class Picking(models.Model):
     def process_barcode_from_ui(self, picking_id, barcode_str, visible_op_ids):
         """ Add a couple of keys that will trigger sounds and behaviour in the
         interface """
-        res = super(Picking, self).process_barcode_from_ui(
-            picking_id, barcode_str, visible_op_ids)
+        res = super(Picking, self.with_context(
+            search_no_configurable=True)).process_barcode_from_ui(
+                picking_id, barcode_str, visible_op_ids)
         if not res.get('filter_loc'):
             if res.get('operation_id'):
                 if (picking_id and

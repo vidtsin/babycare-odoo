@@ -1,5 +1,6 @@
 # coding: utf-8
 from openerp import api, fields, models
+from openerp.osv.expression import AND
 from datetime import timedelta
 
 
@@ -13,6 +14,13 @@ class Product(models.Model):
         'Incoming stock date override')
     max_incoming_stock_date_override_value = fields.Date(
         'Incoming stock date value')
+
+    @api.model
+    def search(self, args, offset=0, limit=None, order=None, count=False):
+        if self.env.context.get('search_no_configurable'):
+            args = AND([[('configurable', '=', False)], args])
+        return super(Product, self).search(
+            args, offset=offset, limit=limit, order=order, count=count)
 
     @api.onchange('max_incoming_stock_date_override')
     def onchange_max_incoming_stock_date_override(self):
