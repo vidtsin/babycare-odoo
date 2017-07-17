@@ -3,23 +3,18 @@ from openerp.fields import Date
 from openerp.addons.stock.tests.common import TestStockCommon
 
 
-class TestBarcodeNoConfigurable(TestStockCommon):
+class TestBarcodeNoConsuSingleAttr(TestStockCommon):
     def setUp(self):
-        super(TestBarcodeNoConfigurable, self).setUp()
+        super(TestBarcodeNoConsuSingleAttr, self).setUp()
         self.product = self.env['product.product'].create({
             'name': 'bbc_stock_bom_product',
             'type': 'consu',
             'default_code': 'product_barcode'})
-
-        self.env['mrp.bom'].create({
-            'name': 'Test BOM',
-            'product_id': self.product.id,
-            'product_tmpl_id': self.product.product_tmpl_id.id,
-            'product_uom': self.env.ref('product.product_uom_unit').id,
-            'product_qty': 1,
-            'type': 'phantom',
+        self.attr = self.env['product.attribute'].create({
+            'name': 'Attribute1',
+            'value_ids': [(0, 0, {
+                'name': 'Attr1 - Val1'})],
         })
-
         self.picking = self.PickingObj.create({
             'partner_id': self.partner_delta_id,
             'picking_type_id': self.picking_type_in})
@@ -35,18 +30,18 @@ class TestBarcodeNoConfigurable(TestStockCommon):
         })
         self.picking.action_confirm()
 
-    def test_01_barcode_no_configurable(self):
-        """ Non-configurable products are processed as usual """
-        self.assertFalse(self.product.configurable)
+    def test_01_barcode_no_consu_single_attr(self):
+        """ Products that are not consu/single attr are processed as usual """
+        self.assertFalse(self.product.consu_single_attr)
         self.assertTrue(
             self.picking.process_barcode_from_ui(
                 self.picking.id, 'product_barcode', [])['operation_id'])
 
-    def test_02_barcode_configurable(self):
-        """ Configurable products are ignored """
-        self.product.copy(
-            default={'product_tmpl_id': self.product.product_tmpl_id.id})
-        self.assertTrue(self.product.configurable)
+    def test_02_barcode_consu_single_attr(self):
+        """ Consumables with a single attribute are ignored """
+        self.product.write({
+            'attribute_value_ids': [(4, self.attr.value_ids.id)]})
+        self.assertTrue(self.product.consu_single_attr)
         self.assertFalse(
             self.picking.process_barcode_from_ui(
                 self.picking.id, 'product_barcode', [])['operation_id'])

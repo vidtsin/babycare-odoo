@@ -29,7 +29,7 @@ class Picking(models.Model):
         """ Add a couple of keys that will trigger sounds and behaviour in the
         interface """
         res = super(Picking, self.with_context(
-            search_no_configurable=True)).process_barcode_from_ui(
+            search_no_consu_single_attr=True)).process_barcode_from_ui(
                 picking_id, barcode_str, visible_op_ids)
         if not res.get('filter_loc'):
             if res.get('operation_id'):

@@ -17,8 +17,8 @@ class Product(models.Model):
 
     @api.model
     def search(self, args, offset=0, limit=None, order=None, count=False):
-        if self.env.context.get('search_no_configurable'):
-            args = AND([[('configurable', '=', False)], args])
+        if self.env.context.get('search_no_consu_single_attr'):
+            args = AND([[('consu_single_attr', '=', False)], args])
         return super(Product, self).search(
             args, offset=offset, limit=limit, order=order, count=count)
 

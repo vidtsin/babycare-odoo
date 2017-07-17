@@ -26,7 +26,7 @@ Different sounds play on
 
 TODO: unscanned products stay on top even if there are red and yellow lines.
 
-* When scanning products in the barcode interface, configurable products (as defined in the bbc_sale module) are ignored.
+* When scanning products in the barcode interface, consumable products with a single product attribute (as defined in the bbc_sale module) are ignored.
 
 Other functionality
 ===================
