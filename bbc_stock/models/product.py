@@ -39,14 +39,16 @@ class Product(models.Model):
         def max_date_product(product):
             if product.max_incoming_stock_date_override:
                 return product.max_incoming_stock_date_override_value
+            dates_expected = self.env['stock.move'].search(
+                domain + [('product_id', '=', product.id)],
+                order='date_expected desc', limit=1).mapped(
+                    'date_expected')
+            base_date = dates_expected[0] if dates_expected else today
             if product.virtual_available > 0:
-                dates = self.env['stock.move'].search(
-                    domain + [('product_id', '=', product.id)]).mapped(
-                        'date_expected')
-                return max(dates) if dates else today
+                return base_date
             delay = product.seller_ids[0].delay if product.seller_ids else 0
             return fields.Date.to_string(
-                fields.Date.from_string(today) + timedelta(delay or 0))
+                fields.Date.from_string(base_date) + timedelta(delay or 0))
 
         for product in self:
             if product.type == 'product':

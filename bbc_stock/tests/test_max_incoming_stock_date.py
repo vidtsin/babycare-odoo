@@ -32,6 +32,7 @@ class TestMaxDate(TestStockCommon):
     def test_01_max_date(self):
         next_year = '%s-01-01' % (int(self.today[:4]) + 1)
         next_year_feb = '%s-02-01' % (int(self.today[:4]) + 1)
+        next_year_feb6 = '%s-02-06' % (int(self.today[:4]) + 1)
 
         delay = Date.to_string(
             Date.from_string(self.today) + timedelta(days=self.seller_delay))
@@ -67,3 +68,22 @@ class TestMaxDate(TestStockCommon):
         self.assertEqual(self.product.max_incoming_stock_date, self.today)
         self.env['product.product'].reset_max_incoming_date_override()
         self.assertEqual(self.product.max_incoming_stock_date, next_year_feb)
+
+        # When a product has to be ordered, add supplier lead time to max date
+        # expected of running orders
+        picking_out = self.PickingObj.create({
+            'partner_id': self.partner_delta_id,
+            'picking_type_id': self.picking_type_out})
+        self.MoveObj.create({
+            'name': self.product.name,
+            'product_id': self.product.id,
+            'product_uom_qty': 1,
+            'product_uom': self.product.uom_id.id,
+            'picking_id': picking_out.id,
+            'location_dest_id': self.customer_location,
+            'location_id': self.stock_location,
+            'date_expected': next_year,
+        })
+        picking_out.action_confirm()
+        self.product.refresh()
+        self.assertEqual(self.product.max_incoming_stock_date, next_year_feb6)
