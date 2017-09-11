@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<record id="view_product_attributemanager_form" model="ir.ui.view">
+			<field name="name">AttributeManager Form</field>
+			<field name="model">product.attributemanager</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form create="false" save="false">
+	                <sheet>
+						<group>
+							<separator string="Attribute Manager" />
+						</group>
+						<group col="3">
+							<group name="attributemanager_default">
+								<label string="Default" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+									<label string="Color" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'color'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+	                        </group>
+	                        <group name="attributemanager_strollers">
+	                        	<label string="Strollers" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+	                        		<label string="Number of Wheels" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'strollers.numberofwheels'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+							</group>
+							<group name="attributemanager_carseats">
+								<label string="Car Seats" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+									<label string="Age Category" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'carseats.agecategory'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+				                    <label string="Child Length" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'carseats.childlength'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+				                    <label string="Child Weight" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'carseats.childweight'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+				                    <label string="Direction of Use" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'carseats.directionofuse'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+				                    <label string="Install Method" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'carseats.installmethod'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+							</group>
+							<group name="attributemanager_buggies">
+								<label string="Buggies" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+									<label string="Maximum Carry Weight" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'buggies.maxcarryweight'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+									<label string="Age Category" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'buggies.agecategory'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+				                    <label string="Number of Wheels" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'buggies.numberofwheels'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+							</group>
+							<group name="attributemanager_highchairs">
+								<label string="High Chairs" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+									<label string="Age Category" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'highchairs.agecategory'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+				                    <label string="Material" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'highchairs.material'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+							</group>
+							<group name="attributemanager_carriers">
+								<label string="Carriers" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+									<label string="Direction of Use" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'carriers.directionofuse'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+				                    <label string="Maximum Carry Weight" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'carriers.maxcarryweight'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+				                    <label string="Type" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'carriers.type'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+							</group>
+							<group name="attributemanager_textiles">
+								<label string="Textiles" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+									<label string="Size" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'textiles.size'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+							</group>
+							<group name="attributemanager_monitors">
+								<label string="Monitors" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+									<label string="Maximum Range" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'monitors.maxrange'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+							</group>
+							<group name="attributemanager_clothes">
+								<label string="Clothes" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+									<label string="Size" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'clothes.size'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+				                    <label string="Season" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'clothes.season'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+							</group>
+							<group name="attributemanager_toys">
+								<label string="Toys" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+									<label string="Age Category" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'toys.agecategory'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+				                    <label string="Type" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'toys.type'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+							</group>
+							<group name="attributemanager_rockers">
+								<label string="Rockers" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+									<label string="Maximum Carry Weight" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'rockers.maxcarryweight'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>			
+		</record>
+
+        <record id="product_attributemanager_synchronize_action" model="ir.actions.act_window">
+            <field name="name">Product Attribute Manager</field>
+            <field name="res_model">product.attributemanager</field>
+            <field name="view_type">form</field>
+            <field name="target">inline</field>
+            <field name="view_id" ref="view_product_attributemanager_form" />
+        </record>
+
+        <menuitem
+        	id="product_attribute_manager"
+        	name="Attribute Manager"
+        	parent="crm.root_menu"
+        />
+
+        <menuitem
+        	id="product_attribute_manager_synchronize"
+        	name="Synchronize"
+        	parent="product_attribute_manager"
+        	action="product_attributemanager_synchronize_action"
+        	sequence="10"
+        />
+	</data>
+</openerp>

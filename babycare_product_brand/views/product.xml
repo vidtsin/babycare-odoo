@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="product_search_form_view_inherited" model="ir.ui.view">
+			<field name="name">Inherited product_brand - ProductProduct Search</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product_brand.product_search_form_view" />
+			<field name="arch" type="xml">
+				<field name="product_brand_id" position="replace" />
+				<filter string="Brand" name="groupby_brand" domain="[]"
+						context="{'group_by' : 'product_brand_id'}" position="replace" />
+			</field>
+        </record>
+
+        <record id="view_product_template_search_brand_inherited" model="ir.ui.view">
+			<field name="name">Inherited product_brand - ProductTemplate Search</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="product_brand.view_product_template_search_brand" />
+			<field name="arch" type="xml">
+				<field name="product_brand_id" position="replace" />
+				<filter string="Brand" name="groupby_brand" domain="[]"
+						context="{'group_by' : 'product_brand_id'}" position="replace" />
+			</field>
+        </record>
+
+		<record id="view_product_template_kanban_brand_inherited" model="ir.ui.view">
+			<field name="name">Inherited product_brand - ProductTemplate Kanban</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="product_brand.view_product_template_kanban_brand" />
+			<field name="arch" type="xml">
+				<field name="product_brand_id" position="replace" />
+			</field>
+        </record>
+
+        <record id="view_product_variant_kanban_brand_inherited" model="ir.ui.view">
+            <field name="name">Inherited product_brand - ProductProduct Kanban</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product_brand.view_product_variant_kanban_brand" />
+            <field name="arch" type="xml">
+            	<field name="product_brand_id" position="replace" />
+            </field>
+        </record>
+
+		<record id="product_template_form_brand_add_inherited" model="ir.ui.view">
+			<field name="name">Inherited product_brand - ProductTemplate Form</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="product_brand.product_template_form_brand_add" />
+			<field name="arch" type="xml">
+				<field name="product_brand_id" position="replace" />
+			</field>
+		</record>
+
+		<record id="view_product_template_tree_brand_inherited" model="ir.ui.view">
+			<field name="name">Inherited product_brand - ProductTemplate Tree</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="product_brand.view_product_template_tree_brand" />
+			<field name="arch" type="xml">
+				<field name="product_brand_id" position="replace" />
+			</field>
+		</record>
+
+		<record id="view_product_variant_tree_brand_inherited" model="ir.ui.view">
+			<field name="name">Inherited product_brand - ProductProduct Tree</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product_brand.view_product_variant_tree_brand" />
+			<field name="arch" type="xml">
+				<field name="product_brand_id" position="replace" />
+			</field>
+		</record>
+
+		<record id="product_template_form_attribute_manager" model="ir.ui.view">
+			<field name="name">Inherited mob_extra_images - ProductTemplate Form Attribute Manager</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="mob_extra_images.product_extra_images_ids_view" />
+			<field name="arch" type="xml">
+				<xpath expr="//page[@string='Magento']/separator[@string='Classification Images']" position="before">
+					<separator string="Attribute Manager" />
+					<div>
+						<label string="Attribute values can be added to the variant." />
+					</div>
+                </xpath>
+			</field>
+		</record>
+
+		<record id="product_product_form_attribute_manager" model="ir.ui.view">
+			<field name="name">Inherited mob_extra_images - ProductProduct Form Attribute Manager</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="mob_extra_images.pro_extra_images_ids_view" />
+			<field name="arch" type="xml">
+				<xpath expr="//page[@string='Magento']/separator[@string='Classification Images']" position="before">
+					<separator string="Attribute Manager" />
+					<div>
+						<label string="New Attribute Values added? Before Product Export/Update to Magento" />
+						<button type="object" name="open_attribute_manager" string="Sync All Attributes" icon="gtk-go-forward" class="oe_inline oe_link" />
+					</div>
+					<group col="6">
+						<group name="am_default">
+							<label string="Default" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+							<field name="product_brand_id" placeholder="Brand" options="{'no_create': True}" />
+							<field name="product_color_id" placeholder="Color" options="{'no_create': True}" />
+						</group>
+						<group name="am_strollers">
+							<label string="Strollers" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+							<field name="product_strollers_numberofwheels_id" placeholder="Number of Wheels" options="{'no_create': True}" />
+						</group>
+						<group name="am_carseats">
+							<label string="Car Seats" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+							<field name="product_carseats_childweight_id" placeholder="Child Weight" options="{'no_create': True}" />
+							<field name="product_carseats_childlength_id" placeholder="Child Length" options="{'no_create': True}" />
+							<field name="product_carseats_agecategory_id" placeholder="Age Category" options="{'no_create': True}" />
+							<field name="product_carseats_directionofuse_id" placeholder="Direction of Use" options="{'no_create': True}" />
+							<field name="product_carseats_installmethod_id" placeholder="Install Method" options="{'no_create': True}" />
+						</group>
+					</group>
+					<group col="6">
+						<group name="am_buggies">
+							<label string="Buggies" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+							<field name="product_buggies_adjustablebackrest" />
+							<field name="product_buggies_agecategory_id" placeholder="Age Category" options="{'no_create': True}" />
+							<field name="product_buggies_maxcarryweight_id" placeholder="Maximum Carry Weight" options="{'no_create': True}" />
+							<field name="product_buggies_numberofwheels_id" placeholder="Number of Wheels" options="{'no_create': True}" />
+						</group>
+						<group name="am_highchairs">
+							<label string="High Chairs" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+							<field name="product_highchairs_agecategory_id" placeholder="Age Category" options="{'no_create': True}" />
+							<field name="product_highchairs_material_id" placeholder="Material" options="{'no_create': True}" />
+							<field name="product_highchairs_includingdinnertray" />
+							<field name="product_highchairs_collapsible" />
+						</group>
+						<group name="am_carriers">
+							<label string="Carriers" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+							<field name="product_carriers_type_id" placeholder="Type" options="{'no_create': True}" />
+							<field name="product_carriers_maxcarryweight_id" placeholder="Maximum Carry Weight" options="{'no_create': True}" />
+							<field name="product_carriers_directionofuse_id" placeholder="Direction of Use" options="{'no_create': True}" />
+						</group>
+					</group>
+					<group col="6">
+						<group name="am_textiles">
+							<label string="Textiles" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+							<field name="product_textiles_size_id" placeholder="Size" options="{'no_create': True}" />
+						</group>
+						<group name="am_monitors">
+							<label string="Monitors" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+							<field name="product_monitors_maxrange_id" placeholder="Maximum Range" options="{'no_create': True}" />
+							<field name="product_monitors_includingcamera" />
+							<field name="product_monitors_includingrecallfunction" />
+						</group>
+						<group name="am_clothes">
+							<label string="Clothes" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+							<field name="product_clothes_size_id" placeholder="Size" options="{'no_create': True}" />
+							<field name="product_clothes_season_id" placeholder="Season" options="{'no_create': True}" />
+							<field name="product_clothes_gender" />
+						</group>
+					</group>
+					<group col="6">
+						<group name="am_toys">
+							<label string="Toys" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+							<field name="product_toys_type_id" placeholder="Type" options="{'no_create': True}" />
+							<field name="product_toys_agecategory_id" placeholder="Age Category" options="{'no_create': True}" />
+						</group>
+						<group name="am_rockers">
+							<label string="Rockers" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+							<field name="product_rockers_maxcarryweight_id" placeholder="Maximum Carry Weight" options="{'no_create': True}" />
+							<field name="product_rockers_collapsible" />
+						</group>
+						<group name="am_travelcots">
+							<label string="Travelcots" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+							<field name="product_travelcots_collapsible" />
+							<field name="product_travelcots_includingwheels" />
+							<field name="product_travelcots_includingcreephatch" />
+						</group>
+					</group>
+                </xpath>
+			</field>
+		</record>
+
+		<record id="action_product_attributemanager_product_brand" model="ir.actions.act_window">
+            <field name="name">Brand</field>
+            <field name="res_model">product.brand</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="target">current</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to define a new brand.
+                </p>
+                <p>
+                    You must define a brand before you can add a brand to a product.
+                </p>
+            </field>
+        </record>
+
+        <record id="view_product_attributemanager_form_product_brand_inherited" model="ir.ui.view">
+            <field name="name">Product Attribute Manager - Brand Add-on</field>
+            <field name="model">product.attributemanager</field>
+            <field name="inherit_id" ref="babycare_product_brand.view_product_attributemanager_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='attributemanager_default']/label[@string='Default']" position="after">
+                    <label string="Brand" />
+                    <div>
+                    	<button type="action" name="%(action_product_attributemanager_product_brand)d" icon="gtk-go-forward" string="Create" class="oe_highlight" />
+                    	<button type="object" name="action_call_magento_sync_all_brands" icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+                    </div><newline/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_brand.menu_product_brand" model="ir.ui.menu">
+			<field name="action" eval="False" />
+		</record>
+	</data>
+</openerp>

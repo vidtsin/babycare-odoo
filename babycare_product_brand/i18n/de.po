@@ -1,0 +1,613 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* babycare_product_brand
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-08 14:24+0000\n"
+"PO-Revision-Date: 2017-09-08 14:24+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: babycare_product_brand
+#: field:product.product,product_monitors_includingrecallfunction:0
+#: field:product.template,product_monitors_includingrecallfunction:0
+msgid "2-way voice operation"
+msgstr "2-way voice operation"
+
+#. module: babycare_product_brand
+#: model:ir.actions.act_window,help:babycare_product_brand.action_product_attributemanager_product_brand
+msgid "<p class=\"oe_view_nocontent_create\">\n"
+"                    Click to define a new brand.\n"
+"                </p>\n"
+"                <p>\n"
+"                    You must define a brand before you can add a brand to a product.\n"
+"                </p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\">\n"
+"                    Click to define a new brand.\n"
+"                </p>\n"
+"                <p>\n"
+"                    You must define a brand before you can add a brand to a product.\n"
+"                </p>\n"
+"            "
+
+#. module: babycare_product_brand
+#: model:ir.actions.act_window,help:babycare_product_brand.custom_option_action
+msgid "<p class=\"oe_view_nocontent_create\">\n"
+"                    Click to define a new record.\n"
+"                </p>\n"
+"                <p>\n"
+"                    You must define a record before you can add the record to a product.\n"
+"                </p>\n"
+"            "
+msgstr "<p class=\"oe_view_nocontent_create\">\n"
+"                    Click to define a new record.\n"
+"                </p>\n"
+"                <p>\n"
+"                    You must define a record before you can add the record to a product.\n"
+"                </p>\n"
+"            "
+
+#. module: babycare_product_brand
+#: field:product.product,product_buggies_adjustablebackrest:0
+#: field:product.template,product_buggies_adjustablebackrest:0
+msgid "Adjustable Backrest?"
+msgstr "Adjustable Backrest?"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+#: field:product.product,product_buggies_agecategory_id:0
+#: field:product.product,product_carseats_agecategory_id:0
+#: field:product.product,product_highchairs_agecategory_id:0
+#: field:product.product,product_toys_agecategory_id:0
+#: field:product.template,product_buggies_agecategory_id:0
+#: field:product.template,product_carseats_agecategory_id:0
+#: field:product.template,product_highchairs_agecategory_id:0
+#: field:product.template,product_toys_agecategory_id:0
+msgid "Age Category"
+msgstr "Age Category"
+
+#. module: babycare_product_brand
+#: model:ir.ui.menu,name:babycare_product_brand.product_attribute_manager
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+#: view:product.template:babycare_product_brand.product_template_form_attribute_manager
+msgid "Attribute Manager"
+msgstr "Attribute Manager"
+
+#. module: babycare_product_brand
+#: view:product.template:babycare_product_brand.product_template_form_attribute_manager
+msgid "Attribute values can be added to the variant."
+msgstr "Attribute values can be added to the variant."
+
+#. module: babycare_product_brand
+#: selection:product.template,product_clothes_gender:0
+msgid "Boy"
+msgstr "Jungen"
+
+#. module: babycare_product_brand
+#: model:ir.actions.act_window,name:babycare_product_brand.action_product_attributemanager_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form_product_brand_inherited
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+#: view:product.product:babycare_product_brand.product_search_form_view_inherited
+#: view:product.template:babycare_product_brand.view_product_template_search_brand_inherited
+msgid "Brand"
+msgstr "Marke"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Buggies"
+msgstr "Buggies"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Car Seats"
+msgstr "Car Seats"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Carriers"
+msgstr "Carriers"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+#: field:product.product,product_carseats_childlength_id:0
+#: field:product.template,product_carseats_childlength_id:0
+msgid "Child Length"
+msgstr "Child Length"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+#: field:product.product,product_carseats_childweight_id:0
+#: field:product.template,product_carseats_childweight_id:0
+msgid "Child Weight"
+msgstr "Child Weight"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Clothes"
+msgstr "Clothes"
+
+#. module: babycare_product_brand
+#: field:product.product,product_highchairs_collapsible:0
+#: field:product.product,product_rockers_collapsible:0
+#: field:product.product,product_travelcots_collapsible:0
+#: field:product.template,product_highchairs_collapsible:0
+#: field:product.template,product_rockers_collapsible:0
+#: field:product.template,product_travelcots_collapsible:0
+msgid "Collapsible"
+msgstr "Collapsible"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+#: field:product.product,product_color_id:0
+#: field:product.template,product_color_id:0
+msgid "Color"
+msgstr "Color"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form_product_brand_inherited
+msgid "Create"
+msgstr "Create"
+
+#. module: babycare_product_brand
+#: field:custom.option,create_uid:0
+#: field:product.attributemanager,create_uid:0
+msgid "Created by"
+msgstr "Created by"
+
+#. module: babycare_product_brand
+#: field:custom.option,create_date:0
+#: field:product.attributemanager,create_date:0
+msgid "Created on"
+msgstr "Created on"
+
+#. module: babycare_product_brand
+#: model:ir.actions.act_window,name:babycare_product_brand.custom_option_action
+msgid "Custom Option"
+msgstr "Custom Option"
+
+#. module: babycare_product_brand
+#: model:ir.ui.menu,name:babycare_product_brand.product_attribute_manager_custom_option
+msgid "Custom Options"
+msgstr "Custom Options"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Default"
+msgstr "Default"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+#: field:product.product,product_carriers_directionofuse_id:0
+#: field:product.product,product_carseats_directionofuse_id:0
+#: field:product.template,product_carriers_directionofuse_id:0
+#: field:product.template,product_carseats_directionofuse_id:0
+msgid "Direction of Use"
+msgstr "Direction of Use"
+
+#. module: babycare_product_brand
+#: field:custom.option,display_name:0
+#: field:product.attributemanager,display_name:0
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: babycare_product_brand
+#: field:product.product,product_clothes_gender:0
+#: field:product.template,product_clothes_gender:0
+msgid "Gender"
+msgstr "Gender"
+
+#. module: babycare_product_brand
+#: selection:product.template,product_clothes_gender:0
+msgid "Girl"
+msgstr "Mädchen"
+
+#. module: babycare_product_brand
+#: view:custom.option:babycare_product_brand.view_customoption_filter
+msgid "Group By"
+msgstr "Group By"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "High Chairs"
+msgstr "High Chairs"
+
+#. module: babycare_product_brand
+#: field:custom.option,id:0
+#: field:product.attributemanager,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: babycare_product_brand
+#: field:product.product,product_monitors_includingcamera:0
+#: field:product.template,product_monitors_includingcamera:0
+msgid "Including Camera"
+msgstr "Including Camera"
+
+#. module: babycare_product_brand
+#: field:product.product,product_travelcots_includingcreephatch:0
+#: field:product.template,product_travelcots_includingcreephatch:0
+msgid "Including Creep Hatch"
+msgstr "Including Creep Hatch"
+
+#. module: babycare_product_brand
+#: field:product.product,product_highchairs_includingdinnertray:0
+#: field:product.template,product_highchairs_includingdinnertray:0
+msgid "Including Dinner Tray"
+msgstr "Including Dinner Tray"
+
+#. module: babycare_product_brand
+#: field:product.product,product_travelcots_includingwheels:0
+#: field:product.template,product_travelcots_includingwheels:0
+msgid "Including Wheels"
+msgstr "Including Wheels"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+#: field:product.product,product_carseats_installmethod_id:0
+#: field:product.template,product_carseats_installmethod_id:0
+msgid "Install Method"
+msgstr "Install Method"
+
+#. module: babycare_product_brand
+#: field:custom.option,__last_update:0
+#: field:product.attributemanager,__last_update:0
+msgid "Last Modified on"
+msgstr "Last Modified on"
+
+#. module: babycare_product_brand
+#: field:custom.option,write_uid:0
+#: field:product.attributemanager,write_uid:0
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: babycare_product_brand
+#: field:custom.option,write_date:0
+#: field:product.attributemanager,write_date:0
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: babycare_product_brand
+#: field:custom.option,mageId:0
+msgid "Magento Option Id"
+msgstr "Magento Option Id"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+#: field:product.product,product_highchairs_material_id:0
+#: field:product.template,product_highchairs_material_id:0
+msgid "Material"
+msgstr "Material"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+#: field:product.product,product_buggies_maxcarryweight_id:0
+#: field:product.product,product_carriers_maxcarryweight_id:0
+#: field:product.product,product_rockers_maxcarryweight_id:0
+#: field:product.template,product_buggies_maxcarryweight_id:0
+#: field:product.template,product_carriers_maxcarryweight_id:0
+#: field:product.template,product_rockers_maxcarryweight_id:0
+msgid "Maximum Carry Weight"
+msgstr "Maximum Carry Weight"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+#: field:product.product,product_monitors_maxrange_id:0
+#: field:product.template,product_monitors_maxrange_id:0
+msgid "Maximum Range"
+msgstr "Maximum Range"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Monitors"
+msgstr "Monitors"
+
+#. module: babycare_product_brand
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "New Attribute Values added? Before Product Export/Update to Magento"
+msgstr "New Attribute Values added? Before Product Export/Update to Magento"
+
+#. module: babycare_product_brand
+#: selection:product.template,product_buggies_adjustablebackrest:0
+#: selection:product.template,product_highchairs_collapsible:0
+#: selection:product.template,product_highchairs_includingdinnertray:0
+#: selection:product.template,product_monitors_includingcamera:0
+#: selection:product.template,product_monitors_includingrecallfunction:0
+#: selection:product.template,product_rockers_collapsible:0
+#: selection:product.template,product_travelcots_collapsible:0
+#: selection:product.template,product_travelcots_includingcreephatch:0
+#: selection:product.template,product_travelcots_includingwheels:0
+msgid "No"
+msgstr "Nein"
+
+#. module: babycare_product_brand
+#: view:custom.option:babycare_product_brand.view_customoption_filter
+msgid "Not Synced"
+msgstr "Not Synced"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+#: field:product.product,product_buggies_numberofwheels_id:0
+#: field:product.product,product_strollers_numberofwheels_id:0
+#: field:product.template,product_buggies_numberofwheels_id:0
+#: field:product.template,product_strollers_numberofwheels_id:0
+msgid "Number of Wheels"
+msgstr "Number of Wheels"
+
+#. module: babycare_product_brand
+#: view:custom.option:babycare_product_brand.view_customoption_filter
+msgid "Option Type"
+msgstr "Option Type"
+
+#. module: babycare_product_brand
+#: field:custom.option,option_type:0
+msgid "Option type"
+msgstr "Option type"
+
+#. module: babycare_product_brand
+#: model:ir.model,name:babycare_product_brand.model_product_product
+msgid "Product"
+msgstr "Produkt"
+
+#. module: babycare_product_brand
+#: model:ir.actions.act_window,name:babycare_product_brand.product_attributemanager_synchronize_action
+msgid "Product Attribute Manager"
+msgstr "Product Attribute Manager"
+
+#. module: babycare_product_brand
+#: view:custom.option:babycare_product_brand.view_customoption_form
+msgid "Product Buggies Age Category"
+msgstr "Product Buggies Age Category"
+
+#. module: babycare_product_brand
+#: model:ir.model,name:babycare_product_brand.model_product_template
+msgid "Product Template"
+msgstr "Produktvorlage"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Rockers"
+msgstr "Rockers"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+#: field:product.product,product_clothes_season_id:0
+#: field:product.template,product_clothes_season_id:0
+msgid "Season"
+msgstr "Season"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+#: field:product.product,product_clothes_size_id:0
+#: field:product.product,product_textiles_size_id:0
+#: field:product.template,product_clothes_size_id:0
+#: field:product.template,product_textiles_size_id:0
+msgid "Size"
+msgstr "Size"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Strollers"
+msgstr "Strollers"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form_product_brand_inherited
+msgid "Sync"
+msgstr "Sync"
+
+#. module: babycare_product_brand
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Sync All Attributes"
+msgstr "Sync All Attributes"
+
+#. module: babycare_product_brand
+#: field:custom.option,synced:0
+msgid "Synced?"
+msgstr "Synced?"
+
+#. module: babycare_product_brand
+#: model:ir.ui.menu,name:babycare_product_brand.product_attribute_manager_synchronize
+msgid "Synchronize"
+msgstr "Synchronize"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Textiles"
+msgstr "Textiles"
+
+#. module: babycare_product_brand
+#: sql_constraint:product.brand:0
+msgid "The Name of the Product Brand must be unique"
+msgstr "The Name of the Product Brand must be unique"
+
+#. module: babycare_product_brand
+#: sql_constraint:custom.option:0
+msgid "The name of the record must be unique"
+msgstr "The name of the record must be unique"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Toys"
+msgstr "Toys"
+
+#. module: babycare_product_brand
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Travelcots"
+msgstr "Travelcots"
+
+#. module: babycare_product_brand
+#: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+#: field:product.product,product_carriers_type_id:0
+#: field:product.product,product_toys_type_id:0
+#: field:product.template,product_carriers_type_id:0
+#: field:product.template,product_toys_type_id:0
+msgid "Type"
+msgstr "Typ"
+
+#. module: babycare_product_brand
+#: selection:product.template,product_clothes_gender:0
+msgid "Unisex"
+msgstr "Unisex"
+
+#. module: babycare_product_brand
+#: view:custom.option:babycare_product_brand.view_customoption_filter
+#: field:custom.option,name:0
+msgid "Value"
+msgstr "Value"
+
+#. module: babycare_product_brand
+#: selection:product.template,product_buggies_adjustablebackrest:0
+#: selection:product.template,product_highchairs_collapsible:0
+#: selection:product.template,product_highchairs_includingdinnertray:0
+#: selection:product.template,product_monitors_includingcamera:0
+#: selection:product.template,product_monitors_includingrecallfunction:0
+#: selection:product.template,product_rockers_collapsible:0
+#: selection:product.template,product_travelcots_collapsible:0
+#: selection:product.template,product_travelcots_includingcreephatch:0
+#: selection:product.template,product_travelcots_includingwheels:0
+msgid "Yes"
+msgstr "Ja"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "buggies.agecategory"
+msgstr "buggies.agecategory"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "buggies.maxcarryweight"
+msgstr "buggies.maxcarryweight"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "buggies.numberofwheels"
+msgstr "buggies.numberofwheels"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "carriers.directionofuse"
+msgstr "carriers.directionofuse"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "carriers.maxcarryweight"
+msgstr "carriers.maxcarryweight"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "carriers.type"
+msgstr "carriers.type"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "carseats.agecategory"
+msgstr "carseats.agecategory"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "carseats.childlength"
+msgstr "carseats.childlength"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "carseats.childweight"
+msgstr "carseats.childweight"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "carseats.directionofuse"
+msgstr "carseats.directionofuse"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "carseats.installmethod"
+msgstr "carseats.installmethod"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "clothes.season"
+msgstr "clothes.season"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "clothes.size"
+msgstr "clothes.size"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "color"
+msgstr "color"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "highchairs.agecategory"
+msgstr "highchairs.agecategory"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "highchairs.material"
+msgstr "highchairs.material"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "monitors.maxrange"
+msgstr "monitors.maxrange"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "rockers.maxcarryweight"
+msgstr "rockers.maxcarryweight"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "strollers.numberofwheels"
+msgstr "strollers.numberofwheels"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "textiles.size"
+msgstr "textiles.size"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "toys.agecategory"
+msgstr "toys.agecategory"
+
+#. module: babycare_product_brand
+#: selection:custom.option,option_type:0
+msgid "toys.type"
+msgstr "toys.type"
+

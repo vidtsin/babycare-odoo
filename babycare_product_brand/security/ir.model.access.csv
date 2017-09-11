@@ -1,0 +1,7 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"product_brand.access_product_brand_product_manager","product.brand","model_product_brand","base.group_sale_manager",1,1,1,1
+"product_brand.access_product_brand_public","product.brand.public","model_product_brand",,1,0,0,0
+"access_product_attributemanager_sales_manager","product.attributemanager","model_product_attributemanager","base.group_sale_manager",1,1,1,1
+"access_product_attributemanager_public","product.attributemanager.public","model_product_attributemanager",,1,0,0,0
+"access_custom_option_sales_manager","custom.option","model_custom_option","base.group_sale_manager",1,1,1,1
+"access_custom_option_public","custom.option.public","model_custom_option",,1,0,0,0

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_customoption_form" model="ir.ui.view">
+            <field name="name">CustomOption Form</field>
+            <field name="model">custom.option</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="option_type" />
+                            <field name="mageId" invisible="1" />
+                            <field name="name" />
+                            <field name="synced" readonly="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_customoption_tree" model="ir.ui.view">
+            <field name="name">CustomOption Tree</field>
+            <field name="model">custom.option</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="option_type" />
+                    <field name="synced" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_customoption_filter" model="ir.ui.view">
+            <field name="name">CustomOption Filter</field>
+            <field name="model">custom.option</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" string="Value" />
+                    <field name="option_type" string="Option Type" />
+                    <filter string="Not Synced" name="not_synced" domain="[('synced', '=', False)]" />
+                    <group expand="0" string="Group By">
+                        <filter string="Option Type" domain="[]" context="{'group_by': 'option_type'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="custom_option_action" model="ir.actions.act_window">
+            <field name="name">Custom Option</field>
+            <field name="res_model">custom.option</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to define a new record.
+                </p>
+                <p>
+                    You must define a record before you can add the record to a product.
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+            id="product_attribute_manager_custom_option"
+            name="Custom Options"
+            parent="product_attribute_manager"
+            action="custom_option_action"
+            sequence="20"
+        />
+    </data>
+</openerp>
