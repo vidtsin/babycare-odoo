@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 from openerp import api
-from openerp.addons.product_brand.product_brand import (
-    ProductProduct, ProductTemplate)
+try:
+    from openerp.addons.product_brand.product_brand import (
+        ProductProduct, ProductTemplate)
+except ImportError:
+    # product_brand, and this module itself, are not yet installed.
+    pass
 
 
 @api.multi
