@@ -31,6 +31,7 @@
         'delivery',
         'bbc_sale',
         'mob_tracking',
+        'website_sale_options',
     ],
     'data': [
         'views/assets.xml',

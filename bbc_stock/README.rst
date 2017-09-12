@@ -35,6 +35,8 @@ Other functionality
 * Hide the stock locations group on the product form
 * Hide the lot tracking group on the product form
 * #2660, don't allow consumables with more than one attribute to be selected on a manually created stock move
+* Disable create and edit function for the fields under the website group on the product form
+* Hide style and sequence fields under the website group on the product form
 
 Credits
 -------
