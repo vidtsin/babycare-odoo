@@ -26,6 +26,10 @@ class ProductTemplate(models.Model):
     x_availability = fields.Float('Website availability', default=0)
     configurable = fields.Boolean(
         compute='get_configurable', store=True)
+    is_synced_magento = fields.Boolean(
+        'Synced to Magento',
+        compute='compute_is_synced_magento',
+        search='search_is_synced_magento')
 
     @api.multi
     @api.depends('type', 'bom_ids', 'product_variant_ids')
@@ -65,6 +69,23 @@ class ProductTemplate(models.Model):
         templates = self.env['mrp.bom.line'].search(
             []).mapped('product_id.product_tmpl_id')
         return [('id', 'not in' if negate else 'in', templates.ids)]
+
+    @api.multi
+    def compute_is_synced_magento(self):
+        for template in self:
+            template.is_synced_magento = bool(
+                self.env['magento.product.template'].search([
+                    ('erp_template_id', 'in', template.ids)
+                ], limit=1))
+
+    @api.model
+    def search_is_synced_magento(self, operator, value):
+        negate = not bool(value)
+        if operator in ('!=', '<>'):
+            negate = not negate
+        templates = self.env['magento.product.template'].search(
+            []).mapped('erp_template_id')
+        return [('id', 'not in' if negate else 'in', templates)]
 
     @api.multi
     def write(self, values):
@@ -198,6 +219,10 @@ class Product(models.Model):
     blue = fields.Boolean(
         compute='_compute_blue',
         string='Show as blue in tree view')
+    is_synced_magento = fields.Boolean(
+        'Synced to Magento',
+        compute='compute_is_synced_magento',
+        search='search_is_synced_magento')
 
     @api.multi
     @api.depends('product_tmpl_id.configurable', 'variant_eol',
@@ -237,6 +262,23 @@ class Product(models.Model):
         products = self.env['mrp.bom.line'].search(
             []).mapped('product_id')
         return [('id', 'not in' if negate else 'in', products.ids)]
+
+    @api.multi
+    def compute_is_synced_magento(self):
+        for product in self:
+            product.is_synced_magento = bool(
+                self.env['magento.product'].search([
+                    ('oe_product_id', '=', product.id)
+                ], limit=1))
+
+    @api.model
+    def search_is_synced_magento(self, operator, value):
+        negate = not bool(value)
+        if operator in ('!=', '<>'):
+            negate = not negate
+        products = self.env['magento.product'].search(
+            []).mapped('oe_product_id')
+        return [('id', 'not in' if negate else 'in', products)]
 
     @api.multi
     def update_availability(self):

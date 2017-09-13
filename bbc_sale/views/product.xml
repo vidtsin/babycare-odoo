@@ -146,5 +146,17 @@
             </field>
         </record>
 
+        <record id="website_sale_product_template_form_view_inherited_is_synced_magento" model="ir.ui.view">
+            <field name="name">Add is_synced_magento field to website group on product form</field>
+            <field name="inherit_id" ref="website_sale.product_template_form_view" />
+            <field name="model">product.template</field>
+            <field name="priority" eval="15" />
+            <field name="arch" type="xml">
+                <field name="public_categ_ids" position="before">
+                    <field name="is_synced_magento"/>
+                </field>
+            </field>
+        </record>
+
     </data>
 </openerp>
