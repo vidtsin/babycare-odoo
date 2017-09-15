@@ -1,4 +1,4 @@
-﻿Sale customizations for Babycare
+Sale customizations for Babycare
 ================================
 
 * When a payment is registered for a sales order that is in state 'Shipping exception', the outgoing delivery is recreated
@@ -44,4 +44,3 @@ a negative expected stock level (or are in an exception state, as red is the def
 * Introduce variant_eol flag on the variant level (cf. template's eol/obsolete states)
 * variant_published and variant_eol are kept in sync with nonconfigurable templates
 * Introduce is_synced_magento flag on product to search on synced to Magento products
-* Introduce house_number and house_number_addition to partner form
