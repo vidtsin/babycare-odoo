@@ -37,5 +37,38 @@
             </field>
         </record>
 
+        <record id="view_partner_form_inherit_house_number_and_addition" model="ir.ui.view">
+            <field name="name">Add house number and house number addition to partner form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority">40</field>
+            <field name="arch" type="xml">
+                <field name="street" position="attributes">
+                    <attribute name="style">width: 80%</attribute>
+                </field>
+                <field name="street" position="after">
+                    <field name="house_number" style="width: 10%" placeholder="Nr." />
+                    <field name="house_number_addition" style="width: 10%" placeholder="Add." />
+                </field>
+                <field name="street2" position="attributes">
+                    <attribute name="placeholder">Street extra</attribute>
+                </field>
+                
+                <xpath expr="//sheet/notebook/page[@string='Contacts']/field[@name='child_ids']/form/sheet/group/div[@name='div_address']/field[@name='street']" position="attributes">
+                    <attribute name="style">width: 80%</attribute>
+                </xpath>
+                
+                <xpath expr="//sheet/notebook/page[@string='Contacts']/field[@name='child_ids']/form/sheet/group/div[@name='div_address']/field[@name='street']" position="after">
+                    <field name="house_number" style="width: 10%" placeholder="Nr." />
+                    <field name="house_number_addition" style="width: 10%" placeholder="Add." />
+                </xpath>
+                
+                <xpath expr="//sheet/notebook/page[@string='Contacts']/field[@name='child_ids']/form/sheet/group/div[@name='div_address']/field[@name='street2']" position="attributes">
+                    <attribute name="placeholder">Street extra</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
     </data>
 </openerp>
