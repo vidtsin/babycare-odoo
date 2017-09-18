@@ -119,6 +119,9 @@
                     <field name="description_sale"/>
                     <separator string="Long description"/>
                 </field>
+                <field name="public_categ_ids" position="before">
+                    <field name="is_synced_magento"/>
+                </field>
             </field>
         </record>
 
