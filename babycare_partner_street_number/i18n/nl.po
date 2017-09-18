@@ -1,0 +1,57 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* babycare_partner_street_number
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-18 10:34+0000\n"
+"PO-Revision-Date: 2017-09-18 10:34+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: babycare_partner_street_number
+#: view:res.partner:babycare_partner_street_number.view_partner_form_partner_street_number_inherited_babycare
+msgid "Add."
+msgstr "Toev."
+
+#. module: babycare_partner_street_number
+#: view:res.partner:babycare_partner_street_number.view_partner_form_partner_street_number_inherited_babycare
+msgid "Nr."
+msgstr "Nr."
+
+#. module: babycare_partner_street_number
+#: model:ir.model,name:babycare_partner_street_number.model_res_partner
+msgid "Partner"
+msgstr "Relatie"
+
+#. module: babycare_partner_street_number
+#: view:res.partner:babycare_partner_street_number.view_partner_form_partner_street_number_inherited_babycare
+msgid "Street"
+msgstr "Straat"
+
+#. module: babycare_partner_street_number
+#: view:res.partner:babycare_partner_street_number.view_partner_form_partner_street_number_inherited_babycare
+msgid "Street extra"
+msgstr "Straat extra info"
+
+#. module: babycare_partner_street_number
+#: field:res.partner,street_number_addition:0
+msgid "Street number addition"
+msgstr "Straat nummer toevoeging"
+
+#. module: babycare_partner_street_number
+#: view:res.partner:babycare_partner_street_number.view_partner_form_partner_street_number_inherited_babycare
+msgid "width: 10%"
+msgstr "width: 10%"
+
+#. module: babycare_partner_street_number
+#: view:res.partner:babycare_partner_street_number.view_partner_form_partner_street_number_inherited_babycare
+msgid "width: 70%"
+msgstr "width: 70%"
+
