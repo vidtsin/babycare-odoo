@@ -72,19 +72,19 @@ class ProductTemplate(models.Model):
 
     @api.multi
     def compute_is_synced_magento(self):
+        synced = self.env['magento.product.template'].search(
+            [('erp_template_id', 'in', self.ids)]).mapped('erp_template_id')
         for template in self:
-            template.is_synced_magento = bool(
-                self.env['magento.product.template'].search([
-                    ('erp_template_id', 'in', template.ids)
-                ], limit=1))
+            template.is_synced_magento = template.id in synced
 
     @api.model
     def search_is_synced_magento(self, operator, value):
         negate = not bool(value)
         if operator in ('!=', '<>'):
             negate = not negate
-        templates = self.env['magento.product.template'].search(
-            []).mapped('erp_template_id')
+        templates = self.env['magento.product.template'].search([
+            ('erp_template_id', 'not in', (False, 0))]).mapped(
+            'erp_template_id')
         return [('id', 'not in' if negate else 'in', templates)]
 
     @api.multi
@@ -265,19 +265,18 @@ class Product(models.Model):
 
     @api.multi
     def compute_is_synced_magento(self):
+        synced = self.env['magento.product'].search([
+            ('oe_product_id', '=', self.ids)]).mapped('oe_product_id')
         for product in self:
-            product.is_synced_magento = bool(
-                self.env['magento.product'].search([
-                    ('oe_product_id', '=', product.id)
-                ], limit=1))
+            product.is_synced_magento = product.id in synced
 
     @api.model
     def search_is_synced_magento(self, operator, value):
         negate = not bool(value)
         if operator in ('!=', '<>'):
             negate = not negate
-        products = self.env['magento.product'].search(
-            []).mapped('oe_product_id')
+        products = self.env['magento.product'].search([
+            ('oe_product_id', 'not in', (False, 0))]).mapped('oe_product_id')
         return [('id', 'not in' if negate else 'in', products)]
 
     @api.multi
