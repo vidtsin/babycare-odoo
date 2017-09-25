@@ -48,7 +48,7 @@ class Partner(models.Model):
         if 'street' in res and not (
                 self._context.get('display_address')):
             res.remove('street')
-        return res + ['street_name', 'street_number', 'street_number_addition']
+        return res + ['street_number_addition']
 
     street_number_addition = fields.Char('Street number addition')
     street_number = fields.Char(size=5)

@@ -6,6 +6,7 @@
     "category": 'Tools',
     "depends": [
         'partner_street_number',
+        'wk_base_partner_patch',
     ],
     "data": [
         'views/res_partner.xml',
