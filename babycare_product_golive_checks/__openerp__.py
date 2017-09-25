@@ -6,6 +6,7 @@
     "category": 'Tools',
     "depends": [
         'product',
+        'magento_bridge',
     ],
     "data": [
         'data/product.xml',
