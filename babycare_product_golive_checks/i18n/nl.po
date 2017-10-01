@@ -1,0 +1,273 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* babycare_product_golive_checks
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-21 08:50+0000\n"
+"PO-Revision-Date: 2017-09-21 08:50+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:126
+#, python-format
+msgid "\n"
+"\n"
+"EAN13 is missing for one or more variants of:\n"
+"%s"
+msgstr "\n"
+"\n"
+"EAN13 ontbreekt voor één of meerdere varianten van:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:101
+#, python-format
+msgid "\n"
+"\n"
+"EAN13 is missing:\n"
+"%s"
+msgstr "\n"
+"\n"
+"EAN13 ontbreekt:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:192
+#, python-format
+msgid "\n"
+"\n"
+"Following config product(s) is/are not (completely) updated because (some) references are too long:\n"
+"%s"
+msgstr "\n"
+"\n"
+"Volgende configurabele product(en) zijn niet (compleet) geüpdate omdat (sommige) interne referenties te lang zijn (maximaal 64 tekens):\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:246
+#, python-format
+msgid "\n"
+"\n"
+"Following config product(s) is/are not updated because it is not a config product or a config product with more than two attributes:\n"
+"%s"
+msgstr "\n"
+"\n"
+"Volgende configurabele product(en) is/zijn niet geüpdate omdat het geen configurabel product betreft of het is een configurabel product met meer dan twee kenmerken:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:242
+#, python-format
+msgid "\n"
+"\n"
+"Following config product(s) is/are updated with EAN13 and images:\n"
+"%s"
+msgstr "\n"
+"\n"
+"Volgende configurabele product(en) is/zijn geüpdate met EAN13 en afbeeldingen:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:188
+#, python-format
+msgid "\n"
+"\n"
+"Following config product(s) is/are updated with internal references:\n"
+"%s"
+msgstr "\n"
+"\n"
+"Volgende configurabele product(en) is/zijn geüpdate met interne referenties:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:197
+#, python-format
+msgid "\n"
+"\n"
+"Following product(s) is/are not updated because they are not config products:\n"
+"%s"
+msgstr "\n"
+"\n"
+"Volgende configurabele product(en) is/zijn niet geüpdate omdat het geen configurabele producten zijn:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:89
+#, python-format
+msgid "\n"
+"\n"
+"Image is missing:\n"
+"%s"
+msgstr "\n"
+"\n"
+"Afbeelding ontbreekt:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:122
+#, python-format
+msgid "\n"
+"\n"
+"Internal reference is missing for one or more variants of:\n"
+"%s"
+msgstr "\n"
+"\n"
+"Interne referentie ontbreekt voor één of meerdere varianten van:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:104
+#, python-format
+msgid "\n"
+"\n"
+"Internal reference is missing:\n"
+"%s"
+msgstr "\n"
+"\n"
+"Interne referentie ontbreekt:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:98
+#, python-format
+msgid "\n"
+"\n"
+"Long description is missing:\n"
+"%s"
+msgstr "\n"
+"\n"
+"Lange omschrijving ontbreekt:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:116
+#, python-format
+msgid "\n"
+"\n"
+"Magento attribute set in missing:\n"
+"%s"
+msgstr "\n"
+"\n"
+"Magento attribuutset ontbreekt:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:92
+#, python-format
+msgid "\n"
+"\n"
+"Magento type is missing:\n"
+"%s"
+msgstr "\n"
+"\n"
+"Magento type ontbreekt:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:119
+#, python-format
+msgid "\n"
+"\n"
+"Magento website is missing:\n"
+"%s"
+msgstr "\n"
+"\n"
+"Magento website ontbreekt:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:107
+#, python-format
+msgid "\n"
+"\n"
+"Net weight is missing:\n"
+"%s"
+msgstr "\n"
+"\n"
+"Netto gewicht ontbreekt:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:113
+#, python-format
+msgid "\n"
+"\n"
+"Not published:\n"
+"%s"
+msgstr "\n"
+"\n"
+"Niet gepubliceerd:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:110
+#, python-format
+msgid "\n"
+"\n"
+"Public category is missing:\n"
+"%s"
+msgstr "\n"
+"\n"
+"Publieke categorie ontbreekt:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:130
+#, python-format
+msgid "\n"
+"\n"
+"Ready:\n"
+"%s"
+msgstr "\n"
+"\n"
+"Gereed:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:95
+#, python-format
+msgid "\n"
+"\n"
+"Short description is missing:\n"
+"%s"
+msgstr "\n"
+"\n"
+"Korte omschrijving ontbreekt:\n"
+"%s"
+
+#. module: babycare_product_golive_checks
+#: model:ir.actions.server,name:babycare_product_golive_checks.action_check_ready_for_magento
+msgid "Check Ready For Magento"
+msgstr "Check Gereed voor Magento"
+
+#. module: babycare_product_golive_checks
+#: code:addons/babycare_product_golive_checks/models/product.py:135
+#: code:addons/babycare_product_golive_checks/models/product.py:204
+#: code:addons/babycare_product_golive_checks/models/product.py:254
+#, python-format
+msgid "Message"
+msgstr "Bericht"
+
+#. module: babycare_product_golive_checks
+#: model:ir.model,name:babycare_product_golive_checks.model_product_template
+msgid "Product Template"
+msgstr "Productsjabloon"
+
+#. module: babycare_product_golive_checks
+#: model:ir.actions.server,name:babycare_product_golive_checks.action_update_ean13_images_config_product
+msgid "Update EAN13 and Images Config Products"
+msgstr "Update EAN13 en Afbeeldingen Config Producten"
+
+#. module: babycare_product_golive_checks
+#: model:ir.actions.server,name:babycare_product_golive_checks.action_update_internal_references_config_product
+msgid "Update Internal References Config Products"
+msgstr "Update Interne Referenties Config Producten"
+
