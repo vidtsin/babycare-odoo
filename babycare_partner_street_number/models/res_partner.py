@@ -12,9 +12,6 @@ class Partner(models.Model):
             filter(None, [self.street_name, self.street_number,
                           self.street_number_addition]))
 
-    def _write_street(self):
-        return False
-
     @api.model
     def _display_address(self, address, without_company=False):
         """
