@@ -44,3 +44,5 @@ a negative expected stock level (or are in an exception state, as red is the def
 * Introduce variant_eol flag on the variant level (cf. template's eol/obsolete states)
 * variant_published and variant_eol are kept in sync with nonconfigurable templates
 * Introduce is_synced_magento flag on product to search on synced to Magento products
+* Don't allow consumables with one attribute to be selected on an account invoice line
+* Don't allow consumables with one attribute to be selected on a mrp bom line
