@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="view_partner_form_partner_street_number_inherited_babycare" model="ir.ui.view">
+            <field name="name">Customize fields street name and number and move street2</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="partner_street_number.view_partner_form"/>
+            <field name="arch" type="xml">
+
+              <xpath expr="/form/sheet//div/field[@name='street_name']" position="attributes">
+                <attribute name="style">width: 70%</attribute>
+                <attribute name="placeholder">Street</attribute>
+              </xpath>
+
+              <xpath expr="/form/sheet//div/field[@name='street_number']" position="attributes">
+                <attribute name="style">width: 10%</attribute>
+                <attribute name="placeholder">Nr.</attribute>
+              </xpath>
+
+              <xpath expr="/form/sheet//div/field[@name='street_number']" position="after">
+                <field name="street_number_addition" style="width: 20%" placeholder="Add." attrs="{'readonly': [('use_parent_address','=',True)]}" />
+              </xpath>
+
+              <xpath expr="/form/sheet//div/field[@name='street2']" position="attributes">
+                <attribute name="placeholder">Street extra</attribute>
+              </xpath>
+
+              <xpath expr="//form[@string='Contact']/sheet/group/div/div/field[@name='street_name']" position="attributes">
+                <attribute name="style">width: 70%</attribute>
+                <attribute name="placeholder">Street</attribute>
+              </xpath>
+
+              <xpath expr="//form[@string='Contact']/sheet/group/div/div/field[@name='street_number']" position="attributes">
+                <attribute name="style">width: 10%</attribute>
+                <attribute name="placeholder">Nr.</attribute>
+              </xpath>
+
+              <xpath expr="//form[@string='Contact']/sheet/group/div/div/field[@name='street_number']" position="after">
+                <field name="street_number_addition" style="width: 20%" placeholder="Add." />
+              </xpath>
+
+              <xpath expr="//form[@string='Contact']/sheet/group/div/field[@name='street2']" position="attributes">
+                <attribute name="placeholder">Street extra</attribute>
+              </xpath>
+
+            </field>
+        </record>
+    </data>
+</openerp>
