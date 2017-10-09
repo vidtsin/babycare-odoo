@@ -45,12 +45,15 @@
                 </field>
                 <field name="alternative_product_ids" position="attributes">
                     <attribute name="options">{'no_create': True}</attribute>
+                    <attribute name="domain">"[('is_synced_magento', '=', True)]"</attribute>
                 </field>
                 <field name="accessory_product_ids" position="attributes">
                     <attribute name="options">{'no_create': True}</attribute>
+                    <attribute name="domain">"[('is_synced_magento', '=', True)]"</attribute>
                 </field>
                 <field name="optional_product_ids" position="attributes">
                     <attribute name="options">{'no_create': True}</attribute>
+                    <attribute name="domain">"[('is_synced_magento', '=', True)]"</attribute>
                 </field>
                 <field name="website_style_ids" position="attributes">
                     <attribute name="invisible">1</attribute>
