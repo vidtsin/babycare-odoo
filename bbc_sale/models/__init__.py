@@ -1,4 +1,5 @@
 from . import account_invoice
+from . import account_invoice_line
 from . import mail_thread
 from . import mrp_bom
 from . import mrp_bom_line
