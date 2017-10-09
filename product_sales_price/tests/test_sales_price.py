@@ -59,8 +59,8 @@ class TestSalesPrice(TransactionCase):
             self.pricelist.price_get(
                 self.blue.product_ids.id, 1.0)[self.pricelist.id], 29.95)
 
-        # This is corrected in the computation of the sales price
-        self.assertEqual(self.blue.product_ids.default_sale_price, 9.95)
+        # This is reflected in the computation of the sales price
+        self.assertEqual(self.blue.product_ids.default_sale_price, 29.95)
 
     def test_sales_price_no_special(self):
         """ Sales price for a variant with attribute price but no pricelist item
@@ -73,6 +73,6 @@ class TestSalesPrice(TransactionCase):
             self.pricelist.price_get(
                 self.blue.product_ids.id, 1.0)[self.pricelist.id], 55.95)
 
-        # Problem: but then the attribute price is included again by the
-        # custom computation of the sales price
-        self.assertEqual(self.blue.product_ids.default_sale_price, 35.95)
+        # The attribute price is included correcly by the
+        # custom computation of the sales price as well
+        self.assertEqual(self.blue.product_ids.default_sale_price, 55.95)
