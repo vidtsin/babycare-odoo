@@ -12,8 +12,7 @@ Sale customizations for Babycare
 * Purchase order line colors reflect the product status and expected stock level
 * Picking line colors reflect the product status and expected stock level
 * Sale orders are red in the list view if one of their products have a negative expected stock level (or are in an exception state, as red is the default color for that)
-* Draft purchase orders are red in the list view if one of their products have
-a negative expected stock level (or are in an exception state, as red is the default color for that)
+* Draft purchase orders are red in the list view if one of their products have a negative expected stock level (or are in an exception state, as red is the default color for that)
 * Add product state 'Can be ordered'
 * Remove product state 'Development'
 * Sync Buy route with product state
@@ -46,3 +45,4 @@ a negative expected stock level (or are in an exception state, as red is the def
 * Introduce is_synced_magento flag on product to search on synced to Magento products
 * Don't allow consumables with one attribute to be selected on an account invoice line
 * Don't allow consumables with one attribute to be selected on a mrp bom line
+* The warranty field on the product form is made invisible
