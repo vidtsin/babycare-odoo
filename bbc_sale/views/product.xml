@@ -122,6 +122,12 @@
                 <field name="public_categ_ids" position="before">
                     <field name="is_synced_magento"/>
                 </field>
+                <xpath expr="//group[@name='sale_condition']/div/field[@name='warranty']/.." position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group[@name='sale_condition']/label[@for='warranty']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
             </field>
         </record>
 
