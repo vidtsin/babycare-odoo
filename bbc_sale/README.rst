@@ -46,3 +46,4 @@ Sale customizations for Babycare
 * Don't allow consumables with one attribute to be selected on an account invoice line
 * Don't allow consumables with one attribute to be selected on a mrp bom line
 * The warranty field on the product form is made invisible
+* The volume and weight field on the product form are invisible
