@@ -44,6 +44,17 @@ msgstr "<p>\n"
 "            "
 
 #. module: bbc_sale
+#: constraint:product.product:0
+msgid "A product with this code already exists"
+msgstr "Er bestaat al een product met deze code"
+
+#. module: bbc_sale
+#: code:addons/bbc_sale/models/product.py:246
+#, python-format
+msgid "A product with value \"%s\" for field \"%s\" already exists."
+msgstr "Er bestaat al een product met code \"%s\" voor veld \"%s\"."
+
+#. module: bbc_sale
 #: field:product.product,is_component:0
 #: field:product.template,is_component:0
 msgid "Is component"

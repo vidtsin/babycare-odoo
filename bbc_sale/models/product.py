@@ -4,6 +4,8 @@ import logging
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from openerp import models, fields, api
+from openerp.exceptions import ValidationError
+from openerp.tools.translate import _
 
 logger = logging.getLogger('odoo.addons.bbc_sale')
 
@@ -223,6 +225,34 @@ class Product(models.Model):
         'Synced to Magento',
         compute='compute_is_synced_magento',
         search='search_is_synced_magento')
+    # Prevent copying fields that are forced to be unique
+    default_code = fields.Char(copy=False)
+    ean13 = fields.Char(copy=False)
+
+    @api.multi
+    def _constraint_unique_codes(self):
+        """ Check that product code and ean13 is unique except for
+        configurable products """
+        for product in self:
+            if product.configurable:
+                continue
+            for field in ['default_code', 'ean13']:
+                if not product[field]:
+                    continue
+                if self.search([
+                        ('id', '!=', self.id),
+                        (field, '=', product[field]),
+                        ('configurable', '=', False)]):
+                    raise ValidationError(_(
+                        'A product with value "%s" for field "%s" already '
+                        'exists.') % (product[field], field))
+        return True
+
+    _constraints = [(
+        _constraint_unique_codes,
+        'A product with this code already exists',
+        ['ean13', 'default_code'],
+    )]
 
     @api.multi
     @api.depends('product_tmpl_id.configurable', 'variant_eol',
