@@ -65,7 +65,7 @@ class Picking(models.Model):
         """
         domain = []
         if self.env.context.get('search_default_late'):
-            domain.append(('min_date', '<', fields.Date.context_today(self)))
+            domain.append(('max_date', '<', fields.Date.context_today(self)))
         if self.env.context.get('search_default_source_supplier'):
             domain.append(('location_id.usage', '=', 'supplier'))
         if self.env.context.get('search_default_dest_supplier'):
