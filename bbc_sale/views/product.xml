@@ -128,6 +128,12 @@
                 <xpath expr="//group[@name='sale_condition']/label[@for='warranty']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
+                <xpath expr="//group[@name='weight']/field[@name='volume']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group[@name='weight']/field[@name='weight']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
             </field>
         </record>
 
