@@ -21,9 +21,12 @@ class TestUniqueCodes(TransactionCase):
             'product_qty': 1,
             'type': 'phantom',
         })
+        attribute = self.env['product.attribute'].create({'name': 'Color'})
+        self.env['product.attribute.line'].create({
+            'attribute_id': attribute.id,
+            'product_tmpl_id': product.product_tmpl_id.id,
+        })
 
-        product.copy(
-            default={'product_tmpl_id': product.product_tmpl_id.id})
         return product
 
     def test_unique_codes(self):
@@ -45,6 +48,7 @@ class TestUniqueCodes(TransactionCase):
 
     def test_unique_codes_configurable(self):
         product = self._configurable()
+        self.assertTrue(product.configurable)
         new_product = product.copy()
         new_product.write({'default_code': '__test_unique_code'})
         new_product.write({'ean13': '1122334455666'})

@@ -34,13 +34,13 @@ class ProductTemplate(models.Model):
         search='search_is_synced_magento')
 
     @api.multi
-    @api.depends('type', 'bom_ids', 'product_variant_ids')
+    @api.depends('type', 'bom_ids', 'attribute_line_ids')
     def get_configurable(self):
         """ Compute if a product is configurable, and if it is, mask the
         default code with a label 'configurable' """
         for template in self:
-            if template.type == 'consu' and template.bom_ids and len(
-                    template.product_variant_ids) > 1:
+            if (template.type == 'consu' and template.bom_ids and
+                    template.attribute_line_ids):
                 template.configurable = True
                 template.display_code = 'Configurabel'
             else:

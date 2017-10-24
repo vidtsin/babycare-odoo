@@ -4,33 +4,38 @@ from openerp.tests.common import TransactionCase
 
 class TestConfigurable(TransactionCase):
     def test_configurable(self):
-        product = self.env['product.product'].create({
+        template = self.env['product.template'].create({
             'name': 'bbc_sale_bom_product',
             'type': 'consu'})
 
         def create_bom():
             return self.env['mrp.bom'].create({
                 'name': 'Test BOM',
-                'product_id': product.id,
-                'product_tmpl_id': product.product_tmpl_id.id,
+                'product_id': template.product_variant_ids[0].id,
+                'product_tmpl_id': template.id,
                 'product_uom': self.env.ref('product.product_uom_unit').id,
                 'product_qty': 1,
                 'type': 'phantom',
             })
 
-        self.assertFalse(product.configurable)
-        bom = create_bom()
-        self.assertFalse(product.configurable)
-        product2 = product.copy(
-            default={'product_tmpl_id': product.product_tmpl_id.id})
-        self.assertTrue(product2.configurable)
+        self.assertFalse(template.configurable)
 
-        product.write({'type': 'service'})
-        self.assertFalse(product.configurable)
-        product.write({'type': 'consu'})
-        self.assertTrue(product2.configurable)
+        bom = create_bom()
+        self.assertFalse(template.configurable)
+
+        attribute = self.env['product.attribute'].create({'name': 'Color'})
+        self.env['product.attribute.line'].create({
+            'attribute_id': attribute.id,
+            'product_tmpl_id': template.id,
+        })
+        self.assertTrue(template.configurable)
+
+        template.write({'type': 'service'})
+        self.assertFalse(template.configurable)
+        template.write({'type': 'consu'})
+        self.assertTrue(template.configurable)
 
         bom.unlink()
-        self.assertFalse(product.configurable)
+        self.assertFalse(template.configurable)
         create_bom()
-        self.assertTrue(product2.configurable)
+        self.assertTrue(template.configurable)
