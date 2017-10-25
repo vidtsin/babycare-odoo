@@ -37,7 +37,7 @@ Other functionality
 * #2660, don't allow consumables with more than one attribute to be selected on a manually created stock move
 * Disable create and edit function and filter on is_synced_magento == True for the fields under the website group on the product form
 * Hide style and sequence fields under the website group on the product form
-* #2800, show move lines' expected dates in the picking lines. Show max expected date on the picking
+* #2800, show move lines' expected dates in the picking lines. Show max expected date on the picking. Max date is writeable and resets the moves' expected dates.
 
 Credits
 -------
