@@ -38,6 +38,7 @@ Other functionality
 * Disable create and edit function and filter on is_synced_magento == True for the fields under the website group on the product form
 * Hide style and sequence fields under the website group on the product form
 * #2800, show move lines' expected dates in the picking lines. Show max expected date on the picking. Max date is writeable and resets the moves' expected dates.
+* Picking's max_date, and move's date_expected are rendered as date instead of timestamp fields.
 
 Credits
 -------

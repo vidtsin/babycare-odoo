@@ -79,7 +79,7 @@
             <field name="model">stock.picking</field>
             <field name="arch" type="xml">
                 <field name="min_date" position="replace">
-                    <field name="max_date" string="Scheduled Date"/>
+                    <field name="max_date" string="Scheduled Date" widget="date"/>
                 </field>
             </field>
         </record>
