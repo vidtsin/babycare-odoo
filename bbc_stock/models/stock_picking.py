@@ -1,5 +1,6 @@
 # coding; utf-8
 from openerp import api, fields, models
+from openerp.addons.stock.stock import stock_picking as odoo_stock_picking
 
 
 class Picking(models.Model):
@@ -65,7 +66,7 @@ class Picking(models.Model):
         """
         domain = []
         if self.env.context.get('search_default_late'):
-            domain.append(('min_date', '<', fields.Date.context_today(self)))
+            domain.append(('max_date', '<', fields.Date.context_today(self)))
         if self.env.context.get('search_default_source_supplier'):
             domain.append(('location_id.usage', '=', 'supplier'))
         if self.env.context.get('search_default_dest_supplier'):
@@ -80,6 +81,17 @@ class Picking(models.Model):
         if not domain:
             return [('id', '=', -1)]
         return domain
+
+    def _register_hook(self, cr):
+        """ Applying an inverse write method on an old API computed field.
+        Reusing the same method that already exists for min_date, as it
+        simply writes the date to all the picking's stock moves which will
+        work for max_date just as well. """
+        max_date = self._columns['max_date']
+        max_date._fnct_inv = odoo_stock_picking._set_min_date
+        max_date.readonly = False
+        self._fields['max_date'].readonly = False
+        return super(Picking, self)._register_hook(cr)
 
 
 class PickingType(models.Model):
