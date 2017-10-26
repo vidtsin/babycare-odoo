@@ -47,3 +47,4 @@ Sale customizations for Babycare
 * Don't allow consumables with one attribute to be selected on a mrp bom line
 * The warranty field on the product form is made invisible
 * The volume and weight field on the product form are invisible
+* #3245, Force product code and ean13 to be unique for non-configurable products

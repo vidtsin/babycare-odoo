@@ -99,6 +99,11 @@ class TestVariantEOL(TransactionCase):
         if its product is set to website_published """
         pr2 = self.bom_product.copy({
             'product_tmpl_id': self.bom_product.product_tmpl_id.id})
+        attribute = self.env['product.attribute'].create({'name': 'Color'})
+        self.env['product.attribute.line'].create({
+            'attribute_id': attribute.id,
+            'product_tmpl_id': self.bom_product.product_tmpl_id.id,
+        })
         self.assertTrue(self.bom_product.configurable)
         self.bom_product.write({
             'variant_published': True,
