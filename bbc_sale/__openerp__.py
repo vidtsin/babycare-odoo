@@ -30,5 +30,6 @@
         'views/product_category.xml',
         'views/res_partner.xml',
         'data/ir_cron.xml',
+        'data/action_automated_emails_magento.xml',
     ],
 }
