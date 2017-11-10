@@ -59,7 +59,7 @@ msgstr "<p class=\"oe_view_nocontent_create\">\n"
 #: field:product.product,product_buggies_adjustablebackrest:0
 #: field:product.template,product_buggies_adjustablebackrest:0
 msgid "Adjustable Backrest? (Buggies)"
-msgstr "Verstelbare rugleuning? (Buggys)"
+msgstr "Verstelbare rugleuning? (Buggy's)"
 
 #. module: babycare_product_brand
 #: view:product.attributemanager:babycare_product_brand.view_product_attributemanager_form
@@ -71,7 +71,7 @@ msgstr "Leeftijdscategorie"
 #: field:product.product,product_buggies_agecategory_id:0
 #: field:product.template,product_buggies_agecategory_id:0
 msgid "Age Category (Buggies)"
-msgstr "Leeftijdscategorie (Buggys)"
+msgstr "Leeftijdscategorie (Buggy's)"
 
 #. module: babycare_product_brand
 #: field:product.product,product_carseats_agecategory_id:0
@@ -358,7 +358,7 @@ msgstr "Maximaal draaggewicht"
 #: field:product.product,product_buggies_maxcarryweight_id:0
 #: field:product.template,product_buggies_maxcarryweight_id:0
 msgid "Maximum Carry Weight (Buggies)"
-msgstr "Maximaal draaggewicht (Buggys)"
+msgstr "Maximaal draaggewicht (Buggy's)"
 
 #. module: babycare_product_brand
 #: field:product.product,product_carriers_maxcarryweight_id:0
@@ -423,7 +423,7 @@ msgstr "Aantal wielen"
 #: field:product.product,product_buggies_numberofwheels_id:0
 #: field:product.template,product_buggies_numberofwheels_id:0
 msgid "Number of Wheels (Buggies)"
-msgstr "Aantal wielen (Buggys)"
+msgstr "Aantal wielen (Buggy's)"
 
 #. module: babycare_product_brand
 #: field:product.product,product_strollers_numberofwheels_id:0
