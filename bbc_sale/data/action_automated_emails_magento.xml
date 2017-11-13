@@ -28,6 +28,13 @@
             <field name="state">email</field>
         </record>
 
+        <record id="filter_magento_order_not_canceled" model="ir.filters">
+            <field name="name">Magento | Not Canceled Sales Orders</field>
+            <field name="model_id">sale.order</field>
+            <field name="domain">[('state', '!=', 'cancel'), ('write_uid', 'ilike', 'magento')]</field>
+            <field name="user_id" eval="False" />
+        </record>
+
         <record id="filter_magento_order_canceled" model="ir.filters">
             <field name="name">Magento | Canceled Sales Orders</field>
             <field name="model_id">sale.order</field>
@@ -38,7 +45,8 @@
         <record id="rule_send_email_cancellation_sales_order_magento" model="base.action.rule">
             <field name="name">Magento | Send Email After Cancellation Sales Order</field>
             <field name="model_id" ref="sale.model_sale_order" />
-            <field name="kind">on_create_or_write</field>
+            <field name="kind">on_write</field>
+            <field name="filter_pre_id" ref="filter_magento_order_not_canceled" />
             <field name="filter_id" ref="filter_magento_order_canceled" />
             <field name="server_action_ids" eval="[(6,0,[ref('action_send_email_cancellation_sales_order_magento')])]" />
         </record>
