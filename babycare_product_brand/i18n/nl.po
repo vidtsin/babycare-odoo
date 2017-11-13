@@ -6,14 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-02 14:49+0000\n"
-"PO-Revision-Date: 2017-11-02 14:49+0000\n"
+"POT-Creation-Date: 2017-11-13 08:49+0000\n"
+"PO-Revision-Date: 2017-11-13 08:49+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: babycare_product_brand
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "2-way voice operation"
+msgstr "Terugspreekfunctie"
 
 #. module: babycare_product_brand
 #: field:product.product,product_monitors_includingrecallfunction:0
@@ -54,6 +59,11 @@ msgstr "<p class=\"oe_view_nocontent_create\">\n"
 "                    Je moet een record definiëren voordat je het record kunt toevoegen aan een product.\n"
 "                </p>\n"
 "            "
+
+#. module: babycare_product_brand
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Adjustable Backrest"
+msgstr "Verstelbare rugleuning"
 
 #. module: babycare_product_brand
 #: field:product.product,product_buggies_adjustablebackrest:0
@@ -167,6 +177,11 @@ msgid "Clothes"
 msgstr "Kleding"
 
 #. module: babycare_product_brand
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Collapsible"
+msgstr "Inklapbaar"
+
+#. module: babycare_product_brand
 #: field:product.product,product_highchairs_collapsible:0
 #: field:product.template,product_highchairs_collapsible:0
 msgid "Collapsible (High Chairs)"
@@ -250,6 +265,11 @@ msgid "Display Name"
 msgstr "Weergavenaam"
 
 #. module: babycare_product_brand
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Gender"
+msgstr "Geslacht"
+
+#. module: babycare_product_brand
 #: field:product.product,product_clothes_gender:0
 #: field:product.template,product_clothes_gender:0
 msgid "Gender (Clothes)"
@@ -278,10 +298,20 @@ msgid "ID"
 msgstr "ID"
 
 #. module: babycare_product_brand
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Including Camera"
+msgstr "Inclusief camera"
+
+#. module: babycare_product_brand
 #: field:product.product,product_monitors_includingcamera:0
 #: field:product.template,product_monitors_includingcamera:0
 msgid "Including Camera (Monitors)"
 msgstr "Inclusief camera (Babyfoons)"
+
+#. module: babycare_product_brand
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Including Creep Hatch"
+msgstr "Inclusief kruipluik"
 
 #. module: babycare_product_brand
 #: field:product.product,product_travelcots_includingcreephatch:0
@@ -290,10 +320,20 @@ msgid "Including Creep Hatch (Travelcots)"
 msgstr "Inclusief kruipluik (Campingbedden)"
 
 #. module: babycare_product_brand
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Including Dinner Tray"
+msgstr "Inclusief eetblad"
+
+#. module: babycare_product_brand
 #: field:product.product,product_highchairs_includingdinnertray:0
 #: field:product.template,product_highchairs_includingdinnertray:0
 msgid "Including Dinner Tray (High Chairs)"
 msgstr "Inclusief eetblad (Kinderstoelen)"
+
+#. module: babycare_product_brand
+#: view:product.product:babycare_product_brand.product_product_form_attribute_manager
+msgid "Including Wheels"
+msgstr "Inclusief wielen"
 
 #. module: babycare_product_brand
 #: field:product.product,product_travelcots_includingwheels:0

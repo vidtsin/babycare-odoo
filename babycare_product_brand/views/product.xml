@@ -101,73 +101,73 @@
 						</group>
 						<group name="am_strollers">
 							<label string="Strollers" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
-							<field name="product_strollers_numberofwheels_id" placeholder="Number of Wheels" options="{'no_create': True}" />
+							<field name="product_strollers_numberofwheels_id" placeholder="Number of Wheels" options="{'no_create': True}" string="Number of Wheels" />
 						</group>
 						<group name="am_carseats">
 							<label string="Car Seats" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
-							<field name="product_carseats_childweight_id" placeholder="Child Weight" options="{'no_create': True}" />
-							<field name="product_carseats_childlength_id" placeholder="Child Length" options="{'no_create': True}" />
-							<field name="product_carseats_agecategory_id" placeholder="Age Category" options="{'no_create': True}" />
-							<field name="product_carseats_directionofuse_id" placeholder="Direction of Use" options="{'no_create': True}" />
-							<field name="product_carseats_installmethod_id" placeholder="Install Method" options="{'no_create': True}" />
+							<field name="product_carseats_childweight_id" placeholder="Child Weight" options="{'no_create': True}" string="Child Weight" />
+							<field name="product_carseats_childlength_id" placeholder="Child Length" options="{'no_create': True}" string="Child Length" />
+							<field name="product_carseats_agecategory_id" placeholder="Age Category" options="{'no_create': True}" string="Age Category" />
+							<field name="product_carseats_directionofuse_id" placeholder="Direction of Use" options="{'no_create': True}" string="Direction of Use" />
+							<field name="product_carseats_installmethod_id" placeholder="Install Method" options="{'no_create': True}" string="Install Method" />
 						</group>
 					</group>
 					<group col="6">
 						<group name="am_buggies">
 							<label string="Buggies" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
-							<field name="product_buggies_adjustablebackrest" />
-							<field name="product_buggies_agecategory_id" placeholder="Age Category" options="{'no_create': True}" />
-							<field name="product_buggies_maxcarryweight_id" placeholder="Maximum Carry Weight" options="{'no_create': True}" />
-							<field name="product_buggies_numberofwheels_id" placeholder="Number of Wheels" options="{'no_create': True}" />
+							<field name="product_buggies_adjustablebackrest" string="Adjustable Backrest" />
+							<field name="product_buggies_agecategory_id" placeholder="Age Category" options="{'no_create': True}" string="Age Category" />
+							<field name="product_buggies_maxcarryweight_id" placeholder="Maximum Carry Weight" options="{'no_create': True}" string="Maximum Carry Weight" />
+							<field name="product_buggies_numberofwheels_id" placeholder="Number of Wheels" options="{'no_create': True}" string="Number of Wheels" />
 						</group>
 						<group name="am_highchairs">
 							<label string="High Chairs" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
-							<field name="product_highchairs_agecategory_id" placeholder="Age Category" options="{'no_create': True}" />
-							<field name="product_highchairs_material_id" placeholder="Material" options="{'no_create': True}" />
-							<field name="product_highchairs_includingdinnertray" />
-							<field name="product_highchairs_collapsible" />
+							<field name="product_highchairs_agecategory_id" placeholder="Age Category" options="{'no_create': True}" string="Age Category" />
+							<field name="product_highchairs_material_id" placeholder="Material" options="{'no_create': True}" string="Material" />
+							<field name="product_highchairs_includingdinnertray" string="Including Dinner Tray" />
+							<field name="product_highchairs_collapsible" string="Collapsible" />
 						</group>
 						<group name="am_carriers">
 							<label string="Carriers" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
-							<field name="product_carriers_type_id" placeholder="Type" options="{'no_create': True}" />
-							<field name="product_carriers_maxcarryweight_id" placeholder="Maximum Carry Weight" options="{'no_create': True}" />
-							<field name="product_carriers_directionofuse_id" placeholder="Direction of Use" options="{'no_create': True}" />
+							<field name="product_carriers_type_id" placeholder="Type" options="{'no_create': True}" string="Type" />
+							<field name="product_carriers_maxcarryweight_id" placeholder="Maximum Carry Weight" options="{'no_create': True}" string="Maximum Carry Weight" />
+							<field name="product_carriers_directionofuse_id" placeholder="Direction of Use" options="{'no_create': True}" string="Direction of Use" />
 						</group>
 					</group>
 					<group col="6">
 						<group name="am_textiles">
 							<label string="Textiles" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
-							<field name="product_textiles_size_id" placeholder="Size" options="{'no_create': True}" />
+							<field name="product_textiles_size_id" placeholder="Size" options="{'no_create': True}" string="Size" />
 						</group>
 						<group name="am_monitors">
 							<label string="Monitors" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
-							<field name="product_monitors_maxrange_id" placeholder="Maximum Range" options="{'no_create': True}" />
-							<field name="product_monitors_includingcamera" />
-							<field name="product_monitors_includingrecallfunction" />
+							<field name="product_monitors_maxrange_id" placeholder="Maximum Range" options="{'no_create': True}" string="Maximum Range" />
+							<field name="product_monitors_includingcamera" string="Including Camera" />
+							<field name="product_monitors_includingrecallfunction" string="2-way voice operation" />
 						</group>
 						<group name="am_clothes">
 							<label string="Clothes" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
-							<field name="product_clothes_size_id" placeholder="Size" options="{'no_create': True}" />
-							<field name="product_clothes_season_id" placeholder="Season" options="{'no_create': True}" />
-							<field name="product_clothes_gender" />
+							<field name="product_clothes_size_id" placeholder="Size" options="{'no_create': True}" string="Size" />
+							<field name="product_clothes_season_id" placeholder="Season" options="{'no_create': True}" string="Season" />
+							<field name="product_clothes_gender" string="Gender" />
 						</group>
 					</group>
 					<group col="6">
 						<group name="am_toys">
 							<label string="Toys" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
-							<field name="product_toys_type_id" placeholder="Type" options="{'no_create': True}" />
-							<field name="product_toys_agecategory_id" placeholder="Age Category" options="{'no_create': True}" />
+							<field name="product_toys_type_id" placeholder="Type" options="{'no_create': True}" string="Type" />
+							<field name="product_toys_agecategory_id" placeholder="Age Category" options="{'no_create': True}" string="Age Category" />
 						</group>
 						<group name="am_rockers">
 							<label string="Rockers" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
-							<field name="product_rockers_maxcarryweight_id" placeholder="Maximum Carry Weight" options="{'no_create': True}" />
-							<field name="product_rockers_collapsible" />
+							<field name="product_rockers_maxcarryweight_id" placeholder="Maximum Carry Weight" options="{'no_create': True}" string="Maximum Carry Weight" />
+							<field name="product_rockers_collapsible" string="Collapsible" />
 						</group>
 						<group name="am_travelcots">
 							<label string="Travelcots" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
-							<field name="product_travelcots_collapsible" />
-							<field name="product_travelcots_includingwheels" />
-							<field name="product_travelcots_includingcreephatch" />
+							<field name="product_travelcots_collapsible" string="Collapsible" />
+							<field name="product_travelcots_includingwheels" string="Including Wheels" />
+							<field name="product_travelcots_includingcreephatch" string="Including Creep Hatch" />
 						</group>
 					</group>
                 </xpath>
