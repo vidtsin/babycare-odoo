@@ -1,6 +1,6 @@
 {
     'name': 'Product Attribute Manager',
-    'version': '8.0.1.0',
+    'version': '8.0.1.1',
     'category': 'Product',
     'summary': 'Add attributes to products',
     'author':
