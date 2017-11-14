@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
-    <data noupdate="1">
+    <data noupdate="0">
         <!-- SALES ORDER CONFIRMATION -->
 
         <!-- automatically sends email after confirming sales order from Magento -->
@@ -10,6 +10,11 @@
             <field name="condition">object.create_uid.name == 'magento'</field>
             <field name="type">ir.actions.server</field>
             <field name="state">email</field>
+        </record>
+
+        <!-- add action_send_email_confirmation_sales_order_magento to workflow activity confirming sales order -->
+        <record id="sale.act_router" model="workflow.activity"> 
+            <field name="action_id" ref="action_send_email_confirmation_sales_order_magento"/>
         </record>
 
         <!-- SALES ORDER CANCELLATION -->
@@ -55,6 +60,11 @@
             <field name="condition">object.create_uid.name == 'magento'</field>
             <field name="type">ir.actions.server</field>
             <field name="state">email</field>
+        </record>
+
+        <!-- add action_send_email_validation_invoice_magento to workflow activity register payment invoice -->
+        <record id="account.act_paid" model="workflow.activity"> 
+            <field name="action_id" ref="action_send_email_validation_invoice_magento"/>
         </record>
 
     </data>
