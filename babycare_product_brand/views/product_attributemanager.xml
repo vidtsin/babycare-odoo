@@ -19,6 +19,11 @@
 				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'color'}"
 				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
 				                    </div><newline/>
+				                    <label string="Warranty" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'warranty'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
 	                        </group>
 	                        <group name="attributemanager_strollers">
 	                        	<label string="Strollers" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />

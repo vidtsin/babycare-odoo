@@ -11,6 +11,12 @@ class ProductTemplate(models.Model):
         context={'default_option_type': 'color'},
         string="Color"
     )
+    product_warranty_id = fields.Many2one(
+        'custom.option',
+        domain=[('option_type', '=', 'warranty')],
+        context={'default_option_type': 'warranty'},
+        string="Warranty"
+    )
     product_buggies_agecategory_id = fields.Many2one(
         'custom.option',
         domain=[('option_type', '=', 'buggies.agecategory')],
