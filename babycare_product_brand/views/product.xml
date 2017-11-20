@@ -98,7 +98,7 @@
 							<label string="Default" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
 							<field name="product_brand_id" placeholder="Brand" options="{'no_create': True}" />
 							<field name="product_color_id" placeholder="Color" options="{'no_create': True}" />
-							<field name="product_warranty_id" placeholder="Warranty" options="{'no_create': True}" />
+							<field name="product_warranty_id" placeholder="Warranty" options="{'no_create': True}" string="Warranty" />
 						</group>
 						<group name="am_strollers">
 							<label string="Strollers" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />

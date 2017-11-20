@@ -15,7 +15,7 @@ class ProductTemplate(models.Model):
         'custom.option',
         domain=[('option_type', '=', 'warranty')],
         context={'default_option_type': 'warranty'},
-        string="Warranty"
+        string="Warranty (Attribute Manager)"
     )
     product_buggies_agecategory_id = fields.Many2one(
         'custom.option',
