@@ -30,6 +30,7 @@ class CustomOption(models.Model):
             ('textiles.size', 'textiles.size'),
             ('toys.agecategory', 'toys.agecategory'),
             ('toys.type', 'toys.type'),
+            ('warranty', 'warranty'),
         ], required=True)
     mageId = fields.Integer('Magento Option Id')
     name = fields.Char('Value', required=True, translate=True)
