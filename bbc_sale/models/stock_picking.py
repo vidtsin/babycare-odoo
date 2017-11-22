@@ -30,3 +30,14 @@ class Picking(models.Model):
         self.remarks = '; '.join(
             [purchase.remarks for purchase in purchases if purchase.remarks] +
             [sale.remarks for sale in sales])
+
+    @api.multi
+    def do_transfer(self):
+        """ Trigger server action 'action_send_email_delivery_shipped_magento'
+        on transfer of outgoing delivery """
+        res = super(Picking, self).do_transfer()
+        server_action_id = self.env.ref(
+            'bbc_sale.action_send_email_delivery_shipped_magento').id
+        self.env['ir.actions.server'].browse(
+            server_action_id).run()
+        return res
