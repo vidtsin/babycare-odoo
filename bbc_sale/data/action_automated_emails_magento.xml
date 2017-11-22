@@ -67,5 +67,33 @@
             <field name="action_id" ref="action_send_email_validation_invoice_magento"/>
         </record>
 
+        <!-- ORDER DELIVERED -->
+
+        <!-- automatically sends email after outgoing delivery is transferred -->
+        <record id="action_send_email_delivery_shipped_magento" model="ir.actions.server">
+            <field name="name">Magento | Send Email After Outgoing Delivery Is Shipped</field>
+            <field name="model_id" ref="stock.model_stock_picking" />
+            <field name="type">ir.actions.server</field>
+            <field name="state">email</field>
+        </record>
+
+        <record id="filter_magento_delivery_transferred" model="ir.filters">
+            <field name="name">Magento | Shipped Deliveries</field>
+            <field name="model_id">stock.picking</field>
+            <field name="domain">[('state', '=', 'done')]</field>
+            <field name="user_id" eval="False" />
+        </record>
+
+        <record id="rule_send_email_delivery_shipped_magento" model="base.action.rule">
+            <field name="name">Magento | Send Email After Outgoing Delivery Is Shipped</field>
+            <field name="model_id" ref="stock.model_stock_picking" />
+            <field name="kind">on_time</field>
+            <field name="filter_id" ref="filter_magento_delivery_transferred" />
+            <field name="trg_date_id" ref="stock.field_stock_picking_write_date" />
+            <field name="trg_date_range">0</field>
+            <field name="trg_date_range_type">minutes</field>
+            <field name="server_action_ids" eval="[(6,0,[ref('action_send_email_delivery_shipped_magento')])]" />
+        </record>
+
     </data>
 </openerp>

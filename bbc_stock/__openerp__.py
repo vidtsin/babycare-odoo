@@ -24,6 +24,8 @@
         'views/stock_move.xml',
         'views/stock_picking.xml',
         'data/ir_cron.xml',
+        'views/report_return_form_outgoing_delivery.xml',
+        'views/bbc_stock_report.xml',
     ],
     'qweb': ['static/src/xml/picking.xml'],
 }
