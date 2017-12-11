@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    	<report 
+            id="custom_report_return_form_outgoing_delivery_nl"
+            model="stock.picking"
+            string="Withdrawal Form Outgoing Delivery NL"
+            report_type="qweb-pdf"
+            name="bbc_stock.report_return_form_outgoing_delivery_nl"
+            attachment_use="False"
+            file="bbc_stock.report_return_form_outgoing_delivery_nl"
+        />
+
+        <report 
+            id="custom_report_return_form_outgoing_delivery_en"
+            model="stock.picking"
+            string="Withdrawal Form Outgoing Delivery EN"
+            report_type="qweb-pdf"
+            name="bbc_stock.report_return_form_outgoing_delivery_en"
+            attachment_use="False"
+            file="bbc_stock.report_return_form_outgoing_delivery_en"
+        />
+
+        <report 
+            id="custom_report_return_form_outgoing_delivery_de"
+            model="stock.picking"
+            string="Withdrawal Form Outgoing Delivery DE"
+            report_type="qweb-pdf"
+            name="bbc_stock.report_return_form_outgoing_delivery_de"
+            attachment_use="False"
+            file="bbc_stock.report_return_form_outgoing_delivery_de"
+        />
+
+        <report 
+            id="custom_report_shipping_information_nl"
+            model="stock.picking"
+            string="Shipping Information NL"
+            report_type="qweb-pdf"
+            name="bbc_stock.report_shipping_information_nl"
+            attachment_use="False"
+            file="bbc_stock.report_shipping_information_nl"
+        />
+
+        <report 
+            id="custom_report_shipping_information_en"
+            model="stock.picking"
+            string="Shipping Information EN"
+            report_type="qweb-pdf"
+            name="bbc_stock.report_shipping_information_en"
+            attachment_use="False"
+            file="bbc_stock.report_shipping_information_en"
+        />
+
+        <report 
+            id="custom_report_shipping_information_de"
+            model="stock.picking"
+            string="Shipping Information DE"
+            report_type="qweb-pdf"
+            name="bbc_stock.report_shipping_information_de"
+            attachment_use="False"
+            file="bbc_stock.report_shipping_information_de"
+        />
+    </data>
+</openerp>

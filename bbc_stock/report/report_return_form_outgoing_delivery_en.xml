@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <template id="report_return_form_outgoing_delivery_en_document">
+            <t t-call="report.external_layout">
+              <div class="page">
+                <h1>
+                  <strong>Informatie rondom garantie &amp;amp; retour</strong>
+                </h1>
+                <h2>
+                  <strong>Retourneren</strong>
+                </h2>
+                <p>U heeft het recht uw bestelling tot 14 dagen na ontvangst zonder opgave van reden te annuleren. U heeft na annulering nogmaals 14 dagen om uw product retour te sturen. U krijgt dan het volledige orderbedrag inclusief verzendkosten gecrediteerd. Enkel de kosten voor retour van u thuis naar de webwinkel zijn voor eigen rekening. Indien u gebruik maakt van uw herroepingsrecht, zal het product met alle geleverde toebehoren en - indien redelijkerwijze mogelijk - in de originele staat en verpakking aan de ondernemer geretourneerd worden. Om gebruik te maken van dit recht kunt u contact met ons opnemen via UWEMAIL@uwwinkel.nl. Wij zullen vervolgens het verschuldigde orderbedrag binnen 14 dagen na aanmelding van uw retour terugstorten mits het product reeds in goede orde retour ontvangen is.</p>
+                <h2>
+                  <strong>Uitzonderingen retourneren</strong>
+                </h2>
+                <p>Vermeldt hier de uitzonderingen op het herroepingsrecht. Geef ook bij het artikel zelf duidelijk aan dat deze niet te retourneren valt voor de consument besteld. <strong>Let op</strong>: uitsluiting van het herroepingsrecht is slechts mogelijk voor producten:</p>
+                <ol style="padding-left: 40px;">
+                  <li>Bij verzegelde producten. Wanneer de verzegeling verbroken is zijn bij deze producten niet retourneerbaar.</li>
+                  <li>die door de ondernemer tot stand zijn gebracht overeenkomstig specificaties van de consument;</li>
+                  <li>die duidelijk persoonlijk van aard zijn;</li>
+                  <li>die door hun aard niet kunnen worden teruggezonden;</li>
+                  <li>die snel kunnen bederven of verouderen;</li>
+                  <li>waarvan de prijs gebonden is aan schommelingen op de financiële markt waarop de ondernemer geen invloed heeft;</li>
+                  <li>voor losse kranten en tijdschriften;</li>
+                  <li>voor audio- en video-opnamen en computersoftware waarvan de consument de verzegeling heeft verbroken.</li>
+                </ol>
+                <h2>Garantie</h2>
+                <p>Omschrijf hier uw garantie voorwaarden…</p>
+                <h2>Identiteit ondernemer</h2>
+                <p>UWBEDRIJF<br/>
+                UW Adres 1<br/>
+                1234 AB Stad<br/>
+                <a href="mailto:UWEMAIL@uwwinkel.nl">UWEMAIL@uwwinkel.nl</a><br/>
+                06-12345678<br/>
+                KVK NUMMER HIER<br/>
+                BTW NUMMER HIER</p>
+                <div style="page-break-before: always;">
+                  <p>Modelformulier voor herroeping</p>
+                  <p>(dit formulier alleen invullen en terugzenden als u de overeenkomst wilt herroepen)</p>
+                  <ul style="padding-left: 40px;">
+                    <li>Aan</li>
+                  </ul>
+                  <p>UWBEDRIJF<br/>
+                  UW Adres 1<br/>
+                  1234 AB Stad<br/>
+                  <a href="mailto:UWEMAIL@uwwinkel.nl">UWEMAIL@uwwinkel.nl</a><br/>
+                  06-12345678</p>
+                  <ul style="padding-left: 40px;">
+                    <li>Ik/Wij (*) deel/delen (*) u hierbij mede dat ik/wij (*) onze overeenkomst betreffende de verkoop van de volgende goederen/levering van de volgende dienst (*) herroep/herroepen (*):</li>
+                    <li>Besteld op (DD-MM-YYYY) :</li>
+                    <li>Bestelnummer :</li>
+                    <li>Ontvangen op (DD-MM-YYYY):</li>
+                    <li>Naam/Namen consument(en)</li>
+                    <li>Adres consument(en) :</li>
+                    <li>IBAN Rekeningnummer:</li>
+                    <li>Handtekening van consument(en) (alleen wanneer dit formulier op papier wordt ingediend)</li>
+                    <li>Datum(DD-MM-YYYY):<i/></li>
+                  </ul>
+                  <p>
+                    <i>(*) Doorhalen wat niet van toepassing is.</i>
+                  </p>
+                </div>
+              </div>
+            </t>
+        </template>
+
+        <template id="report_return_form_outgoing_delivery_en">
+            <t t-call="report.html_container">
+                <t t-foreach="doc_ids" t-as="doc_id">
+                    <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'bbc_stock.report_return_form_outgoing_delivery_en_document')"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</openerp>
