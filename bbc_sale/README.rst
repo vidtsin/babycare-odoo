@@ -49,3 +49,4 @@ Sale customizations for Babycare
 * The volume and weight field on the product form are invisible
 * #3245, Force product code and ean13 to be unique for non-configurable products
 * #3344, added actions for automated emails for orders synchronized from Magento
+* #3394, hide fax and title fields on customer views
