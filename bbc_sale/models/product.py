@@ -327,6 +327,9 @@ class Product(models.Model):
             if (product.x_availability != x_availability or
                     product.x_availability is False):
                 product.write({'x_availability': x_availability})
+            mage_product_mapping = self.env['magento.product'].search([
+                ('oe_product_id', 'in', self.ids)])
+            mage_product_mapping.write({'stock_need_sync': True})
 
         boms = self.env['mrp.bom'].search([
             ('bom_line_ids.product_id', 'in', self.ids),
