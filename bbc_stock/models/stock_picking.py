@@ -65,6 +65,8 @@ class Picking(models.Model):
         """ Convert default search values in the context to needaction domain
         """
         domain = []
+        if self.env.context.get('search_default_late_supplier'):
+            domain.append(('min_date', '<', fields.Date.context_today(self)))
         if self.env.context.get('search_default_late'):
             domain.append(('max_date', '<', fields.Date.context_today(self)))
         if self.env.context.get('search_default_source_supplier'):
