@@ -44,8 +44,6 @@ class Product(models.Model):
                 order='date_expected desc', limit=1).mapped(
                     'date_expected')
             base_date = dates_expected[0] if dates_expected else today
-            if product.virtual_available > 0:
-                return base_date
             delay = product.seller_ids[0].delay if product.seller_ids else 0
             return fields.Date.to_string(
                 fields.Date.from_string(base_date) + timedelta(delay or 0))
