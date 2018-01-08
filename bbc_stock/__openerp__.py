@@ -5,7 +5,7 @@
 {
     "name": "Babycare Stock customizations",
     "category": "Stock",
-    "version": "1.1",
+    "version": "1.0",
     "author": "Opener B.V.",
     "website": 'https://opener.am',
     "depends": [
