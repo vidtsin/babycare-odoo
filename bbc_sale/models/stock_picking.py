@@ -1,4 +1,8 @@
+# coding: utf-8
+import logging
 from openerp import models, fields, api
+
+_logger = logging.getLogger(__name__)
 
 
 class Picking(models.Model):
@@ -38,6 +42,5 @@ class Picking(models.Model):
         res = super(Picking, self).do_transfer()
         server_action_id = self.env.ref(
             'bbc_sale.action_send_email_delivery_shipped_magento').id
-        self.env['ir.actions.server'].browse(
-            server_action_id).run()
+        self.env['ir.actions.server'].browse(server_action_id)
         return res
