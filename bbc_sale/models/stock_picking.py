@@ -38,10 +38,8 @@ class Picking(models.Model):
         Magento | Send Email After Outgoing Delivery Is Shipped.
         active_ids included in context because the server action has to
         work in the Barcode Scanning Interface as well. """
-        template = self.env.ref(
-            'bbc_sale.action_send_email_delivery_shipped_magento')
-        self.env['ir.actions.server'].browse(template.id).with_context(
-            active_ids=self.ids).run()
+        action = self.env.ref('bbc_sale.action_send_email_delivery_shipped_magento')
+        action.with_context(active_ids=self.ids).run()
 
     @api.multi
     def do_transfer(self):
