@@ -8,7 +8,7 @@
             <field name="view_type">form</field>
             <field name="view_mode">list,form</field>
             <field name="context">{
-                'search_default_late': True,
+                'search_default_late_supplier': True,
                 'search_default_confirmed': True,
                 'search_default_source_supplier': True,
                 }</field>
@@ -63,6 +63,9 @@
                 <filter name="late" position="attributes">
                     <attribute name="domain">[('max_date','&lt;', time.strftime('%%Y-%%m-%%d'))]</attribute>
                 </filter>
+                <filter name="late" position="after">
+                    <filter name="late_supplier" string="Late Suppliers" domain="[('min_date','&lt;', time.strftime('%%Y-%%m-%%d'))]"/>
+                </filter>
                 <field name="product_id" position="before">
                     <separator/>
                     <filter name="dest_customer" string="-&gt; Customer" domain="[('location_dest_id.usage', '=', 'customer')]"/>
@@ -78,8 +81,11 @@
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="model">stock.picking</field>
             <field name="arch" type="xml">
-                <field name="min_date" position="replace">
+                <field name="date" position="after">
                     <field name="max_date" string="Scheduled Date" widget="date"/>
+                </field>
+                <field name="min_date" position="attributes">
+                    <attribute name="invisible">1</attribute>
                 </field>
             </field>
         </record>
