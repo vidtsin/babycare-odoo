@@ -59,15 +59,20 @@ class TestMaxDate(TestStockCommon):
             'date_expected': next_year_feb,
         })
         picking_in.action_confirm()
-        self.assertEqual(self.product.max_incoming_stock_date, next_year_feb)
+        next_year_feb_plus_delay = Date.to_string(
+            Date.from_string(next_year_feb) + timedelta(days=self.seller_delay)
+        )
         self.assertEqual(
-            self.bom_product.max_incoming_stock_date, next_year_feb)
+            self.product.max_incoming_stock_date, next_year_feb_plus_delay)
+        self.assertEqual(
+            self.bom_product.max_incoming_stock_date, next_year_feb_plus_delay)
 
         self.product.max_incoming_stock_date_override = True
         self.product.max_incoming_stock_date_override_value = self.today
         self.assertEqual(self.product.max_incoming_stock_date, self.today)
         self.env['product.product'].reset_max_incoming_date_override()
-        self.assertEqual(self.product.max_incoming_stock_date, next_year_feb)
+        self.assertEqual(
+            self.product.max_incoming_stock_date, next_year_feb_plus_delay)
 
         # When a product has to be ordered, add supplier lead time to max date
         # expected of running orders
