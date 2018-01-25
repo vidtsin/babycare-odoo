@@ -38,17 +38,19 @@ class Picking(models.Model):
         Magento | Send Email After Outgoing Delivery Is Shipped.
         active_ids included in context because the server action has to
         work in the Barcode Scanning Interface as well. """
-        action = self.env.ref('bbc_sale.action_send_email_delivery_shipped_magento')
+        action = self.env.ref(
+            'bbc_sale.action_send_email_delivery_shipped_magento')
         action.with_context(active_ids=self.ids).run()
 
     @api.multi
     def do_transfer(self):
         """ Trigger send_mail_outgoing_delivery on transfer of outgoing
         delivery to automatically send an email to the customer.
-        Mail trigger only applies to outgoing deliveries of the central
-        warehouse where the location destination is a customer. """
+        Mail trigger only applies if the destination usage is a customer
+        and if there are related sale orders to the picking. """
         res = super(Picking, self).do_transfer()
-        if (self.picking_type_id.id == 7 and
-                self.location_dest_id.usage == 'customer'):
+        if (self.location_dest_id.usage == 'customer' and
+                (self.group_id and self.env['sale.order'].search([
+                    ('procurement_group_id', '=', self.group_id.id)]))):
             self.send_mail_outgoing_delivery()
         return res
