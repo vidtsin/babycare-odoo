@@ -49,8 +49,9 @@ class Picking(models.Model):
         Mail trigger only applies if the destination usage is a customer
         and if there are related sale orders to the picking. """
         res = super(Picking, self).do_transfer()
-        if (self.location_dest_id.usage == 'customer' and
-                (self.group_id and self.env['sale.order'].search([
-                    ('procurement_group_id', '=', self.group_id.id)]))):
-            self.send_mail_outgoing_delivery()
+        for picking in self:
+            if (picking.location_dest_id.usage == 'customer' and
+                    (picking.group_id and self.env['sale.order'].search([
+                        ('procurement_group_id', '=', picking.group_id.id)]))):
+                picking.send_mail_outgoing_delivery()
         return res
