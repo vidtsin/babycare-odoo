@@ -44,7 +44,11 @@ class Picking(models.Model):
     @api.multi
     def do_transfer(self):
         """ Trigger send_mail_outgoing_delivery on transfer of outgoing
-        delivery to automatically send an email to the customer. """
+        delivery to automatically send an email to the customer.
+        Mail trigger only applies to outgoing deliveries of the central
+        warehouse where the location destination is a customer. """
         res = super(Picking, self).do_transfer()
-        self.send_mail_outgoing_delivery()
+        if (self.picking_type_id.id == 7 and
+                self.location_dest_id.usage == 'customer'):
+            self.send_mail_outgoing_delivery()
         return res
