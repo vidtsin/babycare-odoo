@@ -29,8 +29,7 @@ class Product(models.Model):
 
     @api.multi
     @api.depends('max_incoming_stock_date_override',
-                 'max_incoming_stock_date_override_value',
-                 'virtual_available')
+                 'max_incoming_stock_date_override_value')
     def _compute_max_incoming_stock_date(self):
         today = fields.Date.context_today(self)
         _dql, domain, _dmol = self._get_domain_locations()
@@ -43,10 +42,12 @@ class Product(models.Model):
                 domain + [('product_id', '=', product.id)],
                 order='date_expected desc', limit=1).mapped(
                     'date_expected')
-            base_date = dates_expected[0] if dates_expected else today
             delay = product.seller_ids[0].delay if product.seller_ids else 0
+            today_plus_delay = fields.Date.to_string(
+                fields.Date.from_string(today) + timedelta(delay or 0))
+            output = dates_expected[0] if dates_expected else today_plus_delay
             return fields.Date.to_string(
-                fields.Date.from_string(base_date) + timedelta(delay or 0))
+                fields.Date.from_string(output))
 
         for product in self:
             if product.type == 'product':

@@ -59,20 +59,14 @@ class TestMaxDate(TestStockCommon):
             'date_expected': next_year_feb,
         })
         picking_in.action_confirm()
-        next_year_feb_plus_delay = Date.to_string(
-            Date.from_string(next_year_feb) + timedelta(days=self.seller_delay)
-        )
+        self.assertEqual(self.product.max_incoming_stock_date, next_year_feb)
         self.assertEqual(
-            self.product.max_incoming_stock_date, next_year_feb_plus_delay)
-        self.assertEqual(
-            self.bom_product.max_incoming_stock_date, next_year_feb_plus_delay)
-
+            self.bom_product.max_incoming_stock_date, next_year_feb)
         self.product.max_incoming_stock_date_override = True
         self.product.max_incoming_stock_date_override_value = self.today
         self.assertEqual(self.product.max_incoming_stock_date, self.today)
         self.env['product.product'].reset_max_incoming_date_override()
-        self.assertEqual(
-            self.product.max_incoming_stock_date, next_year_feb_plus_delay)
+        self.assertEqual(self.product.max_incoming_stock_date, next_year_feb)
 
         # When a product has to be ordered, add supplier lead time to max date
         # expected of running orders
@@ -91,7 +85,7 @@ class TestMaxDate(TestStockCommon):
         })
         picking_out.action_confirm()
         self.product.refresh()
-        self.assertEqual(self.product.max_incoming_stock_date, next_year_feb6)
+        self.assertEqual(self.product.max_incoming_stock_date, next_year_feb)
 
         # Test that we can modify the picking's max_date (#2800)
         # Call _register_hook manually because tests run before Odoo does
