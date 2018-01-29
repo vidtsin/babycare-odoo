@@ -338,7 +338,7 @@ class Product(models.Model):
 
         to_unpublish = self.env['product.product'].search([
             ('id', 'in', affected.ids),
-            ('x_availability', '=', 0),
+            ('x_availability', '<', 1),
             ('variant_eol', '=', True),
             ('variant_published', '=', True),
         ])
