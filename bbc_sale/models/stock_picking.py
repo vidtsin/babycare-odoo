@@ -1,3 +1,4 @@
+# coding: utf-8
 from openerp import models, fields, api
 
 
@@ -32,12 +33,25 @@ class Picking(models.Model):
             [sale.remarks for sale in sales])
 
     @api.multi
+    def send_mail_outgoing_delivery(self):
+        """ Runs the server action of sending an email with the template
+        Magento | Send Email After Outgoing Delivery Is Shipped.
+        active_ids included in context because the server action has to
+        work in the Barcode Scanning Interface as well. """
+        action = self.env.ref(
+            'bbc_sale.action_send_email_delivery_shipped_magento')
+        action.with_context(active_ids=self.ids).run()
+
+    @api.multi
     def do_transfer(self):
-        """ Trigger server action 'action_send_email_delivery_shipped_magento'
-        on transfer of outgoing delivery """
+        """ Trigger send_mail_outgoing_delivery on transfer of outgoing
+        delivery to automatically send an email to the customer.
+        Mail trigger only applies if the destination usage is a customer
+        and if there are related sale orders to the picking. """
         res = super(Picking, self).do_transfer()
-        server_action_id = self.env.ref(
-            'bbc_sale.action_send_email_delivery_shipped_magento').id
-        self.env['ir.actions.server'].browse(
-            server_action_id).run()
+        for picking in self:
+            if (picking.location_dest_id.usage == 'customer' and
+                    (picking.group_id and self.env['sale.order'].search([
+                        ('procurement_group_id', '=', picking.group_id.id)]))):
+                picking.send_mail_outgoing_delivery()
         return res
