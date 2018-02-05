@@ -62,7 +62,6 @@ class TestMaxDate(TestStockCommon):
         self.assertEqual(self.product.max_incoming_stock_date, next_year_feb)
         self.assertEqual(
             self.bom_product.max_incoming_stock_date, next_year_feb)
-
         self.product.max_incoming_stock_date_override = True
         self.product.max_incoming_stock_date_override_value = self.today
         self.assertEqual(self.product.max_incoming_stock_date, self.today)
@@ -86,7 +85,7 @@ class TestMaxDate(TestStockCommon):
         })
         picking_out.action_confirm()
         self.product.refresh()
-        self.assertEqual(self.product.max_incoming_stock_date, next_year_feb6)
+        self.assertEqual(self.product.max_incoming_stock_date, next_year_feb)
 
         # Test that we can modify the picking's max_date (#2800)
         # Call _register_hook manually because tests run before Odoo does
@@ -94,3 +93,43 @@ class TestMaxDate(TestStockCommon):
         picking_out.write({'max_date': next_year_feb6})
         self.assertEqual(move.date_expected, next_year_feb6 + ' 00:00:00')
         self.assertEqual(picking_out.max_date, next_year_feb6 + ' 00:00:00')
+
+    def test_02_max_date(self):
+        next_year_apr = '%s-04-01' % (int(self.today[:4]) + 1)
+        delay = Date.to_string(
+            Date.from_string(self.today) + timedelta(days=self.seller_delay))
+
+        """ Test if max_incoming_stock_date is the date today plus delay
+        in case there is no stock of the product. """
+        self.assertEqual(self.product.max_incoming_stock_date, delay)
+        self.assertEqual(self.bom_product.max_incoming_stock_date, delay)
+
+        picking_in = self.PickingObj.create({
+            'partner_id': self.partner_delta_id,
+            'picking_type_id': self.picking_type_in})
+        self.MoveObj.create({
+            'name': self.product.name,
+            'product_id': self.product.id,
+            'product_uom_qty': 1,
+            'product_uom': self.product.uom_id.id,
+            'picking_id': picking_in.id,
+            'location_id': self.supplier_location,
+            'location_dest_id': self.stock_location,
+            'date_expected': next_year_apr,
+        })
+
+        """ Test if date_expected is the max_incoming_stock_date
+        in case there are incoming products. """
+        picking_in.action_confirm()
+        self.product.refresh()
+        self.assertEqual(self.product.max_incoming_stock_date, next_year_apr)
+        self.assertEqual(
+            self.bom_product.max_incoming_stock_date, next_year_apr)
+
+        """ Test if the max_incoming_stock_date is the date today plus
+        delay in case there is stock of the product. """
+        picking_in.action_done()
+        self.product.refresh()
+        self.assertEqual(self.product.max_incoming_stock_date, delay)
+        self.assertEqual(
+            self.bom_product.max_incoming_stock_date, delay)
