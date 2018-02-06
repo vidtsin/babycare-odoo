@@ -150,6 +150,9 @@ class ProductTemplate(models.Model):
             if publish:
                 publish.write(
                     {'variant_published': values['website_published']})
+            mage_mapping = self.env['magento.product.template'].search([
+                ('erp_template_id', 'in', self.ids)])
+            mage_mapping.write({'website_published_need_sync': True})
 
         return super(ProductTemplate, self).write(values)
 
@@ -452,11 +455,17 @@ class Product(models.Model):
                             for variant in template.product_variant_ids):
                         template.with_context(propagate_state=False).write(
                             {'website_published': False})
+                    mage_mapping = self.env['magento.product.template'].search(
+                        [('erp_template_id', 'in', template.ids)])
+                    mage_mapping.write({'website_published_need_sync': True})
             else:
                 for template in nonconfigurable:
                     if not template.website_published:
                         template.with_context(propagate_state=False).write(
                             {'website_published': True})
+                    mage_mapping = self.env['magento.product.template'].search(
+                        [('erp_template_id', 'in', template.ids)])
+                    mage_mapping.write({'website_published_need_sync': True})
         return res
 
     @api.multi
