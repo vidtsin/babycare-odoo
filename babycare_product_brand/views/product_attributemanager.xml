@@ -14,6 +14,11 @@
 						<group col="3">
 							<group name="attributemanager_default">
 								<label string="Default" style="color: #f68519; font-size: 15px; font-weight: bold;" colspan="2" />
+									<label string="Article Type" />
+				                    <div>
+				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'articletype'}"
+				                        		icon="gtk-go-forward" string="Sync" class="oe_highlight" />
+				                    </div><newline/>
 									<label string="Color" />
 				                    <div>
 				                        <button type="object" name="action_call_magento_sync" context="{'option_type': 'color'}"
