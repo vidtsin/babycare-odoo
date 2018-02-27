@@ -194,6 +194,18 @@ class ProductProduct(models.Model):
         context={'default_option_type': 'color'},
         string="Color"
     )
+    product_clothes_size_id = fields.Many2one(
+        'custom.option',
+        domain=[('option_type', '=', 'clothes.size')],
+        context={'default_option_type': 'clothes.size'},
+        string="Size (Clothes)"
+    )
+    product_textiles_size_id = fields.Many2one(
+        'custom.option',
+        domain=[('option_type', '=', 'textiles.size')],
+        context={'default_option_type': 'textiles.size'},
+        string="Size (Textiles)"
+    )
 
     @api.multi
     def open_attribute_manager(self):
