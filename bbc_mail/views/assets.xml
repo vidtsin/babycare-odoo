@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="assets_backend_bbc_mail"
+        		  name="static_resources_bbc_mail assets"
+        		  inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/bbc_mail/static/src/css/bbc_mail.css" />
+            </xpath>
+        </template>
+    </data>
+</openerp>
