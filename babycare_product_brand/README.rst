@@ -7,6 +7,7 @@ Currently, the following attributes are supported:
  * Product Brand
  * Product Color
  * Warranty
+ * Article Type
  * Buggies Adjustable Backrest (selection-field)
  * Buggies Age Category
  * Buggies Maximum Carry Weight
