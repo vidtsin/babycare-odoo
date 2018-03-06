@@ -21,6 +21,9 @@
             <field name="model">purchase.order</field>
             <field name="inherit_id" ref="purchase.purchase_order_form" />
             <field name="arch" type="xml">
+                <field name="partner_id" position="attributes">
+                    <attribute name="options">{'no_create': true}</attribute>
+                </field>
                 <field name="dest_address_id" position="after">
                     <field name="remarks" />
                 </field>
@@ -30,6 +33,24 @@
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree" position="attributes">
                     <attribute name="colors" translation="off">red:virtual_available&lt;0;blue:virtual_available&gt;=0 and product_state in ('draft', 'end', 'obsolete');black:virtual_available&gt;=0 and product_state not in ('draft', 'end', 'obsolete')</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_create': true}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom']" position="attributes">
+                    <attribute name="options">{'no_create': true}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='taxes_id']" position="attributes">
+                    <attribute name="options">{'no_create': true}</attribute>
+                </xpath>
+                <xpath expr="//page[@string='RFQ &amp; Bid']/group/field[@name='incoterm_id']" position="attributes">
+                    <attribute name="options">{'no_create': true}</attribute>
+                </xpath>
+                <xpath expr="//page[@string='Deliveries &amp; Invoices']/group/group/field[@name='location_id']" position="attributes">
+                    <attribute name="options">{'no_create': true}</attribute>
+                </xpath>
+                <xpath expr="//page[@string='Deliveries &amp; Invoices']/group/group/field[@name='fiscal_position']" position="attributes">
+                    <attribute name="options">{'no_create': true}</attribute>
                 </xpath>
             </field>
         </record>

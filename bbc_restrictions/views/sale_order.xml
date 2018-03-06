@@ -11,6 +11,9 @@
                 <xpath expr="//field[@name='pricelist_id']" position="attributes">
                     <attribute name="options">{'no_create': true}</attribute>
                 </xpath>
+                <xpath expr="//field[@name='carrier_id']" position="attributes">
+                    <attribute name="options">{'no_create': true}</attribute>
+                </xpath>
 
             </field>
         </record>

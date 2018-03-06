@@ -40,7 +40,25 @@
             <field name="model">product.template</field>
             <field name="priority" eval="15" />
             <field name="arch" type="xml">
-                <field name="public_categ_ids" position="attributes">
+                <field name="uom_po_id" position="attributes"><!-- Purchase Unit of Measure -->
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="public_categ_ids" position="attributes"><!-- Public Category -->
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="categ_id" position="attributes"><!-- Internal Category -->
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="property_account_income" position="attributes"><!-- Income Account -->
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="property_account_expense" position="attributes"><!-- Expense Account -->
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="taxes_id" position="attributes"><!-- Customer Taxes -->
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="supplier_taxes_id" position="attributes"><!-- Supplier Taxes -->
                     <attribute name="options">{'no_create': True}</attribute>
                 </field>
                 <field name="alternative_product_ids" position="attributes">
