@@ -50,3 +50,4 @@ Sale customizations for Babycare
 * #3245, Force product code and ean13 to be unique for non-configurable products
 * #3344, added actions for automated emails for orders synchronized from Magento
 * #3394, hide fax and title fields on customer views
+* #3629, make ready and to do default in stock moves opened from the product form view
