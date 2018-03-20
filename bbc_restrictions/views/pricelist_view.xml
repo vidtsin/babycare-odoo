@@ -2,16 +2,16 @@
 <openerp>
     <data>
 
-		<record model="ir.ui.view" id="bbc_restrictions_product_pricelist_version_form_view">
-			<field name="name">product.pricelist.version.form.restriction.inherit</field>
-			<field name="model">product.pricelist.version</field>
-        	<field name="inherit_id" ref="product.product_pricelist_version_form_view"/>
-        	<field name="arch" type="xml">
-        		<xpath expr="/form/group/group/field[@name='pricelist_id']" position="attributes">
-        			<attribute name="options">{'no_create': true}</attribute>
-        		</xpath>
-        	</field>
-		</record>
+        <record model="ir.ui.view" id="bbc_restrictions_product_pricelist_version_form_view">
+            <field name="name">product.pricelist.version.form.restriction.inherit</field>
+            <field name="model">product.pricelist.version</field>
+            <field name="inherit_id" ref="product.product_pricelist_version_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/group/group/field[@name='pricelist_id']" position="attributes">
+                    <attribute name="options">{'no_create': true}</attribute>
+                </xpath>
+            </field>
+        </record>
 
         <record model="ir.ui.view" id="bbc_restrictions_product_pricelist_item_form_view">
             <field name="name">product.pricelist.item.form.restriction.inherit</field>
