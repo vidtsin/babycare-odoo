@@ -1,37 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-
         <!-- NB field sale_id comes from sale_stock but is not added to the view -->
         <record id="view_picking_form" model="ir.ui.view">
             <field name="name">Add remarks to picking form</field>
             <field name="model">stock.picking</field>
-            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
                 <field name="origin" position="after">
-                    <field name="remarks" />
+                    <field name="remarks"/>
                 </field>
                 <field name="partner_id" position="after">
-                    <field name="sale_id" attrs="{'invisible': [('sale_id', '=', False)]}" />
-                    <field name="purchase_id" attrs="{'invisible': [('purchase_id', '=', False)]}" />
+                    <field attrs="{'invisible': [('sale_id', '=', False)]}" name="sale_id"/>
+                    <field attrs="{'invisible': [('purchase_id', '=', False)]}" name="purchase_id"/>
                 </field>
                 <xpath expr="/form/sheet/notebook/page[@string='Additional Info']/group/group/field[@name='picking_type_id']" position="attributes">
                     <attribute name="options">{'no_create': true}</attribute>
                 </xpath>
             </field>
         </record>
-
         <record id="vpicktree" model="ir.ui.view">
             <field name="name">Add remarks to picking form</field>
             <field name="model">stock.picking</field>
-            <field name="inherit_id" ref="stock.vpicktree" />
+            <field name="inherit_id" ref="stock.vpicktree"/>
             <field name="arch" type="xml">
                 <field name="state" position="after">
-                    <field name="remarks" />
+                    <field name="remarks"/>
                 </field>
             </field>
         </record>
-
         <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
             <field name="name">delivery.stock.picking_withcarrier.form.view.inherit</field>
             <field name="model">stock.picking</field>
@@ -42,6 +39,5 @@
                 </field>
             </field>
         </record>
-
     </data>
 </openerp>

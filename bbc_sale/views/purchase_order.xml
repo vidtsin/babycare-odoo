@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-
         <record id="view_purchase_order_filter" model="ir.ui.view">
             <field name="name">Add free shipping and missing stock filters to quotation search view</field>
             <field name="model">purchase.order</field>
-            <field name="inherit_id" ref="purchase.view_purchase_order_filter" />
+            <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
             <field name="arch" type="xml">
                 <filter name="not_invoiced" position="after">
-                    <filter name="free_shipping" string="Free shipping"
-                            domain="[('free_shipping', '=', True)]" />
-                    <filter name="missing_stock" string="Missing stock"
-                            domain="[('missing_stock', '=', True)]" />
+                    <filter domain="[('free_shipping', '=', True)]" name="free_shipping" string="Free shipping"/>
+                    <filter domain="[('missing_stock', '=', True)]" name="missing_stock" string="Missing stock"/>
                 </filter>
             </field>
         </record>
-
         <record id="purchase_order_form" model="ir.ui.view">
             <field name="name">Add remarks field to purchase order</field>
             <field name="model">purchase.order</field>
-            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
             <field name="arch" type="xml">
                 <field name="partner_id" position="attributes">
                     <attribute name="options">{'no_create': true}</attribute>
                 </field>
                 <field name="dest_address_id" position="after">
-                    <field name="remarks" />
+                    <field name="remarks"/>
                 </field>
                 <xpath expr="//field[@name='order_line']/tree/field[@name='state']" position="after">
-                    <field name="virtual_available" invisible="1" />
-                    <field name="product_state" invisible="1" />
+                    <field invisible="1" name="virtual_available"/>
+                    <field invisible="1" name="product_state"/>
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree" position="attributes">
                     <attribute name="colors" translation="off">red:virtual_available&lt;0;blue:virtual_available&gt;=0 and product_state in ('draft', 'end', 'obsolete');black:virtual_available&gt;=0 and product_state not in ('draft', 'end', 'obsolete')</attribute>
@@ -54,25 +50,22 @@
                 </xpath>
             </field>
         </record>
-
         <record id="purchase_order_tree" model="ir.ui.view">
             <field name="name">Add remarks field to purchase order</field>
             <field name="model">purchase.order</field>
-            <field name="inherit_id" ref="purchase.purchase_order_tree" />
+            <field name="inherit_id" ref="purchase.purchase_order_tree"/>
             <field name="arch" type="xml">
                 <field name="state" position="after">
-                    <field name="remarks" />
-                    <field name="missing_stock" invisible="1" />
+                    <field name="remarks"/>
+                    <field invisible="1" name="missing_stock"/>
                 </field>
                 <tree position="attributes">
                     <attribute name="colors" translation="off">grey:state=='cancel';blue:state in ('wait','confirmed');red:state in ('except_invoice','except_picking') or missing_stock==True</attribute>
                 </tree>
             </field>
         </record>
-
         <record id="purchase.purchase_rfq" model="ir.actions.act_window">
             <field name="context">{'search_default_missing_stock': True, 'search_default_free_shipping': True}</field>
         </record>
-
     </data>
 </openerp>
