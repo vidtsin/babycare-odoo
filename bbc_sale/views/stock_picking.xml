@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+
         <!-- NB field sale_id comes from sale_stock but is not added to the view -->
         <record id="view_picking_form" model="ir.ui.view">
             <field name="name">Add remarks to picking form</field>
@@ -19,6 +20,7 @@
                 </xpath>
             </field>
         </record>
+
         <record id="vpicktree" model="ir.ui.view">
             <field name="name">Add remarks to picking form</field>
             <field name="model">stock.picking</field>
@@ -29,6 +31,7 @@
                 </field>
             </field>
         </record>
+
         <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
             <field name="name">delivery.stock.picking_withcarrier.form.view.inherit</field>
             <field name="model">stock.picking</field>
@@ -39,5 +42,6 @@
                 </field>
             </field>
         </record>
+
     </data>
 </openerp>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+
         <record id="bbc_restrictions_product_pricelist_version_form_view" model="ir.ui.view">
             <field name="name">product.pricelist.version.form.restriction.inherit</field>
             <field name="model">product.pricelist.version</field>
@@ -11,6 +12,7 @@
                 </xpath>
             </field>
         </record>
+
         <record id="bbc_restrictions_product_pricelist_item_form_view" model="ir.ui.view">
             <field name="name">product.pricelist.item.form.restriction.inherit</field>
             <field name="model">product.pricelist.item</field>
@@ -30,5 +32,6 @@
                 </xpath>
             </field>
         </record>
+
     </data>
 </openerp>

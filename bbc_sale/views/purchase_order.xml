@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+
         <record id="view_purchase_order_filter" model="ir.ui.view">
             <field name="name">Add free shipping and missing stock filters to quotation search view</field>
             <field name="model">purchase.order</field>
@@ -12,6 +13,7 @@
                 </filter>
             </field>
         </record>
+
         <record id="purchase_order_form" model="ir.ui.view">
             <field name="name">Add remarks field to purchase order</field>
             <field name="model">purchase.order</field>
@@ -50,6 +52,7 @@
                 </xpath>
             </field>
         </record>
+
         <record id="purchase_order_tree" model="ir.ui.view">
             <field name="name">Add remarks field to purchase order</field>
             <field name="model">purchase.order</field>
@@ -64,8 +67,10 @@
                 </tree>
             </field>
         </record>
+
         <record id="purchase.purchase_rfq" model="ir.actions.act_window">
             <field name="context">{'search_default_missing_stock': True, 'search_default_free_shipping': True}</field>
         </record>
+
     </data>
 </openerp>

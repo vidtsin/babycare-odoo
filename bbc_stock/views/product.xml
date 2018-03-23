@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+
         <!-- priority=15 so that the manual view with priority 16 is applied afterwards,
              to preserve the order of the fields -->
         <record id="product_normal_form_view" model="ir.ui.view">
@@ -18,6 +19,7 @@
                 </field>
             </field>
         </record>
+
         <record id="view_template_property_form" model="ir.ui.view">
             <field name="inherit_id" ref="stock.view_template_property_form"/>
             <field name="model">product.template</field>
@@ -28,6 +30,7 @@
                 <group position="replace" string="Counter-Part Locations Properties"/>
             </field>
         </record>
+
         <record id="website_sale_options_product_template_form_view_inherited" model="ir.ui.view">
             <field name="name">Change options and visibility for some fields</field>
             <field name="inherit_id" ref="website_sale_options.product_template_form_view"/>
@@ -64,15 +67,15 @@
                 </field>
                 <field name="alternative_product_ids" position="attributes">
                     <attribute name="options">{'no_create': True}</attribute>
-                    <attribute name="domain">&quot;[('is_synced_magento', '=', True)]&quot;</attribute>
+                    <attribute name="domain">"[('is_synced_magento', '=', True)]"</attribute>
                 </field>
                 <field name="accessory_product_ids" position="attributes">
                     <attribute name="options">{'no_create': True}</attribute>
-                    <attribute name="domain">&quot;[('is_synced_magento', '=', True)]&quot;</attribute>
+                    <attribute name="domain">"[('is_synced_magento', '=', True)]"</attribute>
                 </field>
                 <field name="optional_product_ids" position="attributes">
                     <attribute name="options">{'no_create': True}</attribute>
-                    <attribute name="domain">&quot;[('is_synced_magento', '=', True)]&quot;</attribute>
+                    <attribute name="domain">"[('is_synced_magento', '=', True)]"</attribute>
                 </field>
                 <field name="website_style_ids" position="attributes">
                     <attribute name="invisible">1</attribute>
@@ -82,5 +85,6 @@
                 </field>
             </field>
         </record>
+
     </data>
 </openerp>

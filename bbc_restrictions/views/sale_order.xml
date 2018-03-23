@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
+
         <record id="view_order_form" model="ir.ui.view">
             <field name="name">sale.order.form.restriction.inherit</field>
             <field name="model">sale.order</field>
@@ -14,6 +15,7 @@
                 </xpath>
             </field>
         </record>
+
         <record id="view_sale_stock_order_form" model="ir.ui.view">
             <field name="name">sale.order.form.sale.stock.restriction.inherit</field>
             <field name="model">sale.order</field>
@@ -27,5 +29,6 @@
                 </xpath>
             </field>
         </record>
+
     </data>
 </openerp>
