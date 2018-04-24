@@ -7,13 +7,13 @@
         <record id="action_send_email_confirmation_sales_order_magento" model="ir.actions.server">
             <field name="name">Magento | Send Email After Confirming Sales Order</field>
             <field name="model_id" ref="sale.model_sale_order"/>
-            <field name="condition">object.create_uid.name == 'Informatie over je bestelling | Order information | Babycare'</field>
+            <field name="condition">object.create_uid.login = 'magento'</field>
             <field name="type">ir.actions.server</field>
             <field name="state">email</field>
         </record>
 
         <!-- add action_send_email_confirmation_sales_order_magento to workflow activity confirming sales order -->
-        <record id="sale.act_router" model="workflow.activity"> 
+        <record id="sale.act_router" model="workflow.activity">
             <field name="action_id" ref="action_send_email_confirmation_sales_order_magento"/>
         </record>
 
@@ -23,7 +23,7 @@
         <record id="action_send_email_cancellation_sales_order_magento" model="ir.actions.server">
             <field name="name">Magento | Send Email After Cancellation Sales Order</field>
             <field name="model_id" ref="sale.model_sale_order"/>
-            <field name="condition">object.create_uid.name == 'Informatie over je bestelling | Order information | Babycare'</field>
+            <field name="condition">object.create_uid.login == 'magento'</field>
             <field name="type">ir.actions.server</field>
             <field name="state">email</field>
         </record>
@@ -31,14 +31,14 @@
         <record id="filter_magento_order_not_canceled" model="ir.filters">
             <field name="name">Magento | Not Canceled Sales Orders</field>
             <field name="model_id">sale.order</field>
-            <field name="domain">[('state', '!=', 'cancel'), ('write_uid', 'ilike', 'Informatie over je bestelling | Order information | Babycare')]</field>
+            <field name="domain">[('state', '!=', 'cancel'), ('create_uid.login', 'ilike', 'magento')]</field>
             <field name="user_id" eval="False" />
         </record>
 
         <record id="filter_magento_order_canceled" model="ir.filters">
             <field name="name">Magento | Canceled Sales Orders</field>
             <field name="model_id">sale.order</field>
-            <field name="domain">[('state', '=', 'cancel'), ('write_uid', 'ilike', 'Informatie over je bestelling | Order information | Babycare')]</field>
+            <field name="domain">[('state', '=', 'cancel'), ('create_uid.login', 'ilike', 'magento')]</field>
             <field name="user_id" eval="False" />
         </record>
 
@@ -57,13 +57,13 @@
         <record id="action_send_email_validation_invoice_magento" model="ir.actions.server">
             <field name="name">Magento | Send Email After Registering Payment Invoice</field>
             <field name="model_id" ref="account.model_account_invoice"/>
-            <field name="condition">object.create_uid.name == 'Informatie over je bestelling | Order information | Babycare'</field>
+            <field name="condition">object.create_uid.login == 'magento'</field>
             <field name="type">ir.actions.server</field>
             <field name="state">email</field>
         </record>
 
         <!-- add action_send_email_validation_invoice_magento to workflow activity register payment invoice -->
-        <record id="account.act_paid" model="workflow.activity"> 
+        <record id="account.act_paid" model="workflow.activity">
             <field name="action_id" ref="action_send_email_validation_invoice_magento"/>
         </record>
 
