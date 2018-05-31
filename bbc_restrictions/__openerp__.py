@@ -34,5 +34,7 @@
         'views/sale_order.xml',
         'views/res_partner.xml',
         'views/pos_order.xml',
+        'views/mrp_view.xml',
+        'views/pricelist_view.xml',
     ],
 }
