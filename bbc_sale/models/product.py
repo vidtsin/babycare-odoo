@@ -161,6 +161,8 @@ class ProductTemplate(models.Model):
         """ Products that have been set to EOL at least three months ago,
         have no physical stock and and that have no recent stock moves
         will be set to inactive. To be called from cron.
+        The inactivate status will be set to the product template so the
+        variant will automatically be inactive as well.
 
         Legacy note: works on product products even if defined on
         product.template.
@@ -183,9 +185,11 @@ class ProductTemplate(models.Model):
                 logger.debug(
                     'Product %s has recent stock moves', product.id)
                 continue
-            logger.info(
-                'Setting product %s to inactive', product.id)
-            product.write({'active': False})
+            template = product.mapped('product_tmpl_id')
+            for temp in template:
+                logger.info(
+                    'Setting product template %s to inactive', temp.id)
+                temp.write({'active': False})
 
     def _register_hook(self, cr):
         """ Remove draft state """
