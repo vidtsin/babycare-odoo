@@ -133,3 +133,19 @@ class TestVariantEOL(TransactionCase):
         self.bom_product.product_tmpl_id.write({'website_published': True})
         self.assertFalse(self.bom_product.variant_published)
         self.assertTrue(pr2.variant_published)
+
+    def test_06_product_template_eol_inactive(self):
+        """ While running deactivate_obsolete_products set the simple product
+        template to inactive so the product variant is set to inactive as well """
+        self.assertTrue(self.product.active)
+        self.assertTrue(self.product.product_tmpl_id.active)
+        self.product.write({'state': 'end'})
+        self.assertTrue(self.product.variant_eol)
+
+        self.env.cr.execute(
+            """ UPDATE product_product
+            SET write_date = '2017-01-01'
+            """)
+        self.env['product.template'].deactivate_obsolete_products()
+        self.assertFalse(self.product.product_tmpl_id.active)
+        self.assertFalse(self.product.active)

@@ -16,4 +16,5 @@ def migrate(cr, version):
     for product in products:
         template = product.mapped('product_tmpl_id')
         for temp in template:
+            temp.write({'website_published': False})
             temp.write({'active': False})
