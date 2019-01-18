@@ -163,6 +163,7 @@ class ProductTemplate(models.Model):
         will be set to inactive. To be called from cron.
         The inactivate status will be set to the product template so the
         variant will automatically be inactive as well.
+        Also works on products with a BoM but with only one variant.
 
         Legacy note: works on product products even if defined on
         product.template.
@@ -171,10 +172,15 @@ class ProductTemplate(models.Model):
             datetime.now() - relativedelta(months=3))
         start_time = time.time()
         products = self.env['product.product'].search([
+            '&',
             ('variant_eol', '=', True),
             ('write_date', '<', cutoff_datetime),
             ('qty_available', '=', 0),
-            ('bom_ids', '=', False)])
+            '|',
+            ('bom_ids', '=', False),
+            '&',
+            ('bom_ids', '!=', False),
+            ('prod_type', '=', 'simple')])
         logger.debug(
             'Found %s candidate products in %s seconds to set inactive',
             len(products), time.time() - start_time)

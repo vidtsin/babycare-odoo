@@ -9,9 +9,14 @@ def migrate(cr, version):
         return
     env = api.Environment(cr, SUPERUSER_ID, {})
     products = env['product.product'].search([
+        '&',
         ('active', '=', False),
         ('variant_eol', '=', True),
-        ('bom_ids', '=', False)
+        '|',
+        ('bom_ids', '=', False),
+        '&',
+        ('bom_ids', '!=', False),
+        ('prod_type', '=', 'simple')
     ])
     for product in products:
         template = product.mapped('product_tmpl_id')
