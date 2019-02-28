@@ -17,6 +17,7 @@
         'magento_bridge',  # Override of product view
     ],
     'data': [
+        'security/sale_security.xml',
         'data/account_fiscal_position.xml',
         'views/account_invoice.xml',
         'views/pos_order.xml',

@@ -19,6 +19,9 @@
                     <attribute name="colors" translation="off">red:virtual_available&lt;0;blue:virtual_available&gt;=0 and product_state in ('draft', 'end', 'obsolete');black:virtual_available&gt;=0 and product_state not in ('draft', 'end', 'obsolete')</attribute>
 report/stock_graph.py:from openerp.report.misc import choice_colors
                 </xpath>
+                <xpath expr="//page/field[@name='order_line']/tree/field[@name='purchase_price']" position="attributes">
+                    <attribute name="groups">bbc_sale.group_show_cost_price_on_sales_order</attribute>
+                </xpath>
             </field>
         </record>
 
